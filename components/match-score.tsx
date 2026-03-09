@@ -15,13 +15,13 @@ const floatingAvatars = [
     initials: 'SJ',
     image:
       'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face',
-    className: '-left-40 top-[38%]',
+    className: '-left-36 top-[36%]',
   },
   {
     initials: 'KS',
     image:
       'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face',
-    className: '-right-40 top-[38%]',
+    className: '-right-36 top-[36%]',
   },
   {
     initials: 'SB',
