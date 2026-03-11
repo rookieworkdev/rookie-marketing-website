@@ -1,6 +1,74 @@
 import { createServerClient } from './supabase/server'
 import { JobRow } from './supabase'
 
+// Simplified job display type for the marketing site
+export interface JobDisplay {
+  id: string
+  title: string
+  companyName: string | null
+  salary: string | null
+  regionName: string | null
+  location: string | null
+}
+
+function formatSalary(min: number | null, max: number | null, currency: string | null): string | null {
+  if (!min && !max) return null
+  const curr = currency || 'SEK'
+  if (min && max) return `${min.toLocaleString('sv-SE')}–${max.toLocaleString('sv-SE')} ${curr}`
+  if (min) return `Från ${min.toLocaleString('sv-SE')} ${curr}`
+  if (max) return `Upp till ${max.toLocaleString('sv-SE')} ${curr}`
+  return null
+}
+
+/**
+ * Fetches the latest published jobs for the marketing site preview.
+ * Resolves company display (respects show_branding) and region names.
+ */
+export async function getLatestJobs(limit = 8): Promise<JobDisplay[]> {
+  const supabase = createServerClient()
+
+  const { data: jobs, error } = await supabase
+    .from('jobs')
+    .select('id, title, location, salary_min, salary_max, salary_currency, region_id, companies(name, show_branding)')
+    .eq('is_published', true)
+    .or('expires_at.is.null,expires_at.gt.now()')
+    .order('published_at', { ascending: false })
+    .limit(limit)
+
+  if (error || !jobs?.length) {
+    if (error) console.error('Error fetching latest jobs:', error)
+    return []
+  }
+
+  // Resolve region names
+  const regionIds = [...new Set(jobs.map((j) => j.region_id).filter(Boolean))] as string[]
+  const regionMap: Record<string, string> = {}
+
+  if (regionIds.length > 0) {
+    const { data: regions } = await supabase
+      .from('regions' as never)
+      .select('id, name_sv')
+      .in('id', regionIds)
+
+    ;(regions as { id: string; name_sv: string }[] | null)?.forEach((r) => {
+      regionMap[r.id] = r.name_sv
+    })
+  }
+
+  return jobs.map((job) => {
+    const company = job.companies as { name: string; show_branding: boolean } | null
+
+    return {
+      id: job.id,
+      title: job.title,
+      companyName: company?.show_branding ? company.name : null,
+      salary: formatSalary(job.salary_min, job.salary_max, job.salary_currency),
+      regionName: job.region_id ? regionMap[job.region_id] ?? null : null,
+      location: job.location,
+    }
+  })
+}
+
 export interface Job {
   id: string
   title: string

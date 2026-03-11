@@ -2,8 +2,11 @@
 
 import { Button } from '@/components/ui/button'
 import { FlickeringGrid } from '@/components/ui/flickering-grid'
+import { InfiniteSlider } from '@/components/ui/infinite-slider'
+import { ProgressiveBlur } from '@/components/ui/progressive-blur'
 import { cn, containerBorders, horizontalPadding } from '@/lib/utils'
 import Link from 'next/link'
+import { AutolivLogo, CoopLogistikLogo, KlarnaLogo, SkandiaLogo } from './company-logos'
 import { HeroHeader } from './header'
 import { MatchScore } from './match-score'
 
@@ -14,10 +17,7 @@ export default function HeroSection() {
       <main className="overflow-x-hidden">
         <section className="bg-background">
           <div
-            className={cn(
-              containerBorders(),
-              'relative flex min-h-svh flex-col overflow-hidden pt-16'
-            )}
+            className={cn(containerBorders(), 'relative flex min-h-svh flex-col overflow-hidden')}
           >
             {/* Flickering grid background — absolute fill, no gaps */}
             <FlickeringGrid
@@ -43,27 +43,27 @@ export default function HeroSection() {
             <div
               className={cn(
                 horizontalPadding,
-                'relative mx-auto flex max-w-4xl flex-1 flex-col items-center justify-center pb-12 text-center'
+                'relative mx-auto flex max-w-4xl flex-1 flex-col items-center justify-center text-center'
               )}
             >
               {/* Heading */}
               <div>
-                <h1 className="text-foreground text-4xl font-medium tracking-tight md:text-5xl xl:text-6xl">
-                  Matcha snabbt och enkelt
+                <h1 className="text-foreground text-3xl font-medium tracking-tight md:text-4xl xl:text-5xl">
+                  Matchas snabbt och enkelt med AI
                 </h1>
-                <p className="text-muted-foreground mx-auto mt-6 max-w-xl text-lg font-medium">
-                  För människor som inte bara jobbar — de lyfter varandra
+                <p className="text-muted-foreground mx-auto mt-6 max-w-2xl text-lg font-medium">
+                  För unga talanger på väg framåt och ledare som söker nästa Rookie.
                 </p>
               </div>
 
               {/* CTA buttons */}
               <div className="mt-8 flex items-center justify-center gap-3">
-                <Button asChild size="lg" className="min-w-[160px]">
+                <Button asChild size="default" className="min-w-[140px]">
                   <Link href="/skapa-uppdrag">
                     <span>Skapa uppdrag</span>
                   </Link>
                 </Button>
-                <Button asChild size="lg" variant="outline" className="min-w-[160px]">
+                <Button asChild size="default" variant="outline" className="min-w-[140px]">
                   <Link href="/skapa-profil">
                     <span>Skapa profil</span>
                   </Link>
@@ -71,9 +71,41 @@ export default function HeroSection() {
               </div>
 
               {/* Match score indicator */}
-              <div className="mt-6 w-full">
+              <div className="mt-12 w-full max-w-md">
                 <MatchScore score={85} />
               </div>
+            </div>
+
+            {/* Logo carousel — absolute bottom */}
+            <div className="border-border/50 absolute inset-x-0 bottom-0 border-t py-6">
+              {/* Solid background fade + blur on left */}
+              <div className="from-background pointer-events-none absolute inset-y-0 left-0 z-10 w-48 bg-gradient-to-r to-transparent" />
+              <ProgressiveBlur
+                className="pointer-events-none absolute top-0 left-0 z-10 h-full w-28"
+                direction="left"
+                blurIntensity={1}
+              />
+              {/* Solid background fade + blur on right */}
+              <div className="from-background pointer-events-none absolute inset-y-0 right-0 z-10 w-48 bg-gradient-to-l to-transparent" />
+              <ProgressiveBlur
+                className="pointer-events-none absolute top-0 right-0 z-10 h-full w-28"
+                direction="right"
+                blurIntensity={1}
+              />
+              <InfiniteSlider speedOnHover={20} speed={40} gap={112}>
+                <div className="flex items-center justify-center">
+                  <CoopLogistikLogo />
+                </div>
+                <div className="flex items-center justify-center">
+                  <KlarnaLogo />
+                </div>
+                <div className="flex items-center justify-center">
+                  <SkandiaLogo />
+                </div>
+                <div className="flex items-center justify-center">
+                  <AutolivLogo />
+                </div>
+              </InfiniteSlider>
             </div>
           </div>
         </section>

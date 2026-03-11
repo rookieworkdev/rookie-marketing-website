@@ -2,6 +2,8 @@ import CTASection from '@/components/cta-section'
 import FooterSection from '@/components/footer'
 import HeroSection from '@/components/hero-section'
 import HowItWorksSection from '@/components/how-it-works-section'
+import JobsSection from '@/components/jobs-section'
+import { getLatestJobs } from '@/lib/jobs'
 import { DEFAULT_DESCRIPTION } from '@/lib/seo'
 import type { Metadata } from 'next'
 
@@ -24,11 +26,14 @@ export const metadata: Metadata = {
   },
 }
 
-export default function Page() {
+export default async function Page() {
+  const jobs = await getLatestJobs(8)
+
   return (
     <>
       <HeroSection />
       <HowItWorksSection />
+      <JobsSection jobs={jobs} />
       <CTASection
         content={{
           title: 'Redo att komma igång?',
