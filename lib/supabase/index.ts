@@ -2,7 +2,7 @@ export { supabase } from './client'
 export { createServerClient } from './server'
 export type {
   Database,
-  JobAd,
+  JobRow,
   WebsiteInspiration,
   WebsiteRookie,
 } from './types'

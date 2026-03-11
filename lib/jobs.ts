@@ -1,5 +1,5 @@
 import { createServerClient } from './supabase/server'
-import { JobAd } from './supabase'
+import { JobRow } from './supabase'
 
 export interface Job {
   id: string
@@ -13,12 +13,12 @@ export interface Job {
 }
 
 // Row type with joined companies relation
-type JobAdWithCompany = JobAd & {
+type JobWithCompany = JobRow & {
   companies: { name: string } | null
 }
 
 // Transform database row to Job interface
-function transformJob(row: JobAdWithCompany): Job {
+function transformJob(row: JobWithCompany): Job {
   return {
     id: row.id,
     title: row.title,
@@ -26,7 +26,7 @@ function transformJob(row: JobAdWithCompany): Job {
     description: row.description ?? '',
     location: row.location ?? '',
     category: row.category ?? '',
-    externalUrl: row.external_url ?? '',
+    externalUrl: row.external_url ?? row.application_url ?? '',
     postedDate: row.posted_date ?? '',
   }
 }
@@ -35,9 +35,9 @@ export async function getAvailableJobs(): Promise<Job[]> {
   const supabase = createServerClient()
   
   const { data, error } = await supabase
-    .from('job_ads')
+    .from('jobs')
     .select('*, companies(name)')
-    .eq('is_active', true)
+    .eq('is_published', true)
     .order('posted_date', { ascending: false })
 
   if (error) {
@@ -52,10 +52,10 @@ export async function getJobById(id: string): Promise<Job | null> {
   const supabase = createServerClient()
   
   const { data, error } = await supabase
-    .from('job_ads')
+    .from('jobs')
     .select('*, companies(name)')
     .eq('id', id)
-    .eq('is_active', true)
+    .eq('is_published', true)
     .single()
 
   if (error || !data) {
@@ -70,10 +70,10 @@ export async function getJobsByCategory(category: string): Promise<Job[]> {
   const supabase = createServerClient()
   
   const { data, error } = await supabase
-    .from('job_ads')
+    .from('jobs')
     .select('*, companies(name)')
     .eq('category', category)
-    .eq('is_active', true)
+    .eq('is_published', true)
     .order('posted_date', { ascending: false })
 
   if (error) {
@@ -88,10 +88,10 @@ export async function getJobsByLocation(location: string): Promise<Job[]> {
   const supabase = createServerClient()
   
   const { data, error } = await supabase
-    .from('job_ads')
+    .from('jobs')
     .select('*, companies(name)')
     .eq('location', location)
-    .eq('is_active', true)
+    .eq('is_published', true)
     .order('posted_date', { ascending: false })
 
   if (error) {
@@ -107,9 +107,9 @@ export async function getJobCategories(): Promise<string[]> {
   const supabase = createServerClient()
   
   const { data, error } = await supabase
-    .from('job_ads')
+    .from('jobs')
     .select('category')
-    .eq('is_active', true)
+    .eq('is_published', true)
 
   if (error) {
     console.error('Error fetching job categories:', error)
@@ -125,9 +125,9 @@ export async function getJobLocations(): Promise<string[]> {
   const supabase = createServerClient()
   
   const { data, error } = await supabase
-    .from('job_ads')
+    .from('jobs')
     .select('location')
-    .eq('is_active', true)
+    .eq('is_published', true)
 
   if (error) {
     console.error('Error fetching job locations:', error)

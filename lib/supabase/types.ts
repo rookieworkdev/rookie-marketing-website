@@ -14,14 +14,22 @@ export type Database = {
           region: string | null
           current_score: number | null
           status: string | null
-          created_at: string | null
-          updated_at: string | null
           phone: string | null
           website: string | null
+          description: string | null
+          logo_url: string | null
           ai_reasoning: string | null
+          enrichment_status: string | null
           enrichment_needed: Json | null
+          created_at: string | null
+          updated_at: string | null
+          show_branding: boolean
+          linkedin_url: string | null
+          company_size: string | null
           source: string[] | null
-          company_description: string | null
+          industry_id: string | null
+          region_id: string | null
+          country_id: string | null
         }
         Insert: {
           id?: string
@@ -33,14 +41,22 @@ export type Database = {
           region?: string | null
           current_score?: number | null
           status?: string | null
-          created_at?: string | null
-          updated_at?: string | null
           phone?: string | null
           website?: string | null
+          description?: string | null
+          logo_url?: string | null
           ai_reasoning?: string | null
+          enrichment_status?: string | null
           enrichment_needed?: Json | null
+          created_at?: string | null
+          updated_at?: string | null
+          show_branding?: boolean
+          linkedin_url?: string | null
+          company_size?: string | null
           source?: string[] | null
-          company_description?: string | null
+          industry_id?: string | null
+          region_id?: string | null
+          country_id?: string | null
         }
         Update: {
           id?: string
@@ -52,16 +68,46 @@ export type Database = {
           region?: string | null
           current_score?: number | null
           status?: string | null
-          created_at?: string | null
-          updated_at?: string | null
           phone?: string | null
           website?: string | null
+          description?: string | null
+          logo_url?: string | null
           ai_reasoning?: string | null
+          enrichment_status?: string | null
           enrichment_needed?: Json | null
+          created_at?: string | null
+          updated_at?: string | null
+          show_branding?: boolean
+          linkedin_url?: string | null
+          company_size?: string | null
           source?: string[] | null
-          company_description?: string | null
+          industry_id?: string | null
+          region_id?: string | null
+          country_id?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "companies_country_id_fkey"
+            columns: ["country_id"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "companies_industry_id_fkey"
+            columns: ["industry_id"]
+            isOneToOne: false
+            referencedRelation: "industries"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "companies_region_id_fkey"
+            columns: ["region_id"]
+            isOneToOne: false
+            referencedRelation: "regions"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       website_inspiration: {
         Row: {
@@ -108,100 +154,158 @@ export type Database = {
         }
         Relationships: []
       }
-      job_ads: {
+      jobs: {
         Row: {
-          ai_category: string | null
-          ai_reasoning: string | null
-          ai_score: number | null
-          ai_valid: boolean | null
-          ai_experience: string | null
-          application_email: string | null
-          category: string | null
-          company_id: string | null
-          created_at: string | null
-          description: string | null
-          duration: string | null
-          external_id: string
-          external_url: string | null
           id: string
-          is_active: boolean | null
-          is_ai_generated: boolean | null
-          job_type: string | null
-          location: string | null
-          posted_date: string | null
-          published_status: string | null
-          raw_data: Json | null
-          salary: string | null
-          scraped_at: string | null
-          service_type: string | null
-          source: string
+          company_id: string | null
           title: string
+          description: string | null
+          location: string | null
+          job_type: string | null
+          experience_level: string | null
+          salary_min: number | null
+          salary_max: number | null
+          salary_currency: string | null
+          remote_policy: string | null
+          skills: Json | null
+          benefits: Json | null
+          application_url: string | null
+          application_email: string | null
+          is_published: boolean | null
+          published_at: string | null
+          expires_at: string | null
+          created_at: string | null
           updated_at: string | null
+          source: string | null
+          external_id: string | null
+          external_url: string | null
+          posted_date: string | null
+          scraped_at: string | null
+          ai_valid: boolean | null
+          ai_score: number | null
+          ai_reasoning: string | null
+          ai_category: string | null
+          duration: string | null
+          raw_data: Json | null
+          service_type: string | null
+          is_ai_generated: boolean | null
+          category: string | null
+          region_id: string | null
+          ai_experience: string | null
+          salary: string | null
+          published_status: string | null
+          is_active: boolean | null
+          match_notified_at: string | null
+          match_notification_status: string | null
+          match_company_email: string | null
+          match_company_email_source: string | null
+          match_candidate_count: number | null
         }
         Insert: {
-          ai_category?: string | null
-          ai_reasoning?: string | null
-          ai_score?: number | null
-          ai_valid?: boolean | null
-          ai_experience?: string | null
-          application_email?: string | null
-          category?: string | null
-          company_id?: string | null
-          created_at?: string | null
-          description?: string | null
-          duration?: string | null
-          external_id: string
-          external_url?: string | null
           id?: string
-          is_active?: boolean | null
-          is_ai_generated?: boolean | null
-          job_type?: string | null
-          location?: string | null
-          posted_date?: string | null
-          published_status?: string | null
-          raw_data?: Json | null
-          salary?: string | null
-          scraped_at?: string | null
-          service_type?: string | null
-          source: string
+          company_id?: string | null
           title: string
+          description?: string | null
+          location?: string | null
+          job_type?: string | null
+          experience_level?: string | null
+          salary_min?: number | null
+          salary_max?: number | null
+          salary_currency?: string | null
+          remote_policy?: string | null
+          skills?: Json | null
+          benefits?: Json | null
+          application_url?: string | null
+          application_email?: string | null
+          is_published?: boolean | null
+          published_at?: string | null
+          expires_at?: string | null
+          created_at?: string | null
           updated_at?: string | null
+          source?: string | null
+          external_id?: string | null
+          external_url?: string | null
+          posted_date?: string | null
+          scraped_at?: string | null
+          ai_valid?: boolean | null
+          ai_score?: number | null
+          ai_reasoning?: string | null
+          ai_category?: string | null
+          duration?: string | null
+          raw_data?: Json | null
+          service_type?: string | null
+          is_ai_generated?: boolean | null
+          category?: string | null
+          region_id?: string | null
+          ai_experience?: string | null
+          salary?: string | null
+          published_status?: string | null
+          is_active?: boolean | null
+          match_notified_at?: string | null
+          match_notification_status?: string | null
+          match_company_email?: string | null
+          match_company_email_source?: string | null
+          match_candidate_count?: number | null
         }
         Update: {
-          ai_category?: string | null
-          ai_reasoning?: string | null
-          ai_score?: number | null
-          ai_valid?: boolean | null
-          ai_experience?: string | null
-          application_email?: string | null
-          category?: string | null
-          company_id?: string | null
-          created_at?: string | null
-          description?: string | null
-          duration?: string | null
-          external_id?: string
-          external_url?: string | null
           id?: string
-          is_active?: boolean | null
-          is_ai_generated?: boolean | null
-          job_type?: string | null
-          location?: string | null
-          posted_date?: string | null
-          published_status?: string | null
-          raw_data?: Json | null
-          salary?: string | null
-          scraped_at?: string | null
-          service_type?: string | null
-          source?: string
+          company_id?: string | null
           title?: string
+          description?: string | null
+          location?: string | null
+          job_type?: string | null
+          experience_level?: string | null
+          salary_min?: number | null
+          salary_max?: number | null
+          salary_currency?: string | null
+          remote_policy?: string | null
+          skills?: Json | null
+          benefits?: Json | null
+          application_url?: string | null
+          application_email?: string | null
+          is_published?: boolean | null
+          published_at?: string | null
+          expires_at?: string | null
+          created_at?: string | null
           updated_at?: string | null
+          source?: string | null
+          external_id?: string | null
+          external_url?: string | null
+          posted_date?: string | null
+          scraped_at?: string | null
+          ai_valid?: boolean | null
+          ai_score?: number | null
+          ai_reasoning?: string | null
+          ai_category?: string | null
+          duration?: string | null
+          raw_data?: Json | null
+          service_type?: string | null
+          is_ai_generated?: boolean | null
+          category?: string | null
+          region_id?: string | null
+          ai_experience?: string | null
+          salary?: string | null
+          published_status?: string | null
+          is_active?: boolean | null
+          match_notified_at?: string | null
+          match_notification_status?: string | null
+          match_company_email?: string | null
+          match_company_email_source?: string | null
+          match_candidate_count?: number | null
         }
         Relationships: [
           {
-            foreignKeyName: "job_ads_company_id_fkey"
+            foreignKeyName: "jobs_company_id_fkey"
             columns: ["company_id"]
             isOneToOne: false
             referencedRelation: "companies"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "jobs_region_id_fkey"
+            columns: ["region_id"]
+            isOneToOne: false
+            referencedRelation: "regions"
             referencedColumns: ["id"]
           }
         ]
@@ -265,6 +369,6 @@ export type Database = {
 }
 
 // Convenience types for the website tables
-export type JobAd = Database['public']['Tables']['job_ads']['Row']
+export type JobRow = Database['public']['Tables']['jobs']['Row']
 export type WebsiteRookie = Database['public']['Tables']['website_rookies']['Row']
 export type WebsiteInspiration = Database['public']['Tables']['website_inspiration']['Row']

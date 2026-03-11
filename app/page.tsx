@@ -1,21 +1,10 @@
-import { CoopLogistikLogo } from '@/components/company-logos'
+import CTASection from '@/components/cta-section'
 import FooterSection from '@/components/footer'
 import HeroSection from '@/components/hero-section'
-import { getCurrentRookie } from '@/lib/previous-rookies'
+import HowItWorksSection from '@/components/how-it-works-section'
 import { DEFAULT_DESCRIPTION } from '@/lib/seo'
 import type { Metadata } from 'next'
-import dynamic from 'next/dynamic'
 
-// Dynamic imports for below-the-fold components to reduce initial bundle
-const AboutSection = dynamic(() => import('@/components/about-section'))
-const EmployerSection = dynamic(() => import('@/components/employer-section'))
-const JobseekerSection = dynamic(() => import('@/components/jobseeker-section'))
-const TestimonialSection = dynamic(() => import('@/components/testimonial-section'))
-const RookieOfMonthSection = dynamic(() => import('@/components/rookie-of-month-section'))
-const CTASection = dynamic(() => import('@/components/cta-section'))
-
-// Revalidate the homepage every day (86400 seconds)
-// Homepage shows current rookie which changes monthly
 export const revalidate = 86400
 
 export const metadata: Metadata = {
@@ -35,30 +24,17 @@ export const metadata: Metadata = {
   },
 }
 
-export default async function Page() {
-  const currentRookie = await getCurrentRookie()
-
+export default function Page() {
   return (
     <>
       <HeroSection />
-      <AboutSection />
-      <EmployerSection />
-      <JobseekerSection />
-      <TestimonialSection
-        quote="Det har varit ett smidigt samarbete och en träffsäkerhet i urval av rätt profiler. Det har bidragit till snabb tillsättning vid konsultbehov. Rekommenderas varmt!"
-        authorName="Jesper Eriksson"
-        authorTitle="Head of Finance & Business Control"
-        authorImage="/avatars/jesper-eriksson.png"
-        companyLogo={<CoopLogistikLogo />}
-        companyName="Coop Logistik"
-      />
-      <RookieOfMonthSection rookie={currentRookie} />
+      <HowItWorksSection />
       <CTASection
         content={{
-          title: 'Kan vi hjälpa dig?',
+          title: 'Redo att komma igång?',
           description:
-            'Kontakta oss så berättar vi gärna mer om hur vi matchar unga talanger med rätt företag.',
-          buttonText: 'Kontakta oss',
+            'Skapa ett konto och börja matcha med rätt kandidater eller uppdrag redan idag.',
+          buttonText: 'Kom igång',
           buttonHref: '/kontakt',
         }}
       />

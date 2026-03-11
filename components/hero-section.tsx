@@ -49,7 +49,7 @@ export default function HeroSection() {
               {/* Heading */}
               <div>
                 <h1 className="text-foreground text-4xl font-medium tracking-tight md:text-5xl xl:text-6xl">
-                  Match snabbt och enkelt
+                  Matcha snabbt och enkelt
                 </h1>
                 <p className="text-muted-foreground mx-auto mt-6 max-w-xl text-lg font-medium">
                   För människor som inte bara jobbar — de lyfter varandra
