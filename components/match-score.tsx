@@ -4,7 +4,15 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { cn } from '@/lib/utils'
 import { SparklesIcon } from '@heroicons/react/20/solid'
 import { motion, useInView } from 'motion/react'
-import { useEffect, useRef, useState } from 'react'
+import { useMemo, useRef } from 'react'
+
+const DIGIT_HEIGHT = 52
+
+const digitMask = {
+  maskImage: 'linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)',
+  WebkitMaskImage:
+    'linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)',
+} as const
 
 const floatingAvatars = [
   {
@@ -52,15 +60,14 @@ interface MatchScoreProps {
 export function MatchScore({ score = 85, className }: MatchScoreProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(containerRef, { once: true, margin: '0px 0px -100px 0px' })
-  const [displayScore, setDisplayScore] = useState(0)
 
   const radius = 120
   const strokeWidth = 10
   const centerX = 150
   const centerY = 140
-  const startAngle = 180 // left (9 o'clock)
-  const endAngle = 360 // right (3 o'clock)
-  const totalAngle = endAngle - startAngle // 180 degrees — clean half circle
+  const startAngle = 168 // slightly past 9 o'clock — dips below center
+  const endAngle = 372 // slightly past 3 o'clock — dips below center
+  const totalAngle = endAngle - startAngle // 204 degrees — more than a half circle
 
   const toRad = (deg: number) => (deg * Math.PI) / 180
 
@@ -71,10 +78,11 @@ export function MatchScore({ score = 85, className }: MatchScoreProps) {
     y: round(centerY + radius * Math.sin(toRad(angleDeg))),
   })
 
-  // Build the half-circle arc path (sweeps from left to right along the top)
+  // Build the arc path (sweeps from left to right through the top)
   const arcStart = pointOnArc(startAngle)
   const arcEnd = pointOnArc(endAngle)
-  const backgroundArc = `M ${arcStart.x} ${arcStart.y} A ${radius} ${radius} 0 0 1 ${arcEnd.x} ${arcEnd.y}`
+  const largeArcFlag = totalAngle > 180 ? 1 : 0
+  const backgroundArc = `M ${arcStart.x} ${arcStart.y} A ${radius} ${radius} 0 ${largeArcFlag} 1 ${arcEnd.x} ${arcEnd.y}`
 
   const arcLength = (totalAngle / 360) * 2 * Math.PI * radius
 
@@ -103,26 +111,18 @@ export function MatchScore({ score = 85, className }: MatchScoreProps) {
   const needleRotation = (score / 100) * totalAngle
   const arcEase = [0.33, 1, 0.68, 1] as const
 
-  // Count up score in sync with arc
-  useEffect(() => {
-    if (!isInView) return
-    const duration = animDuration * 1000
-    const startTime = performance.now()
-    let raf: number
-    const tick = (now: number) => {
-      const elapsed = now - startTime
-      const t = Math.min(elapsed / duration, 1)
-      const eased = 1 - Math.pow(1 - t, 3)
-      setDisplayScore(Math.round(eased * score))
-      if (t < 1) raf = requestAnimationFrame(tick)
-    }
-    raf = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(raf)
-  }, [isInView, score])
+  // Digit strips — each column only contains 0 → final digit value
+  const tensDigit = Math.floor(score / 10)
+  const onesDigit = score % 10
+  const tensStrip = useMemo(() => Array.from({ length: tensDigit + 1 }, (_, i) => i), [tensDigit])
+  const onesStrip = useMemo(() => Array.from({ length: onesDigit + 1 }, (_, i) => i), [onesDigit])
+
+  const matchLabel =
+    score >= 80 ? 'Stark match' : score >= 60 ? 'Bra match' : score >= 40 ? 'Medel' : 'Svag'
 
   return (
     <div ref={containerRef} className={cn('flex flex-col items-center', className)}>
-      <div className="relative w-full max-w-xl">
+      <div className="relative w-full max-w-2xl">
         {/* Floating avatars — staggered scale + blur/fade */}
         {floatingAvatars.map((av, i) => (
           <motion.div
@@ -139,7 +139,7 @@ export function MatchScore({ score = 85, className }: MatchScoreProps) {
           </motion.div>
         ))}
 
-        <svg viewBox="-10 -10 320 185" className="relative z-10 w-full overflow-visible">
+        <svg viewBox="-10 -10 320 200" className="relative z-10 w-full overflow-visible">
           <defs>
             <linearGradient id="scoreGradient" x1="0%" y1="50%" x2="100%" y2="50%">
               <stop offset="0%" stopColor="oklch(0.58 0.22 27)" />
@@ -177,20 +177,63 @@ export function MatchScore({ score = 85, className }: MatchScoreProps) {
             transition={{ duration: animDuration, ease: arcEase }}
           />
 
-          {/* Score number — blur/fade in, then count up */}
-          <motion.text
-            x={centerX}
-            y={centerY - 56}
-            textAnchor="middle"
-            dominantBaseline="middle"
-            className="fill-foreground"
-            style={{ fontSize: '48px', fontWeight: 700, letterSpacing: '-0.05em' }}
-            initial={{ opacity: 0, filter: 'blur(8px)' }}
-            animate={isInView ? { opacity: 1, filter: 'blur(0px)' } : undefined}
-            transition={{ duration: 0.3, delay: 0.1 }}
+          {/* Score number — rolling odometer digits */}
+          <foreignObject
+            x={centerX - 60}
+            y={centerY - 86}
+            width={120}
+            height={60}
+            style={{ overflow: 'visible' }}
           >
-            {displayScore}
-          </motion.text>
+            <motion.div
+              className="text-foreground flex h-full items-center justify-center"
+              initial={{ opacity: 0, filter: 'blur(8px)' }}
+              animate={isInView ? { opacity: 1, filter: 'blur(0px)' } : undefined}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              {/* Tens digit */}
+              <div className="relative h-[52px] w-[30px] overflow-hidden" style={digitMask}>
+                <motion.div
+                  initial={{ y: 0 }}
+                  animate={isInView ? { y: -tensDigit * DIGIT_HEIGHT } : undefined}
+                  transition={{ duration: animDuration, ease: arcEase }}
+                >
+                  {tensStrip.map((d, i) => (
+                    <div
+                      key={i}
+                      className="flex h-[52px] w-[30px] items-center justify-center text-5xl font-bold"
+                      style={{ letterSpacing: '-0.05em' }}
+                    >
+                      {d}
+                    </div>
+                  ))}
+                </motion.div>
+              </div>
+
+              {/* Ones digit — slight stagger, balanced speed */}
+              <div className="relative h-[52px] w-[30px] overflow-hidden" style={digitMask}>
+                <motion.div
+                  initial={{ y: 0 }}
+                  animate={isInView ? { y: -onesDigit * DIGIT_HEIGHT } : undefined}
+                  transition={{
+                    duration: animDuration * 0.85,
+                    ease: arcEase,
+                    delay: animDuration * 0.12,
+                  }}
+                >
+                  {onesStrip.map((d, i) => (
+                    <div
+                      key={i}
+                      className="flex h-[52px] w-[30px] items-center justify-center text-5xl font-bold"
+                      style={{ letterSpacing: '-0.05em' }}
+                    >
+                      {d}
+                    </div>
+                  ))}
+                </motion.div>
+              </div>
+            </motion.div>
+          </foreignObject>
 
           {/* Needle — rotates from start to final position */}
           <motion.g
@@ -215,29 +258,29 @@ export function MatchScore({ score = 85, className }: MatchScoreProps) {
             />
             <circle cx={centerX} cy={centerY} r="4" className="fill-background" />
           </motion.g>
+
+          {/* Bottom score bar — connects to arc endpoints */}
+          <foreignObject
+            x={arcStart.x - 20}
+            y={arcStart.y - 3}
+            width={arcEnd.x - arcStart.x + 40}
+            height={26}
+          >
+            <motion.div
+              className="bg-card border-border flex h-full items-center justify-center gap-1 overflow-hidden rounded-sm border shadow-xs"
+              initial={{ opacity: 0, y: -4 }}
+              animate={isInView ? { opacity: 1, y: 0 } : undefined}
+              transition={{ duration: 0.4, delay: animDuration * 0.5 }}
+            >
+              <SparklesIcon className="text-primary size-[11px] shrink-0" />
+              <span className="text-muted-foreground text-[10px] font-semibold">
+                Rookie AI Score:
+              </span>
+              <span className="text-primary text-[10px] font-semibold">{score}/100</span>
+            </motion.div>
+          </foreignObject>
         </svg>
       </div>
-
-      {/* Score label badges — blur/fade in near end */}
-      <motion.div
-        className="mt-6 flex w-full items-center justify-center gap-2"
-        initial={{ opacity: 0, filter: 'blur(4px)' }}
-        animate={isInView ? { opacity: 1, filter: 'blur(0px)' } : undefined}
-        transition={{ duration: 0.3, delay: animDuration * 0.6 }}
-      >
-        <span className="bg-background text-muted-foreground border-border inline-flex flex-1 items-center justify-center gap-1.5 rounded-full border px-3 py-1.5 text-sm font-medium shadow-sm">
-          <SparklesIcon className="text-primary size-4 shrink-0" />
-          Kandidatprofil
-        </span>
-        <span className="bg-background text-muted-foreground border-border inline-flex flex-1 items-center justify-center gap-1.5 rounded-full border px-3 py-1.5 text-sm font-medium shadow-sm">
-          <SparklesIcon className="text-primary size-4 shrink-0" />
-          Erfarenhetsnivå
-        </span>
-        <span className="bg-background text-muted-foreground border-border inline-flex flex-1 items-center justify-center gap-1.5 rounded-full border px-3 py-1.5 text-sm font-medium shadow-sm">
-          <SparklesIcon className="text-primary size-4 shrink-0" />
-          Löneförväntning
-        </span>
-      </motion.div>
     </div>
   )
 }

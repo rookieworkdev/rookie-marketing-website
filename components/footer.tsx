@@ -1,120 +1,270 @@
-import { Logo } from '@/components/logo'
+'use client'
 
+import { Logo } from '@/components/logo'
+import { Button } from '@/components/ui/button'
 import { cn, containerBorders, horizontalPadding, sectionWrapper } from '@/lib/utils'
+import { motion } from 'motion/react'
 import Link from 'next/link'
 
-const discoveryLinks = [
+interface CTAItem {
+  title: string
+  description: string
+  buttonText: string
+  buttonHref?: string
+  buttonVariant?: 'default' | 'secondary'
+  buttonOpenInNewTab?: boolean
+  secondaryButtonText?: string
+  secondaryButtonHref?: string
+  secondaryButtonOpenInNewTab?: boolean
+}
+
+interface FooterSectionProps {
+  ctaVariant?: 'single' | 'double'
+  ctaContent?: CTAItem | [CTAItem, CTAItem]
+}
+
+const defaultSingleContent: CTAItem = {
+  title: 'Kom igång med Rookie',
+  description:
+    'Letar du efter nästa generations talanger eller en kandidat redo att ta nästa steg i karriären? Vi hjälper dig att hitta rätt match snabbt och smidigt.',
+  buttonText: 'Registrera företag',
+  buttonHref: '/personal',
+  secondaryButtonText: 'Logga in som kandidat',
+  secondaryButtonHref: '/for-jobbsokande',
+}
+
+const defaultDoubleContent: [CTAItem, CTAItem] = [
   {
-    title: 'Månadens Rookie',
-    href: '/manadens-rookie',
+    title: 'Kan vi hjälpa dig?',
+    description:
+      'Kontakta oss så berättar vi gärna mer om hur vi matchar unga talanger med rätt företag.',
+    buttonText: 'Kontakta oss',
+    buttonHref: '/kontakt',
   },
   {
-    title: 'För jobbsökande',
-    href: '/for-jobbsokande',
-  },
-  {
-    title: 'För företag',
-    href: '/for-foretag',
-  },
-  {
-    title: 'Om oss',
-    href: '/om-oss',
-  },
-  {
-    title: 'Inspiration',
-    href: '/inspiration',
-  },
-  {
-    title: 'Kontakt',
-    href: '/kontakt',
-  },
-  {
-    title: 'Integritetspolicy',
-    href: '/integritetspolicy',
+    title: 'Guide',
+    description: 'Avgörande steg för en effektivare rekryterings process av unga talanger',
+    buttonText: 'Få tillgång',
+    buttonHref: '/kontakt',
+    buttonVariant: 'secondary',
   },
 ]
 
-export default function FooterSection() {
+const discoveryLinks = [
+  { title: 'Månadens Rookie', href: '/manadens-rookie' },
+  { title: 'För jobbsökande', href: '/for-jobbsokande' },
+  { title: 'För företag', href: '/for-foretag' },
+  { title: 'Om oss', href: '/om-oss' },
+  { title: 'Inspiration', href: '/inspiration' },
+  { title: 'Kontakt', href: '/kontakt' },
+  { title: 'Integritetspolicy', href: '/integritetspolicy' },
+]
+
+function CTADouble({ content }: { content: [CTAItem, CTAItem] }) {
+  return (
+    <div className="flex flex-col gap-6 lg:flex-row">
+      <motion.div
+        initial={{ opacity: 0, filter: 'blur(12px)' }}
+        whileInView={{ opacity: 1, filter: 'blur(0px)' }}
+        viewport={{ once: true, margin: '-100px' }}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
+        className="relative flex-1 overflow-hidden rounded-2xl p-6 shadow-xs md:p-8 lg:p-10"
+      >
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage:
+              'url(https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop)',
+          }}
+        />
+        <div className="absolute inset-0 bg-linear-to-br from-black/90 via-black/60 to-black/10" />
+        <div className="relative flex flex-col justify-between gap-8 md:min-h-[200px]">
+          <div className="max-w-2xl">
+            <h2 className="text-3xl font-medium tracking-tight text-white md:text-3xl lg:text-4xl">
+              {content[0].title}
+            </h2>
+            <p className="mt-4 max-w-xl text-base text-white/80">{content[0].description}</p>
+          </div>
+          <div className="self-start">
+            <Button asChild size="default" variant={content[0].buttonVariant || 'default'}>
+              <Link
+                href={content[0].buttonHref || '/kontakt'}
+                target={content[0].buttonOpenInNewTab ? '_blank' : undefined}
+              >
+                <span className="text-nowrap">{content[0].buttonText}</span>
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, filter: 'blur(12px)' }}
+        whileInView={{ opacity: 1, filter: 'blur(0px)' }}
+        viewport={{ once: true, margin: '-100px' }}
+        transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
+        className="bg-muted relative flex-1 overflow-hidden rounded-2xl p-6 shadow-xs md:p-8 lg:p-10"
+      >
+        <div className="relative flex flex-col justify-between gap-8 md:min-h-[200px]">
+          <div className="max-w-2xl">
+            <h2 className="text-foreground text-3xl font-medium tracking-tight md:text-3xl lg:text-4xl">
+              {content[1].title}
+            </h2>
+            <p className="text-foreground/80 mt-4 max-w-xl text-base">{content[1].description}</p>
+          </div>
+          <div className="self-start">
+            <Button asChild size="default" variant={content[1].buttonVariant || 'default'}>
+              <Link
+                href={content[1].buttonHref || '/kontakt'}
+                target={content[1].buttonOpenInNewTab ? '_blank' : undefined}
+              >
+                <span className="text-nowrap">{content[1].buttonText}</span>
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  )
+}
+
+function CTASingle({ content }: { content: CTAItem }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, filter: 'blur(12px)' }}
+      whileInView={{ opacity: 1, filter: 'blur(0px)' }}
+      viewport={{ once: true, margin: '-100px' }}
+      transition={{ duration: 0.8, ease: 'easeOut' }}
+      className="relative overflow-hidden rounded-2xl shadow-xs"
+    >
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage:
+            'url(https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop)',
+        }}
+      />
+      <div className="absolute inset-0 bg-linear-to-br from-black/90 via-black/60 to-black/10" />
+      <div className="relative flex flex-col justify-between gap-8 p-6 md:min-h-[200px] md:p-8 lg:p-10">
+        <div className="max-w-2xl">
+          <h2 className="text-2xl font-medium tracking-tight text-white md:text-3xl lg:text-4xl">
+            {content.title}
+          </h2>
+          <p className="mt-4 max-w-xl text-base text-pretty text-white/80">{content.description}</p>
+        </div>
+        <div className="flex flex-wrap gap-3 self-start">
+          <Button asChild size="default" variant={content.buttonVariant || 'default'}>
+            <Link
+              href={content.buttonHref || '/kontakt'}
+              target={content.buttonOpenInNewTab ? '_blank' : undefined}
+            >
+              <span className="text-nowrap">{content.buttonText}</span>
+            </Link>
+          </Button>
+          {content.secondaryButtonText && (
+            <Button
+              asChild
+              size="default"
+              variant="outline"
+              className="border-white/30 bg-white/10 text-white hover:bg-white/20"
+            >
+              <Link
+                href={content.secondaryButtonHref || '/kontakt'}
+                target={content.secondaryButtonOpenInNewTab ? '_blank' : undefined}
+              >
+                <span className="text-nowrap">{content.secondaryButtonText}</span>
+              </Link>
+            </Button>
+          )}
+        </div>
+      </div>
+    </motion.div>
+  )
+}
+
+export default function FooterSection({
+  ctaVariant = 'single',
+  ctaContent,
+}: FooterSectionProps = {}) {
+  const singleContent = ctaContent && !Array.isArray(ctaContent) ? ctaContent : defaultSingleContent
+  const doubleContent = ctaContent && Array.isArray(ctaContent) ? ctaContent : defaultDoubleContent
+
   return (
     <footer className={sectionWrapper('bg-background')}>
-      <div className={cn(containerBorders(), horizontalPadding, 'pt-16 pb-8')}>
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-          {/* Left Half - Logo and Tagline */}
-          <div className="space-y-4">
-            <Link href="/" aria-label="go home" className="block size-fit">
-              <Logo />
-            </Link>
-            <p className="text-xl font-medium">
-              Matchar unga talanger
-              <br />
-              med företag
-            </p>
-          </div>
+      <div className={cn(containerBorders(), horizontalPadding)}>
+        {/* CTA */}
+        <div className="pt-16">
+          {ctaVariant === 'double' ? (
+            <CTADouble content={doubleContent} />
+          ) : (
+            <CTASingle content={singleContent} />
+          )}
+        </div>
 
-          {/* Right Half - Two Columns */}
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
-            {/* Upptäck Rookie Column */}
+        {/* Footer content */}
+        <div className="pt-16 pb-8">
+          <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold">Upptäck Rookie</h3>
-              <nav className="flex flex-col space-y-3">
-                {discoveryLinks.map((link, index) => (
-                  <Link
-                    key={index}
-                    href={link.href}
-                    className="text-muted-foreground hover:text-foreground transition-colors duration-150"
-                  >
-                    {link.title}
-                  </Link>
-                ))}
-              </nav>
+              <Link href="/" aria-label="go home" className="block size-fit">
+                <Logo />
+              </Link>
+              <p className="text-xl font-medium">
+                Matchar unga talanger
+                <br />
+                med företag
+              </p>
             </div>
 
-            {/* Kontakt Column */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold">Kontakt</h3>
-              <div className="text-muted-foreground flex flex-col space-y-3">
-                <a
-                  href="https://maps.google.com/?q=Drottninggatan+32,+111+51+Stockholm"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-foreground transition-colors duration-150"
-                >
-                  Drottninggatan 32, 8tr, 111 51 Stockholm
-                </a>
-                <a
-                  href="mailto:info@rookiework.se"
-                  className="hover:text-foreground transition-colors duration-150"
-                >
-                  info@rookiework.se
-                </a>
-                <a
-                  href="tel:+46101296000"
-                  className="hover:text-foreground transition-colors duration-150"
-                >
-                  010 129 60 00
-                </a>
+            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold">Upptäck Rookie</h3>
+                <nav className="flex flex-col space-y-3">
+                  {discoveryLinks.map((link, index) => (
+                    <Link
+                      key={index}
+                      href={link.href}
+                      className="text-muted-foreground hover:text-foreground transition-colors duration-150"
+                    >
+                      {link.title}
+                    </Link>
+                  ))}
+                </nav>
+              </div>
+
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold">Kontakt</h3>
+                <div className="text-muted-foreground flex flex-col space-y-3">
+                  <a
+                    href="https://maps.google.com/?q=Drottninggatan+32,+111+51+Stockholm"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-foreground transition-colors duration-150"
+                  >
+                    Drottninggatan 32, 8tr, 111 51 Stockholm
+                  </a>
+                  <a
+                    href="mailto:info@rookiework.se"
+                    className="hover:text-foreground transition-colors duration-150"
+                  >
+                    info@rookiework.se
+                  </a>
+                  <a
+                    href="tel:+46101296000"
+                    className="hover:text-foreground transition-colors duration-150"
+                  >
+                    010 129 60 00
+                  </a>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Bottom Section - Copyright, Site by Stormfors, and Theme Toggle */}
-        <div className="mt-16 flex flex-wrap items-center justify-between gap-6 pt-6">
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
-            <span className="text-muted-foreground text-sm">
-              © {new Date().getFullYear()} Rookie, All rights reserved
-            </span>
-            {/*
-            <span className="text-muted-foreground hidden sm:inline">•</span>
-            <a
-              href="https://stormfors.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground text-sm transition-colors duration-150"
-            >
-              Site by Stormfors
-            </a>
-            */}
+          <div className="mt-16 flex flex-wrap items-center justify-between gap-6 pt-6">
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
+              <span className="text-muted-foreground text-sm">
+                © {new Date().getFullYear()} Rookie, All rights reserved
+              </span>
+            </div>
           </div>
         </div>
       </div>

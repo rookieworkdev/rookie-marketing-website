@@ -9,7 +9,6 @@ import dynamic from 'next/dynamic'
 const AboutSection = dynamic(() => import('@/components/about-section'))
 const LargeImageSection = dynamic(() => import('@/components/large-image-section'))
 const JobsCarouselSection = dynamic(() => import('@/components/jobs-carousel-section'))
-const CTASection = dynamic(() => import('@/components/cta-section'))
 
 export const metadata: Metadata = {
   title: 'För jobbsökande',
@@ -59,17 +58,16 @@ export default async function ForJobbsokandePage() {
           description="Vi nischar oss helt mot att matcha ihop unga talanger med företag. Vilket gör det enklare för dig att hitta lediga tjänster som passar din profil. Dessutom slipper du tävla mot de som har lång erfarenhet och många år av arbete i bagaget."
         />
         <JobsCarouselSection jobs={jobs} maxJobs={6} showCTA />
-        <CTASection
-          content={{
-            title: 'Är du ute efter jobb?',
-            description:
-              'Ladda enkelt upp ditt CV för att göra dig synlig för spännande företag och unika jobbmöjligheter.',
-            buttonText: 'Registrera ditt CV',
-            buttonHref: '/registrera-ditt-cv',
-          }}
-        />
       </main>
-      <FooterSection />
+      <FooterSection
+        ctaContent={{
+          title: 'Är du ute efter jobb?',
+          description:
+            'Ladda enkelt upp ditt CV för att göra dig synlig för spännande företag och unika jobbmöjligheter.',
+          buttonText: 'Registrera ditt CV',
+          buttonHref: '/registrera-ditt-cv',
+        }}
+      />
     </>
   )
 }

@@ -78,7 +78,7 @@ export default function CTASection({ variant = 'single', content }: CTASectionPr
                   <h2 className="text-3xl font-medium tracking-tight text-white md:text-3xl lg:text-4xl">
                     {doubleContent[0].title}
                   </h2>
-                  <p className="mt-4 max-w-xl text-lg text-white/80">
+                  <p className="mt-4 max-w-xl text-base text-white/80">
                     {doubleContent[0].description}
                   </p>
                 </div>
@@ -106,7 +106,7 @@ export default function CTASection({ variant = 'single', content }: CTASectionPr
                   <h2 className="text-foreground text-3xl font-medium tracking-tight md:text-3xl lg:text-4xl">
                     {doubleContent[1].title}
                   </h2>
-                  <p className="text-foreground/80 mt-4 max-w-xl text-lg">
+                  <p className="text-foreground/80 mt-4 max-w-xl text-base">
                     {doubleContent[1].description}
                   </p>
                 </div>
@@ -155,7 +155,7 @@ export default function CTASection({ variant = 'single', content }: CTASectionPr
               <h2 className="text-2xl font-medium tracking-tight text-white md:text-3xl lg:text-4xl">
                 {singleContent.title}
               </h2>
-              <p className="mt-4 max-w-xl text-lg text-pretty text-white/80">
+              <p className="mt-4 max-w-xl text-base text-pretty text-white/80">
                 {singleContent.description}
               </p>
             </div>

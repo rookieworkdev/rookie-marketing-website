@@ -1,4 +1,3 @@
-import CTASection from '@/components/cta-section'
 import FooterSection from '@/components/footer'
 import { HeroHeader } from '@/components/header'
 import JobsGridSection from '@/components/jobs-grid-section'
@@ -65,8 +64,8 @@ export default async function LedigaJobbPage() {
         />
         <JobsGridSection jobs={jobs} />
       </main>
-      <CTASection
-        content={{
+      <FooterSection
+        ctaContent={{
           title: 'Redo att ta steget in i arbetslivet?',
           description:
             'Registrera dig här för att göra dig tillgänglig för hundratals arbetsgivare.',
@@ -75,7 +74,6 @@ export default async function LedigaJobbPage() {
           buttonOpenInNewTab: true,
         }}
       />
-      <FooterSection />
     </>
   )
 }

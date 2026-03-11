@@ -1,4 +1,3 @@
-import CTASection from '@/components/cta-section'
 import FooterSection from '@/components/footer'
 import { HeroHeader } from '@/components/header'
 import { PageHeader } from '@/components/page-header'
@@ -50,15 +49,6 @@ export default async function ManadensRookiePage() {
         />
         <RookieOfMonthSection rookie={currentRookie} />
         <PreviousRookiesSection rookies={previousRookies} />
-        <CTASection
-          content={{
-            title: 'Kan vi hjälpa dig?',
-            description:
-              'Kontakta oss så berättar vi gärna mer om hur vi matchar unga talanger med rätt företag.',
-            buttonText: 'Kontakta oss',
-            buttonHref: '/kontakt',
-          }}
-        />
       </main>
       <FooterSection />
     </>

@@ -1,4 +1,4 @@
-import CTASection from '@/components/cta-section'
+import CeoTestimonialSection from '@/components/ceo-testimonial-section'
 import FooterSection from '@/components/footer'
 import HeroSection from '@/components/hero-section'
 import HowItWorksSection from '@/components/how-it-works-section'
@@ -34,14 +34,11 @@ export default async function Page() {
       <HeroSection />
       <HowItWorksSection />
       <JobsSection jobs={jobs} />
-      <CTASection
-        content={{
-          title: 'Redo att komma igång?',
-          description:
-            'Skapa ett konto och börja matcha med rätt kandidater eller uppdrag redan idag.',
-          buttonText: 'Kom igång',
-          buttonHref: '/kontakt',
-        }}
+      <CeoTestimonialSection
+        quote="Vår mission är att göra rekryteringsprocessen enklare och att få fler företag att se den otroliga potential som finns hos unga. Om fler vågar investera i den yngre arbetskraften så skapar vi en arbetsmarknad som är rustad för att möta framtidens utmaningar."
+        authorName="Håkan Olsson"
+        authorTitle="VD och grundare av Rookie AB"
+        authorImage="/images/content/hakan-olsson.jpeg"
       />
       <FooterSection />
     </>

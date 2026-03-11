@@ -1,4 +1,3 @@
-import CTASection from '@/components/cta-section'
 import FooterSection from '@/components/footer'
 import { HeroHeader } from '@/components/header'
 import { PageHeader } from '@/components/page-header'
@@ -134,8 +133,6 @@ export default async function InspirationPostPage({ params }: PageProps) {
           </div>
         </article>
 
-        {/* CTA Section */}
-        <CTASection />
       </main>
       <FooterSection />
     </>

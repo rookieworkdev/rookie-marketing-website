@@ -5,6 +5,7 @@ import { FlickeringGrid } from '@/components/ui/flickering-grid'
 import { InfiniteSlider } from '@/components/ui/infinite-slider'
 import { ProgressiveBlur } from '@/components/ui/progressive-blur'
 import { cn, containerBorders, horizontalPadding } from '@/lib/utils'
+import { motion } from 'motion/react'
 import Link from 'next/link'
 import { AutolivLogo, CoopLogistikLogo, KlarnaLogo, SkandiaLogo } from './company-logos'
 import { HeroHeader } from './header'
@@ -37,7 +38,7 @@ export default function HeroSection() {
               className="absolute inset-0 hidden dark:block"
             />
             {/* Gradient overlay: solid background at top, transparent at bottom */}
-            <div className="from-background absolute inset-0 bg-gradient-to-b from-30% to-transparent" />
+            <div className="from-background absolute inset-0 bg-gradient-to-b from-25% to-transparent" />
 
             {/* Content */}
             <div
@@ -46,18 +47,50 @@ export default function HeroSection() {
                 'relative mx-auto flex max-w-4xl flex-1 flex-col items-center justify-center text-center'
               )}
             >
+              {/* Stats bar */}
+              <motion.div
+                initial={{ opacity: 0, filter: 'blur(12px)' }}
+                animate={{ opacity: 1, filter: 'blur(0px)' }}
+                transition={{ duration: 0.8, ease: 'easeOut' }}
+                className="border-border mb-8 inline-flex items-center rounded-full border p-1 shadow-xs"
+              >
+                <div className="flex items-center gap-2 px-3 py-1">
+                  <span className="text-muted-foreground text-sm">AI-granskade uppdrag</span>
+                  <span className="text-foreground text-sm font-semibold">1 400+</span>
+                </div>
+                <div className="bg-border h-4 w-px" />
+                <div className="flex items-center gap-2 px-3 py-1">
+                  <span className="text-muted-foreground text-sm">Uppdrag analyserade</span>
+                  <span className="text-foreground text-sm font-semibold">1 700+</span>
+                </div>
+                <div className="bg-border h-4 w-px" />
+                <div className="flex items-center gap-2 px-3 py-1">
+                  <span className="text-muted-foreground text-sm">Företag i nätverket</span>
+                  <span className="text-foreground text-sm font-semibold">1 100+</span>
+                </div>
+              </motion.div>
+
               {/* Heading */}
-              <div>
+              <motion.div
+                initial={{ opacity: 0, filter: 'blur(12px)' }}
+                animate={{ opacity: 1, filter: 'blur(0px)' }}
+                transition={{ duration: 0.8, ease: 'easeOut', delay: 0.1 }}
+              >
                 <h1 className="text-foreground text-3xl font-medium tracking-tight md:text-4xl xl:text-5xl">
-                  Matchas snabbt och enkelt med AI
+                  Matcha snabbt och enkelt med AI
                 </h1>
-                <p className="text-muted-foreground mx-auto mt-6 max-w-2xl text-lg font-medium">
+                <p className="text-muted-foreground mx-auto mt-6 max-w-2xl text-base font-medium">
                   För unga talanger på väg framåt och ledare som söker nästa Rookie.
                 </p>
-              </div>
+              </motion.div>
 
               {/* CTA buttons */}
-              <div className="mt-8 flex items-center justify-center gap-3">
+              <motion.div
+                initial={{ opacity: 0, filter: 'blur(12px)' }}
+                animate={{ opacity: 1, filter: 'blur(0px)' }}
+                transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
+                className="mt-8 flex items-center justify-center gap-3"
+              >
                 <Button asChild size="default" className="min-w-[140px]">
                   <Link href="/skapa-uppdrag">
                     <span>Skapa uppdrag</span>
@@ -68,10 +101,10 @@ export default function HeroSection() {
                     <span>Skapa profil</span>
                   </Link>
                 </Button>
-              </div>
+              </motion.div>
 
               {/* Match score indicator */}
-              <div className="mt-12 w-full max-w-md">
+              <div className="mt-8 w-full max-w-lg">
                 <MatchScore score={85} />
               </div>
             </div>
@@ -92,7 +125,7 @@ export default function HeroSection() {
                 direction="right"
                 blurIntensity={1}
               />
-              <InfiniteSlider speedOnHover={20} speed={40} gap={112}>
+              <InfiniteSlider speedOnHover={10} speed={20} gap={112}>
                 <div className="flex items-center justify-center">
                   <CoopLogistikLogo />
                 </div>

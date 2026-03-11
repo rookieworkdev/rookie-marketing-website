@@ -10,7 +10,7 @@ export const CoopLogistikLogo = ({ className }: CompanyLogoProps) => (
     height="42"
     viewBox="0 0 183 64"
     xmlns="http://www.w3.org/2000/svg"
-    className={cn('text-foreground max-h-[42px] max-w-[120px]', className)}
+    className={cn('text-muted-foreground max-h-[42px] max-w-[120px]', className)}
   >
     <g>
       <path
@@ -28,7 +28,7 @@ export const VolvoLogo = ({ className }: CompanyLogoProps) => (
     viewBox="0 0 104 8"
     width="180"
     height="28"
-    className={cn('text-foreground max-h-[28px] max-w-[180px]', className)}
+    className={cn('text-muted-foreground max-h-[28px] max-w-[180px]', className)}
   >
     <defs>
       <symbol id="wordmark">
@@ -41,7 +41,7 @@ export const VolvoLogo = ({ className }: CompanyLogoProps) => (
 
 export const KlarnaLogo = ({ className }: CompanyLogoProps) => (
   <svg
-    className={cn('text-foreground max-h-[22px] max-w-[91px]', className)}
+    className={cn('text-muted-foreground max-h-[22px] max-w-[91px]', className)}
     width="91"
     height="22"
     viewBox="0 0 91 22"
@@ -60,7 +60,7 @@ export const SkandiaLogo = ({ className }: CompanyLogoProps) => (
     viewBox="0 0 794 142"
     width="120"
     xmlns="http://www.w3.org/2000/svg"
-    className={cn('text-foreground max-h-[21px] max-w-[120px]', className)}
+    className={cn('text-muted-foreground max-h-[21px] max-w-[120px]', className)}
   >
     <path
       d="M273 109H261c-8 0-14-5-14-11 0-8 7-11 14-11h12V109ZM498 107h-4c-19 0-27-9-27-25 0-17 9-25 27-25h4V107ZM94 101c0-39-57-29-57-42 0-5 3-5 20-5 10 0 20 1 31 2V33c-12-2-24-2-36-2C20 31 0 39 0 60c0 38 57 28 57 41 0 4-3 6-20 6 -13 0-26-1-38-2v26c11 2 29 2 43 2C70 132 94 124 94 101M213 130l-40-52 35-45h-38l-23 31c-1 2-4 2-8 2V0h-34v130h34V89c3 0 7 0 8 2l28 38H213ZM314 130c-4-5-6-9-6-15V65c0-31-27-34-51-34 -12 0-23 1-35 2v23c9-1 19-2 29-2 15 0 22 3 22 9v4h-11c-27 0-50 8-50 31 0 24 14 35 33 35 14 0 22-2 29-10 1 3 2 5 4 8H314ZM421 130V66c0-16-6-35-34-35 -12 0-22 5-27 10 -1-3-3-5-5-8h-35c4 5 6 9 6 15v82h34V56h12c12 0 15 6 15 16v58H421ZM538 130c-4-5-6-9-6-15V0h-34v33h-9c-38 0-56 21-56 48 0 31 15 51 39 51 13 0 21-3 26-10 1 3 3 5 5 8H538ZM587 33h-34v97h34V33ZM587 0h-34v22h34V0ZM701 130c-4-5-6-9-6-15V65c0-31-27-34-51-34 -12 0-23 1-35 2v23c9-1 19-2 29-2 15 0 22 3 22 9v4h-11c-27 0-50 8-50 31 0 24 14 35 33 35 14 0 22-2 29-10 1 3 2 5 4 8H701ZM660 109h-12c-8 0-14-5-14-11 0-8 7-11 14-11h12V109Z"
@@ -79,7 +79,7 @@ export const AutolivLogo = ({ className }: CompanyLogoProps) => (
     width="234"
     height="80"
     viewBox="0 0 234 80"
-    className={cn('text-foreground max-h-[24px] max-w-[70px]', className)}
+    className={cn('text-muted-foreground max-h-[24px] max-w-[70px]', className)}
   >
     <g fill="currentColor" fillRule="nonzero">
       <path d="M180.226 17.723h10.97v33.216h-10.97zM180.24 12.805h10.976V0l-10.975 8.54zM27.637 33.422H16.7l5.23-15.81 5.706 15.81zM.06 51.145h10.4l3.388-9.128h17.88l3.154 9.012H46.8L30.084 7.033H17.002L.06 51.145zM84.77 17.658H74.241v16.281c0 4.265-1.354 11.052-7.61 11.052-5.546 0-6.078-5.49-6.078-9.545V17.658H50.024V38.68c-.18 8.626 4.613 13.192 13.618 13.062 4.512-.076 7.786-2.07 10.429-5.3h.13v4.52h10.53l.04-33.305zM95.11 40.917c-.322 8.238 3.74 10.79 10.528 10.79 2.583 0 6.93-.21 9.271-1.266v-4.224c-.907.582-3.79.502-5.515.351-3.274-.301-3.776-4.24-3.776-7.083V22.606h9.076v-4.948h-9.076v-9.43l-16.546 12.83-.325 1.548h6.382l-.02 18.31zM162.23 50.934h10.976V.02l-10.975 8.51zM208.299 17.663h-12.154l14.019 33.246h9.697L234 17.663h-7.711l-9.025 23.405zM0 62.377h233.955V80H0zM144.993 37.214c-.607 3.517-2.241 7.305-5.751 8.229a9.338 9.338 0 0 1-2.332.282 9.052 9.052 0 0 1-2.296-.282c-3.48-.924-5.11-4.742-5.726-8.229a22.075 22.075 0 0 1-.296-3.727c0-4.973 2.708-10.62 8.318-10.62 5.61 0 8.379 5.526 8.379 10.62a21.949 21.949 0 0 1-.296 3.727m-7.611-20.33c-11.563-.276-19.745 6.887-19.745 17.869 0 .824.058 1.646.175 2.461a16.258 16.258 0 0 0 3.084 7.496 16.429 16.429 0 0 0 3.95 3.742c3.27 2.216 7.522 3.456 12.536 3.255a22.641 22.641 0 0 0 11.09-3.255 18.873 18.873 0 0 0 4.358-3.793 15.954 15.954 0 0 0 3.605-10.137c0-10.982-9.186-17.402-19.053-17.638" />

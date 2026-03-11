@@ -1,9 +1,8 @@
 import AboutSection from '@/components/about-section'
-import CTASection from '@/components/cta-section'
+import CeoTestimonialSection from '@/components/ceo-testimonial-section'
 import FooterSection from '@/components/footer'
 import { HeroHeader } from '@/components/header'
 import { PageHeader } from '@/components/page-header'
-import QuoteAnimationSection from '@/components/quote-animation-section'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -49,13 +48,12 @@ export default function OmOssPage() {
           ctaText="Kontakta oss"
           ctaHref="/kontakt"
         />
-        <QuoteAnimationSection
+        <CeoTestimonialSection
           quote="Vår mission är att göra rekryteringsprocessen enklare och att få fler företag att se den otroliga potential som finns hos unga. Om fler vågar investera i den yngre arbetskraften så skapar vi en arbetsmarknad som är rustad för att möta framtidens utmaningar."
-          author="Håkan Olsson"
+          authorName="Håkan Olsson"
           authorTitle="VD och grundare av Rookie AB"
-          authorImage="/avatars/hakan-olsson.jpeg"
+          authorImage="/images/content/hakan-olsson.jpeg"
         />
-        <CTASection />
       </main>
       <FooterSection />
     </>

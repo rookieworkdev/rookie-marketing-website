@@ -1,9 +1,9 @@
 'use client'
 
 import { cn, sectionContainer, sectionWrapper } from '@/lib/utils'
-import { BrainCircuit, FileText, Handshake, Search, UserPlus, Users } from 'lucide-react'
-import { motion, AnimatePresence } from 'motion/react'
 import type { LucideIcon } from 'lucide-react'
+import { BrainCircuit, FileText, Handshake, Search, UserPlus, Users } from 'lucide-react'
+import { AnimatePresence, motion } from 'motion/react'
 import { useState } from 'react'
 
 interface Step {
@@ -94,13 +94,19 @@ export default function HowItWorksSection() {
           className="text-center"
         >
           <h2 className="text-3xl font-medium tracking-tight md:text-4xl">Så fungerar Rookie</h2>
-          <p className="text-muted-foreground mx-auto mt-4 max-w-2xl text-lg">
+          <p className="text-muted-foreground mx-auto mt-4 max-w-2xl text-base">
             Från profil till tillsättning — tre steg med AI i förarsätet.
           </p>
         </motion.div>
 
         {/* Tabs */}
-        <div className="mt-10 flex justify-center">
+        <motion.div
+          initial={{ opacity: 0, filter: 'blur(12px)' }}
+          whileInView={{ opacity: 1, filter: 'blur(0px)' }}
+          viewport={{ once: true, margin: '0px 0px 200px 0px' }}
+          transition={{ duration: 0.8, ease: 'easeOut', delay: 0.1 }}
+          className="mt-10 flex justify-center"
+        >
           <div className="bg-muted ring-border/50 inline-flex rounded-full p-1 ring-1">
             {tabs.map((tab) => (
               <button
@@ -117,10 +123,16 @@ export default function HowItWorksSection() {
               </button>
             ))}
           </div>
-        </div>
+        </motion.div>
 
         {/* Steps grid */}
-        <div className="mt-12">
+        <motion.div
+          initial={{ opacity: 0, filter: 'blur(12px)' }}
+          whileInView={{ opacity: 1, filter: 'blur(0px)' }}
+          viewport={{ once: true, margin: '0px 0px 200px 0px' }}
+          transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
+          className="mt-12"
+        >
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}
@@ -135,7 +147,7 @@ export default function HowItWorksSection() {
               ))}
             </motion.div>
           </AnimatePresence>
-        </div>
+        </motion.div>
       </div>
     </section>
   )

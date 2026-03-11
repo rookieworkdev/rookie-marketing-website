@@ -83,7 +83,7 @@ export default function JobsCarouselSection({
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
           >
-            <h2 className="text-3xl font-medium tracking-tight md:text-4xl lg:text-5xl">
+            <h2 className="text-muted-foreground text-3xl font-medium tracking-tight md:text-4xl lg:text-5xl">
               Lediga tjänster
             </h2>
             <p className="text-muted-foreground mt-6 max-w-2xl text-pretty">

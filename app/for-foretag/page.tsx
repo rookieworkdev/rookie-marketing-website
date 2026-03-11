@@ -12,7 +12,6 @@ const LargeImageSection = dynamic(() => import('@/components/large-image-section
 const BenefitsSection = dynamic(() => import('@/components/benefits-section'))
 const TestimonialSection = dynamic(() => import('@/components/testimonial-section'))
 const RookieOfMonthSection = dynamic(() => import('@/components/rookie-of-month-section'))
-const CTASection = dynamic(() => import('@/components/cta-section'))
 
 export const metadata: Metadata = {
   title: 'För företag',
@@ -112,28 +111,27 @@ export default async function ForForetagPage() {
           companyName="Volvo Cars Financial Services"
         />
         <RookieOfMonthSection rookie={currentRookie} />
-        <CTASection
-          variant="double"
-          content={[
-            {
-              title: 'Kan vi hjälpa dig?',
-              description:
-                'Kontakta oss så berättar vi gärna mer om hur vi matchar unga talanger med rätt företag.',
-              buttonText: 'Kontakta oss',
-              buttonHref: '/kontakt',
-            },
-            {
-              title: 'Guide',
-              description:
-                'Avgörande steg för en effektivare rekryterings process av unga talanger',
-              buttonText: 'Få tillgång',
-              buttonHref: '/kontakt',
-              buttonVariant: 'secondary',
-            },
-          ]}
-        />
       </main>
-      <FooterSection />
+      <FooterSection
+        ctaVariant="double"
+        ctaContent={[
+          {
+            title: 'Kan vi hjälpa dig?',
+            description:
+              'Kontakta oss så berättar vi gärna mer om hur vi matchar unga talanger med rätt företag.',
+            buttonText: 'Kontakta oss',
+            buttonHref: '/kontakt',
+          },
+          {
+            title: 'Guide',
+            description:
+              'Avgörande steg för en effektivare rekryterings process av unga talanger',
+            buttonText: 'Få tillgång',
+            buttonHref: '/kontakt',
+            buttonVariant: 'secondary',
+          },
+        ]}
+      />
     </>
   )
 }
