@@ -40,12 +40,12 @@ export default function CeoTestimonialSection({
 
           {/* Quote card */}
           <div className="bg-foreground flex flex-col justify-between rounded-2xl p-6 md:p-8 lg:p-10">
-            <blockquote className="text-xl font-medium text-white md:text-2xl lg:text-3xl">
+            <blockquote className="text-background text-xl font-medium md:text-2xl lg:text-3xl">
               &ldquo;{quote}&rdquo;
             </blockquote>
 
             {/* Author info */}
-            <p className="text-muted-foreground text-sm font-medium md:text-base">
+            <p className="text-background/70 text-sm font-medium md:text-base">
               {authorName} &ndash; {authorTitle}
             </p>
           </div>

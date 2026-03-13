@@ -2,44 +2,44 @@ import ContactSection from '@/components/contact-section'
 import FooterSection from '@/components/footer'
 import { HeroHeader } from '@/components/header'
 import { PageHeader } from '@/components/page-header'
-import type { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
 
-export const metadata: Metadata = {
-  title: 'Kontakt',
-  description:
-    'Kontakta Rookie så berättar vi gärna mer om hur vi matchar unga talanger med rätt företag. Ring oss på 010 129 60 00 eller maila info@rookiework.se',
-  alternates: {
-    canonical: '/kontakt',
-  },
-  openGraph: {
-    url: '/kontakt',
-    title: 'Kontakt - Rookie',
-    description:
-      'Kontakta Rookie så berättar vi gärna mer om hur vi matchar unga talanger med rätt företag.',
-  },
-  twitter: {
-    title: 'Kontakt - Rookie',
-    description:
-      'Kontakta Rookie så berättar vi gärna mer om hur vi matchar unga talanger med rätt företag.',
-  },
+export async function generateMetadata() {
+  const t = await getTranslations('pages.contact')
+  return {
+    title: t('metaTitle'),
+    description: t('metaDescription'),
+    alternates: { canonical: '/kontakt' },
+    openGraph: {
+      url: '/kontakt',
+      title: t('metaTitle') + ' - Rookie',
+      description: t('ogDescription'),
+    },
+    twitter: {
+      title: t('metaTitle') + ' - Rookie',
+      description: t('ogDescription'),
+    },
+  }
 }
 
-export default function KontaktPage() {
+export default async function KontaktPage() {
+  const t = await getTranslations('pages.contact')
+  const tCommon = await getTranslations('common')
+
   return (
     <>
       <HeroHeader />
       <main>
         <PageHeader
-          breadcrumbs={[{ label: 'Hem', href: '/' }, { label: 'Kontakt' }]}
-          title="Hör av dig till oss"
-          description="Kontakta oss så berättar vi gärna mer om hur vi kan hjälpa dig."
-          imageSrc="/images/headers/three-business-men.jpg"
+          breadcrumbs={[{ label: tCommon('home'), href: '/' }, { label: t('metaTitle') }]}
+          title={t('pageTitle')}
+          description={t('pageDescription')}
         />
         <ContactSection
           variant="simple"
-          subject="Allmän förfrågan"
-          title="Skicka ett meddelande"
-          description="Kontakta oss så berättar vi gärna mer om hur vi matchar unga talanger med rätt företag."
+          subject={t('contactSubject')}
+          title={t('contactTitle')}
+          description={t('contactDescription')}
         />
       </main>
       <FooterSection />

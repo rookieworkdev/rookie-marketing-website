@@ -4,27 +4,29 @@ import { HeroHeader } from '@/components/header'
 import { PageHeader } from '@/components/page-header'
 import RookieOfMonthSection from '@/components/rookie-of-month-section'
 import { getCurrentRookie } from '@/lib/previous-rookies'
-import type { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
 
-export const metadata: Metadata = {
-  title: 'Hitta Personal',
-  description:
-    'Kontakta Rookie så hjälper vi dig hitta rätt unga talanger och nyexaminerade för ditt företag. Vi matchar kvalitetssäkrade juniora profiler med din verksamhet.',
-  alternates: {
-    canonical: '/personal',
-  },
-  openGraph: {
-    url: '/personal',
-    title: 'Hitta Personal - Rookie',
-    description: 'Kontakta Rookie så hjälper vi dig hitta rätt unga talanger och nyexaminerade för ditt företag.',
-  },
-  twitter: {
-    title: 'Hitta Personal - Rookie',
-    description: 'Kontakta Rookie så hjälper vi dig hitta rätt unga talanger och nyexaminerade för ditt företag.',
-  },
+export async function generateMetadata() {
+  const t = await getTranslations('pages.personal')
+  return {
+    title: t('metaTitle'),
+    description: t('metaDescription'),
+    alternates: { canonical: '/personal' },
+    openGraph: {
+      url: '/personal',
+      title: t('metaTitle') + ' - Rookie',
+      description: t('ogDescription'),
+    },
+    twitter: {
+      title: t('metaTitle') + ' - Rookie',
+      description: t('ogDescription'),
+    },
+  }
 }
 
 export default async function PersonalPage() {
+  const t = await getTranslations('pages.personal')
+  const tCommon = await getTranslations('common')
   const currentRookie = await getCurrentRookie()
 
   return (
@@ -32,16 +34,15 @@ export default async function PersonalPage() {
       <HeroHeader />
       <main>
         <PageHeader
-          breadcrumbs={[{ label: 'Hem', href: '/' }, { label: 'Hitta personal' }]}
-          title="Hitta rätt personal för ditt företag"
-          description="Ert företag är nu ett steg närmare att signa nästa kandidat. Fyll i formuläret och berätta om ert personalbehov så återkommer vi inom kort!"
-          imageSrc="/images/headers/working-men.jpg"
+          breadcrumbs={[{ label: tCommon('home'), href: '/' }, { label: t('breadcrumb') }]}
+          title={t('pageTitle')}
+          description={t('pageDescription')}
         />
         <ContactSection
           variant="full"
-          subject="Rekryteringsförfrågan"
-          title="Skicka en rekryteringsförfrågan"
-          description="Kontakta oss så berättar vi gärna mer om hur vi matchar unga talanger med rätt företag."
+          subject={t('contactSubject')}
+          title={t('contactTitle')}
+          description={t('contactDescription')}
         />
         <RookieOfMonthSection rookie={currentRookie} />
       </main>

@@ -11,7 +11,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     'manadens-rookie',
     'for-jobbsokande',
     'for-foretag',
-    'lediga-jobb',
     'om-oss',
     'inspiration',
     'kontakt',

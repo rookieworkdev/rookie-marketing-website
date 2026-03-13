@@ -7,8 +7,10 @@ import { sectionContainer, sectionWrapper } from '@/lib/utils'
 import { motion } from 'motion/react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 
 export default function JobseekerSection() {
+  const t = useTranslations('jobseeker')
   return (
     <section className={sectionWrapper('bg-background')}>
       <div className={sectionContainer()}>
@@ -22,16 +24,15 @@ export default function JobseekerSection() {
         >
           <div className="max-w-2xl">
             <h2 className="text-3xl font-medium tracking-tight md:text-4xl lg:text-5xl">
-              Vad Rookie erbjuder unga arbetssökande
+              {t('title')}
             </h2>
             <p className="text-muted-foreground mt-6">
-              Är du i början av din karriär? Då har du kommit helt rätt. Upptäck lediga jobb och
-              ladda enkelt upp ditt CV för att göra dig synlig för spännande företag.
+              {t('description')}
             </p>
           </div>
           <Button asChild size="lg" variant="secondary" className="shrink-0">
-            <Link href="/lediga-jobb">
-              <span className="text-nowrap">Hitta jobb</span>
+            <Link href="https://rookie-se.intelliplan.net/jobb/9/ansok" target="_blank">
+              <span className="text-nowrap">{t('findJobs')}</span>
             </Link>
           </Button>
         </motion.div>

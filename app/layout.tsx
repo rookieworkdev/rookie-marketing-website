@@ -1,7 +1,5 @@
 import { ThemeProvider } from '@/components/theme-provider'
 import {
-  DEFAULT_DESCRIPTION,
-  DEFAULT_KEYWORDS,
   metadataBase,
   OG_IMAGE_PATH,
   SITE_NAME,
@@ -10,6 +8,8 @@ import {
 } from '@/lib/seo'
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
+import { getLocale, getMessages } from 'next-intl/server'
+import { NextIntlClientProvider } from 'next-intl'
 import './globals.css'
 
 // Local Inter font for better performance (no external requests)
@@ -33,8 +33,6 @@ export const metadata: Metadata = {
     default: SITE_NAME,
     template: `%s - ${SITE_NAME}`,
   },
-  description: DEFAULT_DESCRIPTION,
-  keywords: DEFAULT_KEYWORDS,
   applicationName: SITE_NAME,
   manifest: '/manifest.webmanifest',
   robots: {
@@ -50,10 +48,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: 'website',
-    locale: 'sv_SE',
     siteName: SITE_NAME,
     title: SITE_NAME,
-    description: DEFAULT_DESCRIPTION,
     images: [
       {
         url: OG_IMAGE_PATH,
@@ -66,7 +62,6 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: SITE_NAME,
-    description: DEFAULT_DESCRIPTION,
     images: [TWITTER_IMAGE_PATH],
   },
   icons: {
@@ -75,23 +70,28 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const locale = await getLocale()
+  const messages = await getMessages()
+
   return (
-    <html lang="sv" className={inter.variable} suppressHydrationWarning>
+    <html lang={locale} className={inter.variable} suppressHydrationWarning>
       <body className="antialiased">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: structuredData }} />
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        <NextIntlClientProvider messages={messages}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   )

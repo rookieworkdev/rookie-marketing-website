@@ -7,6 +7,7 @@ import { sectionContainer, sectionWrapper } from '@/lib/utils'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { motion } from 'motion/react'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 interface JobsCarouselSectionProps {
@@ -20,6 +21,7 @@ export default function JobsCarouselSection({
   maxJobs = 6,
   showCTA = true,
 }: JobsCarouselSectionProps) {
+  const t = useTranslations('jobsCarousel')
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(true)
@@ -83,11 +85,11 @@ export default function JobsCarouselSection({
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
           >
-            <h2 className="text-muted-foreground text-3xl font-medium tracking-tight md:text-4xl lg:text-5xl">
-              Lediga tjänster
+            <h2 className="text-3xl font-medium tracking-tight md:text-4xl lg:text-5xl">
+              {t('title')}
             </h2>
             <p className="text-muted-foreground mt-6 max-w-2xl text-pretty">
-              Upptäck spännande karriärmöjligheter hos företag som söker unga talanger
+              {t('description')}
             </p>
           </motion.div>
 
@@ -104,7 +106,7 @@ export default function JobsCarouselSection({
               size="icon"
               onClick={() => scroll('left')}
               disabled={!canScrollLeft}
-              aria-label="Föregående jobb"
+              aria-label={t('previousJob')}
             >
               <ChevronLeft className="size-4" />
             </Button>
@@ -113,7 +115,7 @@ export default function JobsCarouselSection({
               size="icon"
               onClick={() => scroll('right')}
               disabled={!canScrollRight}
-              aria-label="Nästa jobb"
+              aria-label={t('nextJob')}
             >
               <ChevronRight className="size-4" />
             </Button>
@@ -124,7 +126,7 @@ export default function JobsCarouselSection({
         <div
           className="relative"
           role="region"
-          aria-label="Lediga tjänster karusell"
+          aria-label={t('carouselLabel')}
           onKeyDown={handleKeyDown}
         >
           <div
@@ -132,7 +134,7 @@ export default function JobsCarouselSection({
             onScroll={checkScrollability}
             className="no-scrollbar flex gap-6 overflow-x-auto pb-4"
             tabIndex={0}
-            aria-label="Använd vänster- och högerpilarna för att navigera"
+            aria-label={t('navigationHint')}
             style={{
               scrollbarWidth: 'none',
               msOverflowStyle: 'none',
@@ -164,8 +166,8 @@ export default function JobsCarouselSection({
             className="mt-8 flex justify-start text-center"
           >
             <Button asChild size="lg" variant="secondary">
-              <Link href="/lediga-jobb">
-                <span className="text-nowrap">Se alla lediga jobb</span>
+              <Link href="https://rookie-se.intelliplan.net/jobb/9/ansok" target="_blank">
+                <span className="text-nowrap">{t('viewAllJobs')}</span>
               </Link>
             </Button>
           </motion.div>

@@ -3,6 +3,7 @@
 import { sectionContainer, sectionWrapper } from '@/lib/utils'
 import { motion } from 'motion/react'
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 
 interface LargeImageSectionProps {
   imageUrl?: string
@@ -13,10 +14,12 @@ interface LargeImageSectionProps {
 
 export default function LargeImageSection({
   imageUrl = 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=1600&auto=format&fit=crop&q=80',
-  imageAlt = 'Teamwork',
+  imageAlt,
   title,
   description,
 }: LargeImageSectionProps) {
+  const t = useTranslations('largeImage')
+  const effectiveImageAlt = imageAlt || t('defaultAlt')
   const descriptionArray = Array.isArray(description) ? description : [description]
 
   return (
@@ -59,7 +62,7 @@ export default function LargeImageSection({
         >
           <Image
             src={imageUrl}
-            alt={imageAlt}
+            alt={effectiveImageAlt}
             fill
             className="object-cover"
             sizes="100vw"

@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button'
 import { horizontalPadding, sectionContainer, sectionWrapper } from '@/lib/utils'
 import { motion } from 'motion/react'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 
 interface CTAItem {
   title: string
@@ -20,26 +21,26 @@ interface CTASectionProps {
 }
 
 export default function CTASection({ variant = 'single', content }: CTASectionProps) {
+  const t = useTranslations('cta')
+
   const defaultSingleContent: CTAItem = {
-    title: 'Kan vi hjälpa dig?',
-    description:
-      'Kontakta oss så berättar vi gärna mer om hur vi matchar unga talanger med rätt företag.',
-    buttonText: 'Kontakta oss',
+    title: t('canWeHelp'),
+    description: t('canWeHelpDescription'),
+    buttonText: t('contactUs'),
     buttonHref: '/kontakt',
   }
 
   const defaultDoubleContent: [CTAItem, CTAItem] = [
     {
-      title: 'Kan vi hjälpa dig?',
-      description:
-        'Kontakta oss så berättar vi gärna mer om hur vi matchar unga talanger med rätt företag.',
-      buttonText: 'Kontakta oss',
+      title: t('canWeHelp'),
+      description: t('canWeHelpDescription'),
+      buttonText: t('contactUs'),
       buttonHref: '/kontakt',
     },
     {
-      title: 'Guide',
-      description: 'Avgörande steg för en effektivare rekryterings process av unga talanger',
-      buttonText: 'Få tillgång',
+      title: t('guide'),
+      description: t('guideDescription'),
+      buttonText: t('getAccess'),
       buttonHref: '/kontakt',
       buttonVariant: 'secondary',
     },
@@ -106,7 +107,7 @@ export default function CTASection({ variant = 'single', content }: CTASectionPr
                   <h2 className="text-foreground text-3xl font-medium tracking-tight md:text-3xl lg:text-4xl">
                     {doubleContent[1].title}
                   </h2>
-                  <p className="text-foreground/80 mt-4 max-w-xl text-base">
+                  <p className="text-muted-foreground mt-4 max-w-xl text-base">
                     {doubleContent[1].description}
                   </p>
                 </div>

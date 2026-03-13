@@ -4,6 +4,7 @@ import { cn, sectionContainer, sectionWrapper } from '@/lib/utils'
 import type { LucideIcon } from 'lucide-react'
 import { BrainCircuit, FileText, Handshake, Search, UserPlus, Users } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
+import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
 interface Step {
@@ -12,50 +13,10 @@ interface Step {
   description: string
 }
 
-const candidateSteps: Step[] = [
-  {
-    icon: UserPlus,
-    title: 'Skapa din profil',
-    description: 'Lägg in kompetens, erfarenhet och preferenser. Klart på några minuter.',
-  },
-  {
-    icon: BrainCircuit,
-    title: 'AI matchar dig',
-    description: 'Vår AI analyserar din profil och kopplar dig till relevanta uppdrag.',
-  },
-  {
-    icon: Handshake,
-    title: 'Börja jobba',
-    description: 'Genomför intervju, få ditt uppdrag och kom igång. Helt utan krångel.',
-  },
-]
-
-const clientSteps: Step[] = [
-  {
-    icon: FileText,
-    title: 'Publicera uppdrag',
-    description: 'Beskriv rollen, kompetenskrav och preferenser. Klart på några minuter.',
-  },
-  {
-    icon: Search,
-    title: 'AI hittar kandidater',
-    description: 'Vår AI rankar och presenterar de bästa kandidaterna för ditt uppdrag.',
-  },
-  {
-    icon: Users,
-    title: 'Tillsätt rollen',
-    description: 'Granska profiler, boka intervju och anställ. Allt på samma plats.',
-  },
-]
-
 type Tab = 'candidate' | 'client'
 
-const tabs: { key: Tab; label: string }[] = [
-  { key: 'candidate', label: 'För kandidater' },
-  { key: 'client', label: 'För företag' },
-]
-
 function StepCard({ step, index }: { step: Step; index: number }) {
+  const t = useTranslations('howItWorks')
   return (
     <motion.div
       initial={{ opacity: 0, y: 24 }}
@@ -71,7 +32,7 @@ function StepCard({ step, index }: { step: Step; index: number }) {
       >
         <step.icon className="text-foreground h-6 w-6" strokeWidth={1.5} />
       </div>
-      <span className="text-muted-foreground mt-4 text-sm font-medium">Steg {index + 1}</span>
+      <span className="text-muted-foreground mt-4 text-sm font-medium">{t('step', { number: index + 1 })}</span>
       <h3 className="mt-2 text-lg font-medium">{step.title}</h3>
       <p className="text-muted-foreground mt-2 text-sm">{step.description}</p>
     </motion.div>
@@ -79,7 +40,50 @@ function StepCard({ step, index }: { step: Step; index: number }) {
 }
 
 export default function HowItWorksSection() {
+  const t = useTranslations('howItWorks')
   const [activeTab, setActiveTab] = useState<Tab>('candidate')
+
+  const candidateSteps: Step[] = [
+    {
+      icon: UserPlus,
+      title: t('candidate.step1Title'),
+      description: t('candidate.step1Description'),
+    },
+    {
+      icon: BrainCircuit,
+      title: t('candidate.step2Title'),
+      description: t('candidate.step2Description'),
+    },
+    {
+      icon: Handshake,
+      title: t('candidate.step3Title'),
+      description: t('candidate.step3Description'),
+    },
+  ]
+
+  const clientSteps: Step[] = [
+    {
+      icon: FileText,
+      title: t('client.step1Title'),
+      description: t('client.step1Description'),
+    },
+    {
+      icon: Search,
+      title: t('client.step2Title'),
+      description: t('client.step2Description'),
+    },
+    {
+      icon: Users,
+      title: t('client.step3Title'),
+      description: t('client.step3Description'),
+    },
+  ]
+
+  const tabs: { key: Tab; label: string }[] = [
+    { key: 'candidate', label: t('forCandidates') },
+    { key: 'client', label: t('forCompanies') },
+  ]
+
   const steps = activeTab === 'candidate' ? candidateSteps : clientSteps
 
   return (
@@ -92,9 +96,9 @@ export default function HowItWorksSection() {
           transition={{ duration: 0.8, ease: 'easeOut' }}
           className="text-center"
         >
-          <h2 className="text-3xl font-medium tracking-tight md:text-4xl">Så fungerar Rookie</h2>
+          <h2 className="text-3xl font-medium tracking-tight md:text-4xl">{t('title')}</h2>
           <p className="text-muted-foreground mx-auto mt-4 max-w-2xl text-base">
-            Från profil till tillsättning — tre steg med AI i förarsätet.
+            {t('subtitle')}
           </p>
         </motion.div>
 

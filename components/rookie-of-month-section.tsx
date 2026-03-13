@@ -8,12 +8,14 @@ import { sectionContainer, sectionWrapper } from '@/lib/utils'
 import { GraduationCap } from 'lucide-react'
 import { motion } from 'motion/react'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 
 interface RookieOfMonthSectionProps {
   rookie: PreviousRookie | null
 }
 
 export default function RookieOfMonthSection({ rookie }: RookieOfMonthSectionProps) {
+  const t = useTranslations('rookieOfMonth')
   if (!rookie) {
     return null
   }
@@ -50,14 +52,14 @@ export default function RookieOfMonthSection({ rookie }: RookieOfMonthSectionPro
               <div className="flex items-start gap-3">
                 <GraduationCap className="text-primary mt-0.5 size-5 shrink-0" />
                 <div className="flex-1">
-                  <dt className="text-muted-foreground mb-1 font-medium">Studier</dt>
+                  <dt className="text-muted-foreground mb-1 font-medium">{t('studies')}</dt>
                   <dd className="text-base">{rookie.studies}</dd>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <GraduationCap className="text-primary mt-0.5 size-5 shrink-0" />
                 <div className="flex-1">
-                  <dt className="text-muted-foreground mb-1 font-medium">Skola</dt>
+                  <dt className="text-muted-foreground mb-1 font-medium">{t('school')}</dt>
                   <dd className="text-base">{rookie.school}</dd>
                 </div>
               </div>
@@ -74,20 +76,18 @@ export default function RookieOfMonthSection({ rookie }: RookieOfMonthSectionPro
           >
             <h2 className="text-3xl font-medium tracking-tight md:text-4xl lg:text-5xl">
               {/* Månadens rookie för <em className="text-primary not-italic">{rookie.month}</em> */}
-              Månadens rookie för{' '}
+              {t('titlePrefix')}{' '}
               <em className="bg-linear-to-br from-green-700 via-green-600 to-yellow-400 bg-clip-text text-transparent not-italic">
                 {rookie.month}
               </em>
             </h2>
             <p className="text-muted-foreground mt-6">
-              Vi hyllar och uppmärksammar de mest framstående studenterna från olika program och
-              universitet. Baserat på studenters akademiska prestationer utser vi varje månad
-              Månadens Rookie!
+              {t('description')}
             </p>
             <div className="mt-8">
               <Button asChild size="lg" variant="secondary">
                 <Link href="/manadens-rookie">
-                  <span className="text-nowrap">Visa alla utmärkelser</span>
+                  <span className="text-nowrap">{t('viewAllAwards')}</span>
                 </Link>
               </Button>
             </div>

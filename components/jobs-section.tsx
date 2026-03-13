@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button'
 import { sectionContainer, sectionWrapper } from '@/lib/utils'
 import { motion } from 'motion/react'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 import { JobPostingCard } from './job-posting-card'
 import type { JobDisplay } from '@/lib/jobs'
 
@@ -12,6 +13,7 @@ interface JobsSectionProps {
 }
 
 export default function JobsSection({ jobs }: JobsSectionProps) {
+  const t = useTranslations('jobsSection')
   if (!jobs || jobs.length === 0) return null
 
   return (
@@ -25,13 +27,13 @@ export default function JobsSection({ jobs }: JobsSectionProps) {
           className="flex items-end justify-between"
         >
           <div>
-            <h2 className="text-3xl font-medium tracking-tight md:text-4xl">Senaste uppdragen</h2>
+            <h2 className="text-3xl font-medium tracking-tight md:text-4xl">{t('title')}</h2>
             <p className="text-muted-foreground mt-4 max-w-2xl text-base">
-              Se ett urval av aktuella uppdrag som matchas med unga talanger.
+              {t('subtitle')}
             </p>
           </div>
           <Button asChild>
-            <Link href="/jobb">Se alla uppdrag</Link>
+            <Link href="/jobb">{t('viewAll')}</Link>
           </Button>
         </motion.div>
 

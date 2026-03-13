@@ -7,11 +7,13 @@ import { ProgressiveBlur } from '@/components/ui/progressive-blur'
 import { cn, containerBorders, horizontalPadding } from '@/lib/utils'
 import { motion } from 'motion/react'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 import { AutolivLogo, CoopLogistikLogo, KlarnaLogo, SkandiaLogo } from './company-logos'
 import { HeroHeader } from './header'
 import { MatchScore } from './match-score'
 
 export default function HeroSection() {
+  const t = useTranslations('hero')
   return (
     <>
       <HeroHeader />
@@ -55,17 +57,17 @@ export default function HeroSection() {
                 className="border-border mb-8 inline-flex items-center rounded-full border p-1 shadow-xs"
               >
                 <div className="flex items-center gap-2 px-3 py-1">
-                  <span className="text-muted-foreground text-sm">AI-granskade uppdrag</span>
+                  <span className="text-muted-foreground text-sm">{t('aiReviewedAssignments')}</span>
                   <span className="text-foreground text-sm font-semibold">1 400+</span>
                 </div>
                 <div className="bg-border h-4 w-px" />
                 <div className="flex items-center gap-2 px-3 py-1">
-                  <span className="text-muted-foreground text-sm">Uppdrag analyserade</span>
+                  <span className="text-muted-foreground text-sm">{t('assignmentsAnalyzed')}</span>
                   <span className="text-foreground text-sm font-semibold">1 700+</span>
                 </div>
                 <div className="bg-border h-4 w-px" />
                 <div className="flex items-center gap-2 px-3 py-1">
-                  <span className="text-muted-foreground text-sm">Företag i nätverket</span>
+                  <span className="text-muted-foreground text-sm">{t('companiesInNetwork')}</span>
                   <span className="text-foreground text-sm font-semibold">1 100+</span>
                 </div>
               </motion.div>
@@ -77,10 +79,13 @@ export default function HeroSection() {
                 transition={{ duration: 0.8, ease: 'easeOut', delay: 0.1 }}
               >
                 <h1 className="text-foreground text-3xl font-medium tracking-tight md:text-4xl xl:text-5xl">
-                  Matcha snabbt och enkelt med AI
+                  {t('matchQuickly')}{' '}
+                  <span className="bg-linear-to-br from-green-700 via-green-600 to-yellow-400 bg-clip-text text-transparent">
+                    {t('withAI')}
+                  </span>
                 </h1>
                 <p className="text-muted-foreground mx-auto mt-6 max-w-2xl text-base font-medium">
-                  För unga talanger på väg framåt och ledare som söker nästa Rookie.
+                  {t('subtitle')}
                 </p>
               </motion.div>
 
@@ -93,12 +98,12 @@ export default function HeroSection() {
               >
                 <Button asChild size="default" className="min-w-[140px]">
                   <Link href="/skapa-uppdrag">
-                    <span>Skapa uppdrag</span>
+                    <span>{t('createAssignment')}</span>
                   </Link>
                 </Button>
                 <Button asChild size="default" variant="outline" className="min-w-[140px]">
                   <Link href="/skapa-profil">
-                    <span>Skapa profil</span>
+                    <span>{t('createProfile')}</span>
                   </Link>
                 </Button>
               </motion.div>

@@ -4,34 +4,34 @@ import { PageHeader } from '@/components/page-header'
 import PreviousRookiesSection from '@/components/previous-rookies-section'
 import RookieOfMonthSection from '@/components/rookie-of-month-section'
 import { getCurrentRookie, getPreviousRookies } from '@/lib/previous-rookies'
-import type { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
 
 // Revalidate this page every day (86400 seconds)
 // Rookie of the month changes monthly, so daily checks are sufficient
 // export const revalidate = 86400
-export const revalidate = 1 
+export const revalidate = 1
 
-export const metadata: Metadata = {
-  title: 'Månadens Rookie',
-  description:
-    'Vi hyllar och uppmärksammar de mest framstående studenterna från olika program och universitet. Baserat på studenters akademiska prestationer utser vi varje månad Månadens Rookie.',
-  alternates: {
-    canonical: '/manadens-rookie',
-  },
-  openGraph: {
-    url: '/manadens-rookie',
-    title: 'Månadens Rookie - Rookie',
-    description:
-      'Vi hyllar och uppmärksammar de mest framstående studenterna från olika program och universitet.',
-  },
-  twitter: {
-    title: 'Månadens Rookie - Rookie',
-    description:
-      'Vi hyllar och uppmärksammar de mest framstående studenterna från olika program och universitet.',
-  },
+export async function generateMetadata() {
+  const t = await getTranslations('pages.rookieOfMonth')
+  return {
+    title: t('metaTitle'),
+    description: t('metaDescription'),
+    alternates: { canonical: '/manadens-rookie' },
+    openGraph: {
+      url: '/manadens-rookie',
+      title: t('metaTitle') + ' - Rookie',
+      description: t('ogDescription'),
+    },
+    twitter: {
+      title: t('metaTitle') + ' - Rookie',
+      description: t('ogDescription'),
+    },
+  }
 }
 
 export default async function ManadensRookiePage() {
+  const t = await getTranslations('pages.rookieOfMonth')
+  const tCommon = await getTranslations('common')
   const [currentRookie, previousRookies] = await Promise.all([
     getCurrentRookie(),
     getPreviousRookies(),
@@ -42,10 +42,9 @@ export default async function ManadensRookiePage() {
       <HeroHeader />
       <main>
         <PageHeader
-          breadcrumbs={[{ label: 'Hem', href: '/' }, { label: 'Månadens Rookie' }]}
-          title="Månadens mest lovande talang"
-          description="Vi hyllar och uppmärksammar de mest framstående studenterna från olika program och universitet runt om i Sverige."
-          imageSrc="/images/headers/woman-writing.jpg"
+          breadcrumbs={[{ label: tCommon('home'), href: '/' }, { label: t('metaTitle') }]}
+          title={t('pageTitle')}
+          description={t('pageDescription')}
         />
         <RookieOfMonthSection rookie={currentRookie} />
         <PreviousRookiesSection rookies={previousRookies} />

@@ -3,6 +3,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { cn, fullBorders, mutedBorderOpacity, sectionContainer, sectionWrapper } from '@/lib/utils'
 import { motion } from 'motion/react'
+import { useTranslations } from 'next-intl'
 import { ReactNode } from 'react'
 
 interface TestimonialProps {
@@ -22,6 +23,7 @@ export default function TestimonialSection({
   companyLogo,
   companyName,
 }: TestimonialProps) {
+  const t = useTranslations('testimonial')
   return (
     <section className={sectionWrapper()}>
       <div className={sectionContainer()}>
@@ -34,7 +36,7 @@ export default function TestimonialSection({
           className="max-w-3xl"
         >
           <h2 className="text-3xl font-medium tracking-tight md:text-4xl lg:text-5xl">
-            Vad andra säger
+            {t('title')}
           </h2>
         </motion.div>
 

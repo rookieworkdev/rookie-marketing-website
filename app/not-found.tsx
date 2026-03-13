@@ -2,9 +2,13 @@ import FooterSection from '@/components/footer'
 import { HeroHeader } from '@/components/header'
 import { Button } from '@/components/ui/button'
 import { cn, horizontalPadding, whiteBorderWrapper } from '@/lib/utils'
+import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
 
-export default function NotFound() {
+export default async function NotFound() {
+  const t = await getTranslations('notFound')
+  const tCommon = await getTranslations('common')
+
   return (
     <>
       <HeroHeader />
@@ -20,17 +24,17 @@ export default function NotFound() {
             <div className={cn('text-center', horizontalPadding)}>
               <p className="text-primary mb-4 text-lg font-medium">404</p>
               <h1 className="text-4xl font-medium tracking-tight md:text-5xl lg:text-6xl">
-                Sidan kunde inte hittas
+                {t('title')}
               </h1>
               <p className="text-muted-foreground mt-6 text-lg">
-                Det verkar som att sidan du letar efter inte finns eller har flyttats.
+                {t('description')}
               </p>
               <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
                 <Button asChild size="lg">
-                  <Link href="/">Gå till startsidan</Link>
+                  <Link href="/">{t('goHome')}</Link>
                 </Button>
                 <Button asChild variant="outline" size="lg">
-                  <Link href="/kontakt">Kontakta oss</Link>
+                  <Link href="/kontakt">{t('contactUs')}</Link>
                 </Button>
               </div>
             </div>

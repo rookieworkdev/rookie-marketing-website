@@ -1,19 +1,20 @@
 'use client'
+import { LanguageSwitcher } from '@/components/language-switcher'
 import { Logo } from '@/components/logo'
 import { Button } from '@/components/ui/button'
 import { cn, defaultBorderOpacity, horizontalPadding } from '@/lib/utils'
 import { Menu, X } from 'lucide-react'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-const menuItems = [
-  { name: 'För företag', href: '/for-foretag' },
-  { name: 'För kandidater', href: '/for-jobbsokande' },
-  { name: 'Lediga jobb', href: '/lediga-jobb' },
-  { name: 'Inspiration', href: '/inspiration' },
-]
-
 export const HeroHeader = () => {
+  const t = useTranslations('nav')
+  const menuItems = [
+    { name: t('forCompanies'), href: '/for-foretag' },
+    { name: t('forCandidates'), href: '/for-jobbsokande' },
+    { name: t('inspiration'), href: '/inspiration' },
+  ]
   const [menuState, setMenuState] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
@@ -105,15 +106,17 @@ export const HeroHeader = () => {
               </ul>
             </div>
 
-            {/* Right side — sign in + theme toggle */}
+            {/* Right side — language + sign in */}
             <div className="flex items-center gap-2">
+              <LanguageSwitcher />
+
               {/* Mobile menu button */}
               <Button
                 ref={menuButtonRef}
                 variant="default"
                 size="icon"
                 onClick={() => setMenuState(!menuState)}
-                aria-label={menuState ? 'Stäng meny' : 'Öppna meny'}
+                aria-label={menuState ? t('closeMenu') : t('openMenu')}
                 aria-expanded={menuState}
                 aria-controls="mobile-menu"
                 className="lg:hidden"
@@ -129,7 +132,7 @@ export const HeroHeader = () => {
                 className="hidden lg:inline-flex"
               >
                 <Link href="https://rookie-se.on.intelliplan.eu/">
-                  <span>Logga in</span>
+                  <span>{t('login')}</span>
                 </Link>
               </Button>
             </div>
@@ -140,7 +143,7 @@ export const HeroHeader = () => {
               id="mobile-menu"
               role="dialog"
               aria-modal={menuState ? 'true' : undefined}
-              aria-label="Navigeringsmeny"
+              aria-label={t('navigationMenu')}
               className="bg-background absolute left-0 top-full mb-6 hidden w-full flex-wrap items-center space-y-8 rounded-3xl border p-6 shadow-2xl in-data-[state=active]:block lg:hidden"
             >
               <ul className="space-y-6 text-base">
@@ -162,7 +165,7 @@ export const HeroHeader = () => {
                   variant="outline"
                 >
                   <Link href="https://rookie-se.on.intelliplan.eu/">
-                    <span>Logga in</span>
+                    <span>{t('login')}</span>
                   </Link>
                 </Button>
               </div>

@@ -1,12 +1,15 @@
 import { InspirationCard } from '@/components/inspiration-card'
 import { InspirationPost } from '@/lib/inspiration'
 import { sectionContainer, sectionWrapper } from '@/lib/utils'
+import { getTranslations } from 'next-intl/server'
 
 interface InspirationGridSectionProps {
   posts: InspirationPost[]
 }
 
-export default function InspirationGridSection({ posts }: InspirationGridSectionProps) {
+export default async function InspirationGridSection({ posts }: InspirationGridSectionProps) {
+  const t = await getTranslations('inspirationGrid')
+
   return (
     <section className={sectionWrapper('bg-background')}>
       <div className={sectionContainer()}>
@@ -28,7 +31,7 @@ export default function InspirationGridSection({ posts }: InspirationGridSection
           </div>
         ) : (
           <div className="prose prose-lg max-w-none">
-            <p>Inga inlägg tillgängliga ännu. Kom tillbaka snart!</p>
+            <p>{t('noPosts')}</p>
           </div>
         )}
       </div>

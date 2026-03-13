@@ -6,6 +6,7 @@ import { getAllSlugs, getPostBySlug } from '@/lib/inspiration'
 import { generateArticleSchema } from '@/lib/seo'
 import { cn, containerBorders, topBorder } from '@/lib/utils'
 import type { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import { notFound } from 'next/navigation'
 
@@ -29,8 +30,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const post = await getPostBySlug(slug)
 
   if (!post) {
+    const t = await getTranslations('pages.inspirationPost')
     return {
-      title: 'Inlägg hittades inte',
+      title: t('notFound'),
     }
   }
 
@@ -73,6 +75,8 @@ export default async function InspirationPostPage({ params }: PageProps) {
     notFound()
   }
 
+  const t = await getTranslations('common')
+
   const articleSchema = generateArticleSchema({
     title: post.title,
     description: post.description,
@@ -92,10 +96,8 @@ export default async function InspirationPostPage({ params }: PageProps) {
       <main>
         {/* Hero Image Section with PageHeader */}
         <PageHeader
-          imageSrc={post.image}
-          imageAlt={post.title}
           breadcrumbs={[
-            { label: 'Hem', href: '/' },
+            { label: t('home'), href: '/' },
             { label: 'Inspiration', href: '/inspiration' },
             { label: post.title },
           ]}
@@ -105,10 +107,10 @@ export default async function InspirationPostPage({ params }: PageProps) {
             <Badge variant="default" className="mb-6">
               {post.category}
             </Badge>
-            <h1 className="text-4xl font-medium tracking-tight text-white md:text-5xl lg:text-6xl">
+            <h1 className="text-foreground text-4xl font-medium tracking-tight md:text-5xl lg:text-6xl">
               {post.title}
             </h1>
-            <div className="mt-6 flex items-center gap-3 text-white/80">
+            <div className="text-muted-foreground mt-6 flex items-center gap-3">
               <time dateTime={post.date}>
                 {new Date(post.date).toLocaleDateString('sv-SE', {
                   year: 'numeric',

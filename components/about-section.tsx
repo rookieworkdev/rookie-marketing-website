@@ -6,6 +6,7 @@ import { Check } from 'lucide-react'
 import { motion } from 'motion/react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 
 interface AboutSectionProps {
   title?: string
@@ -19,20 +20,20 @@ interface AboutSectionProps {
 }
 
 export default function AboutSection({
-  title = 'Ung kraft och starka möjligheter',
-  description = [
-    'Rookie är dedikerade till att underlätta rekryteringsprocessen för både företag och unga jobbsökande genom att matcha rätt kompetens med rätt möjligheter. Vi förstår vikten av att anställa nyexaminerade och juniora profiler för att skapa en dynamisk och framåtriktad arbetsmiljö.',
-    'Unga talanger är redo att ta sig an nya utmaningar och bidrar med nya perspektiv till teamet som kan vara avgörande för att främja innovation och kreativitet inom organisationen.',
-    'Upptäck hur vi kan hjälpa dig att forma din framtid eller att hitta de bästa unga talangerna för ditt företag.',
-  ],
+  title,
+  description,
   imageUrl = 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&auto=format&fit=crop&q=80',
-  imageAlt = 'Unga talanger samarbetar',
+  imageAlt,
   items,
   ctaText,
   ctaHref,
   reversed = false,
 }: AboutSectionProps) {
-  const descriptionArray = Array.isArray(description) ? description : [description]
+  const t = useTranslations('about')
+  const effectiveTitle = title || t('defaultTitle')
+  const effectiveDescription = description || [t('defaultDescription1'), t('defaultDescription2'), t('defaultDescription3')]
+  const effectiveImageAlt = imageAlt || t('defaultImageAlt')
+  const descriptionArray = Array.isArray(effectiveDescription) ? effectiveDescription : [effectiveDescription]
 
   return (
     <section className={sectionWrapper('bg-background')}>
@@ -50,7 +51,7 @@ export default function AboutSection({
           >
             <Image
               src={imageUrl}
-              alt={imageAlt}
+              alt={effectiveImageAlt}
               fill
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 50vw"
@@ -67,7 +68,7 @@ export default function AboutSection({
             className={`flex flex-col ${reversed ? 'lg:order-1' : ''}`}
           >
             <h2 className="mb-6 text-3xl font-medium tracking-tight md:text-4xl lg:text-5xl">
-              {title}
+              {effectiveTitle}
             </h2>
 
             {/* Description paragraphs */}

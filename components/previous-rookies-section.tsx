@@ -6,12 +6,14 @@ import { PreviousRookie } from '@/lib/previous-rookies'
 import { sectionContainer, sectionWrapper } from '@/lib/utils'
 import { GraduationCap } from 'lucide-react'
 import { motion } from 'motion/react'
+import { useTranslations } from 'next-intl'
 
 interface PreviousRookiesSectionProps {
   rookies: PreviousRookie[]
 }
 
 export default function PreviousRookiesSection({ rookies }: PreviousRookiesSectionProps) {
+  const t = useTranslations('previousRookies')
   return (
     <section id="utmarkelser" className={sectionWrapper()}>
       <div className={sectionContainer('bg-muted')}>
@@ -24,10 +26,10 @@ export default function PreviousRookiesSection({ rookies }: PreviousRookiesSecti
           className="mb-12 flex flex-col items-start text-left"
         >
           <h2 className="text-3xl font-medium tracking-tight md:text-4xl lg:text-5xl">
-            Tidigare utmärkelser
+            {t('title')}
           </h2>
           <p className="text-muted-foreground mt-4 max-w-2xl text-pretty">
-            Här är några av de tidigare rookies som har blivit månadens mest lovande talang
+            {t('description')}
           </p>
         </motion.div>
 
@@ -62,14 +64,14 @@ export default function PreviousRookiesSection({ rookies }: PreviousRookiesSecti
                 <div className="flex items-start gap-3">
                   <GraduationCap className="text-primary mt-0.5 size-4 shrink-0" />
                   <div className="flex-1">
-                    <dt className="text-muted-foreground mb-1 text-sm font-medium">Studier</dt>
+                    <dt className="text-muted-foreground mb-1 text-sm font-medium">{t('studies')}</dt>
                     <dd className="text-sm">{rookie.studies}</dd>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <GraduationCap className="text-primary mt-0.5 size-4 shrink-0" />
                   <div className="flex-1">
-                    <dt className="text-muted-foreground mb-1 text-sm font-medium">Skola</dt>
+                    <dt className="text-muted-foreground mb-1 text-sm font-medium">{t('school')}</dt>
                     <dd className="text-sm">{rookie.school}</dd>
                   </div>
                 </div>

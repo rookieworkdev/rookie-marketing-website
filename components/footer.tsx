@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { cn, containerBorders, horizontalPadding, sectionWrapper } from '@/lib/utils'
 import { motion } from 'motion/react'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 
 interface CTAItem {
   title: string
@@ -22,43 +23,6 @@ interface FooterSectionProps {
   ctaVariant?: 'single' | 'double'
   ctaContent?: CTAItem | [CTAItem, CTAItem]
 }
-
-const defaultSingleContent: CTAItem = {
-  title: 'Kom igång med Rookie',
-  description:
-    'Letar du efter nästa generations talanger eller en kandidat redo att ta nästa steg i karriären? Vi hjälper dig att hitta rätt match snabbt och smidigt.',
-  buttonText: 'Registrera företag',
-  buttonHref: '/personal',
-  secondaryButtonText: 'Logga in som kandidat',
-  secondaryButtonHref: '/for-jobbsokande',
-}
-
-const defaultDoubleContent: [CTAItem, CTAItem] = [
-  {
-    title: 'Kan vi hjälpa dig?',
-    description:
-      'Kontakta oss så berättar vi gärna mer om hur vi matchar unga talanger med rätt företag.',
-    buttonText: 'Kontakta oss',
-    buttonHref: '/kontakt',
-  },
-  {
-    title: 'Guide',
-    description: 'Avgörande steg för en effektivare rekryterings process av unga talanger',
-    buttonText: 'Få tillgång',
-    buttonHref: '/kontakt',
-    buttonVariant: 'secondary',
-  },
-]
-
-const discoveryLinks = [
-  { title: 'Månadens Rookie', href: '/manadens-rookie' },
-  { title: 'För jobbsökande', href: '/for-jobbsokande' },
-  { title: 'För företag', href: '/for-foretag' },
-  { title: 'Om oss', href: '/om-oss' },
-  { title: 'Inspiration', href: '/inspiration' },
-  { title: 'Kontakt', href: '/kontakt' },
-  { title: 'Integritetspolicy', href: '/integritetspolicy' },
-]
 
 function CTADouble({ content }: { content: [CTAItem, CTAItem] }) {
   return (
@@ -110,7 +74,7 @@ function CTADouble({ content }: { content: [CTAItem, CTAItem] }) {
             <h2 className="text-foreground text-3xl font-medium tracking-tight md:text-3xl lg:text-4xl">
               {content[1].title}
             </h2>
-            <p className="text-foreground/80 mt-4 max-w-xl text-base">{content[1].description}</p>
+            <p className="text-muted-foreground mt-4 max-w-xl text-base">{content[1].description}</p>
           </div>
           <div className="self-start">
             <Button asChild size="default" variant={content[1].buttonVariant || 'default'}>
@@ -186,6 +150,44 @@ export default function FooterSection({
   ctaVariant = 'single',
   ctaContent,
 }: FooterSectionProps = {}) {
+  const t = useTranslations('footer')
+  const tCta = useTranslations('cta')
+
+  const defaultSingleContent: CTAItem = {
+    title: t('getStarted'),
+    description: t('getStartedDescription'),
+    buttonText: t('registerCompany'),
+    buttonHref: '/personal',
+    secondaryButtonText: t('loginAsCandidate'),
+    secondaryButtonHref: '/for-jobbsokande',
+  }
+
+  const defaultDoubleContent: [CTAItem, CTAItem] = [
+    {
+      title: tCta('canWeHelp'),
+      description: tCta('canWeHelpDescription'),
+      buttonText: tCta('contactUs'),
+      buttonHref: '/kontakt',
+    },
+    {
+      title: tCta('guide'),
+      description: tCta('guideDescription'),
+      buttonText: tCta('getAccess'),
+      buttonHref: '/kontakt',
+      buttonVariant: 'secondary',
+    },
+  ]
+
+  const discoveryLinks = [
+    { title: t('rookieOfMonth'), href: '/manadens-rookie' },
+    { title: t('forJobSeekers'), href: '/for-jobbsokande' },
+    { title: t('forCompanies'), href: '/for-foretag' },
+    { title: t('aboutUs'), href: '/om-oss' },
+    { title: t('inspiration'), href: '/inspiration' },
+    { title: t('contact'), href: '/kontakt' },
+    { title: t('privacyPolicy'), href: '/integritetspolicy' },
+  ]
+
   const singleContent = ctaContent && !Array.isArray(ctaContent) ? ctaContent : defaultSingleContent
   const doubleContent = ctaContent && Array.isArray(ctaContent) ? ctaContent : defaultDoubleContent
 
@@ -209,15 +211,15 @@ export default function FooterSection({
                 <Logo />
               </Link>
               <p className="text-xl font-medium">
-                Matchar unga talanger
+                {t('tagline')}
                 <br />
-                med företag
+                {t('taglineLine2')}
               </p>
             </div>
 
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
               <div className="space-y-4">
-                <h3 className="text-lg font-semibold">Upptäck Rookie</h3>
+                <h3 className="text-lg font-semibold">{t('discoverRookie')}</h3>
                 <nav className="flex flex-col space-y-3">
                   {discoveryLinks.map((link, index) => (
                     <Link
@@ -232,7 +234,7 @@ export default function FooterSection({
               </div>
 
               <div className="space-y-4">
-                <h3 className="text-lg font-semibold">Kontakt</h3>
+                <h3 className="text-lg font-semibold">{t('contact')}</h3>
                 <div className="text-muted-foreground flex flex-col space-y-3">
                   <a
                     href="https://maps.google.com/?q=Drottninggatan+32,+111+51+Stockholm"

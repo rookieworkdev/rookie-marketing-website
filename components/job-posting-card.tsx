@@ -1,14 +1,18 @@
+'use client'
+
 import Link from 'next/link'
 import { MapPinIcon } from '@heroicons/react/20/solid'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import type { JobDisplay } from '@/lib/jobs'
+import { useTranslations } from 'next-intl'
 
 interface JobPostingCardProps {
   job: JobDisplay
 }
 
 export function JobPostingCard({ job }: JobPostingCardProps) {
+  const t = useTranslations('jobCard')
   const locationLabel = job.regionName || job.location
 
   return (
@@ -33,7 +37,7 @@ export function JobPostingCard({ job }: JobPostingCardProps) {
               ) : (
                 <div />
               )}
-              <span className="text-primary text-sm font-medium group-hover:underline">Ansök</span>
+              <span className="text-primary text-sm font-medium group-hover:underline">{t('apply')}</span>
             </div>
           </div>
         </CardContent>

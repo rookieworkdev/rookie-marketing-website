@@ -4,29 +4,31 @@ import HeroSection from '@/components/hero-section'
 import HowItWorksSection from '@/components/how-it-works-section'
 import JobsSection from '@/components/jobs-section'
 import { getLatestJobs } from '@/lib/jobs'
-import { DEFAULT_DESCRIPTION } from '@/lib/seo'
-import type { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
 
 export const revalidate = 86400
 
-export const metadata: Metadata = {
-  title: 'Vi matchar företag med unga talanger',
-  description: DEFAULT_DESCRIPTION,
-  alternates: {
-    canonical: '/',
-  },
-  openGraph: {
-    url: '/',
-    title: 'Vi matchar företag med unga talanger - Rookie',
-    description: DEFAULT_DESCRIPTION,
-  },
-  twitter: {
-    title: 'Vi matchar företag med unga talanger - Rookie',
-    description: DEFAULT_DESCRIPTION,
-  },
+export async function generateMetadata() {
+  const t = await getTranslations('pages.home')
+  const tSeo = await getTranslations('seo')
+  return {
+    title: t('title'),
+    description: tSeo('defaultDescription'),
+    alternates: { canonical: '/' },
+    openGraph: {
+      url: '/',
+      title: t('title') + ' - Rookie',
+      description: tSeo('defaultDescription'),
+    },
+    twitter: {
+      title: t('title') + ' - Rookie',
+      description: tSeo('defaultDescription'),
+    },
+  }
 }
 
 export default async function Page() {
+  const t = await getTranslations('pages.home')
   const jobs = await getLatestJobs(8)
 
   return (
@@ -35,9 +37,9 @@ export default async function Page() {
       <HowItWorksSection />
       <JobsSection jobs={jobs} />
       <CeoTestimonialSection
-        quote="Vår mission är att göra rekryteringsprocessen enklare och att få fler företag att se den otroliga potential som finns hos unga. Om fler vågar investera i den yngre arbetskraften så skapar vi en arbetsmarknad som är rustad för att möta framtidens utmaningar."
-        authorName="Håkan Olsson"
-        authorTitle="VD och grundare av Rookie AB"
+        quote={t('ceoQuote')}
+        authorName={t('ceoName')}
+        authorTitle={t('ceoTitle')}
         authorImage="/images/content/hakan-olsson.jpeg"
       />
       <FooterSection />

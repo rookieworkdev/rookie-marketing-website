@@ -17,6 +17,7 @@ import { submitContactAction } from '@/lib/actions/contact'
 import { cn, fullBorders, sectionContainer, sectionWrapper } from '@/lib/utils'
 import { Mail, MapPin, Phone } from 'lucide-react'
 import { motion } from 'motion/react'
+import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
 export interface ContactSectionProps {
@@ -28,10 +29,13 @@ export interface ContactSectionProps {
 
 export default function ContactSection({
   variant = 'simple',
-  subject = 'Allmän förfrågan',
-  title = 'Skicka ett meddelande',
+  subject,
+  title,
   description,
 }: ContactSectionProps) {
+  const t = useTranslations('contact')
+  const effectiveSubject = subject || t('generalInquiry')
+  const effectiveTitle = title || t('sendMessage')
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -64,7 +68,7 @@ export default function ContactSection({
         experience: formData.experience,
         message: formData.message,
         consent: formData.consent,
-        subject,
+        subject: effectiveSubject,
       })
 
       if (result.success) {
@@ -86,7 +90,7 @@ export default function ContactSection({
       }
     } catch (error) {
       setSubmitStatus('error')
-      setErrorMessage(error instanceof Error ? error.message : 'Ett oväntat fel uppstod')
+      setErrorMessage(error instanceof Error ? error.message : t('unexpectedError'))
     } finally {
       setIsSubmitting(false)
     }
@@ -119,16 +123,16 @@ export default function ContactSection({
           >
             <div>
               <h2 className="mb-4 text-3xl font-medium md:text-3xl lg:text-4xl">
-                Kan vi hjälpa dig?
+                {t('canWeHelp')}
               </h2>
               <p className="text-muted-foreground text-lg">
                 {description ||
-                  'Kontakta oss så berättar vi gärna mer om hur vi matchar unga talanger med rätt företag.'}
+                  t('defaultDescription')}
               </p>
             </div>
 
             <div className="space-y-6">
-              <h3 className="text-2xl font-medium tracking-tight">Kontaktuppgifter</h3>
+              <h3 className="text-2xl font-medium tracking-tight">{t('contactDetails')}</h3>
 
               <div className="space-y-6">
                 <div className="flex items-center gap-4">
@@ -136,9 +140,9 @@ export default function ContactSection({
                     <MapPin className="text-primary h-6 w-6" />
                   </div>
                   <div>
-                    <h4 className="mb-0 font-semibold">Adress</h4>
+                    <h4 className="mb-0 font-semibold">{t('address')}</h4>
                     <p className="text-muted-foreground">
-                      Drottninggatan 32, 8tr, 111 51 Stockholm
+                      {t('addressValue')}
                     </p>
                   </div>
                 </div>
@@ -148,7 +152,7 @@ export default function ContactSection({
                     <Mail className="text-primary h-6 w-6" />
                   </div>
                   <div>
-                    <h4 className="mb-0 font-semibold">E-post</h4>
+                    <h4 className="mb-0 font-semibold">{t('emailLabel')}</h4>
                     <a
                       href="mailto:info@rookiework.se"
                       className="text-muted-foreground hover:text-primary transition-colors"
@@ -163,7 +167,7 @@ export default function ContactSection({
                     <Phone className="text-primary h-6 w-6" />
                   </div>
                   <div>
-                    <h4 className="mb-0 font-semibold">Telefon</h4>
+                    <h4 className="mb-0 font-semibold">{t('phoneLabel')}</h4>
                     <a
                       href="tel:+4610129600"
                       className="text-muted-foreground hover:text-primary transition-colors"
@@ -184,13 +188,13 @@ export default function ContactSection({
             transition={{ duration: 0.8, ease: 'easeOut', delay: 0.1 }}
             className={cn('bg-card rounded-lg p-8 shadow-xs', fullBorders())}
           >
-            <h3 className="mb-6 text-2xl font-medium tracking-tight">{title}</h3>
+            <h3 className="mb-6 text-2xl font-medium tracking-tight">{effectiveTitle}</h3>
 
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Namn */}
               <div className="space-y-2">
                 <Label htmlFor="name">
-                  Namn <span className="text-destructive">*</span>
+                  {t('name')} <span className="text-destructive">*</span>
                 </Label>
                 <Input
                   id="name"
@@ -199,7 +203,7 @@ export default function ContactSection({
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  placeholder="Ditt för- och efternamn"
+                  placeholder={t('namePlaceholder')}
                 />
               </div>
 
@@ -207,7 +211,7 @@ export default function ContactSection({
               <div className="grid gap-4 md:grid-cols-2">
                 <div className="space-y-2">
                   <Label htmlFor="email">
-                    Företags e-post <span className="text-destructive">*</span>
+                    {t('businessEmail')} <span className="text-destructive">*</span>
                   </Label>
                   <Input
                     id="email"
@@ -216,13 +220,13 @@ export default function ContactSection({
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    placeholder="namn@företag.se"
+                    placeholder={t('emailPlaceholder')}
                   />
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="phone">
-                    Telefon <span className="text-destructive">*</span>
+                    {t('phone')} <span className="text-destructive">*</span>
                   </Label>
                   <Input
                     id="phone"
@@ -231,7 +235,7 @@ export default function ContactSection({
                     value={formData.phone}
                     onChange={handleChange}
                     required
-                    placeholder="070-123 45 67"
+                    placeholder={t('phonePlaceholder')}
                   />
                 </div>
               </div>
@@ -243,7 +247,7 @@ export default function ContactSection({
                   <div className="grid gap-4 md:grid-cols-2">
                     <div className="space-y-2">
                       <Label htmlFor="company">
-                        Företag <span className="text-destructive">*</span>
+                        {t('company')} <span className="text-destructive">*</span>
                       </Label>
                       <Input
                         id="company"
@@ -252,13 +256,13 @@ export default function ContactSection({
                         value={formData.company}
                         onChange={handleChange}
                         required
-                        placeholder="Ditt företagsnamn"
+                        placeholder={t('companyPlaceholder')}
                       />
                     </div>
 
                     <div className="space-y-2">
                       <Label htmlFor="industry">
-                        Bransch <span className="text-destructive">*</span>
+                        {t('industry')} <span className="text-destructive">*</span>
                       </Label>
                       <Select
                         value={formData.industry}
@@ -266,16 +270,16 @@ export default function ContactSection({
                         required
                       >
                         <SelectTrigger id="industry" className="w-full">
-                          <SelectValue placeholder="Välj bransch" />
+                          <SelectValue placeholder={t('selectIndustry')} />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="tech">IT & Tech</SelectItem>
-                          <SelectItem value="finance">Bank, Finans & Försäkring</SelectItem>
-                          <SelectItem value="retail">Handel & E-handel</SelectItem>
-                          <SelectItem value="manufacturing">Tillverkning & Industri</SelectItem>
-                          <SelectItem value="consulting">Konsult & Rådgivning</SelectItem>
-                          <SelectItem value="media">Media & Kommunikation</SelectItem>
-                          <SelectItem value="other">Övrig bransch</SelectItem>
+                          <SelectItem value="tech">{t('industryTech')}</SelectItem>
+                          <SelectItem value="finance">{t('industryFinance')}</SelectItem>
+                          <SelectItem value="retail">{t('industryRetail')}</SelectItem>
+                          <SelectItem value="manufacturing">{t('industryManufacturing')}</SelectItem>
+                          <SelectItem value="consulting">{t('industryConsulting')}</SelectItem>
+                          <SelectItem value="media">{t('industryMedia')}</SelectItem>
+                          <SelectItem value="other">{t('industryOther')}</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -285,7 +289,7 @@ export default function ContactSection({
                   <div className="grid gap-4 md:grid-cols-2">
                     <div className="space-y-2">
                       <Label htmlFor="service_type">
-                        Tjänstetyp <span className="text-destructive">*</span>
+                        {t('serviceType')} <span className="text-destructive">*</span>
                       </Label>
                       <Select
                         value={formData.service_type}
@@ -293,19 +297,19 @@ export default function ContactSection({
                         required
                       >
                         <SelectTrigger id="service_type" className="w-full">
-                          <SelectValue placeholder="Välj tjänstetyp" />
+                          <SelectValue placeholder={t('selectServiceType')} />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="direktrekrytering">Direktrekrytering</SelectItem>
-                          <SelectItem value="hyresrekrytering">Hyrrekrytering</SelectItem>
-                          <SelectItem value="bemanning">Bemanning</SelectItem>
+                          <SelectItem value="direktrekrytering">{t('directRecruitment')}</SelectItem>
+                          <SelectItem value="hyresrekrytering">{t('tempRecruitment')}</SelectItem>
+                          <SelectItem value="bemanning">{t('staffing')}</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
 
                     <div className="space-y-2">
                       <Label htmlFor="experience">
-                        Erfarenhet (Senioritet) <span className="text-destructive">*</span>
+                        {t('experience')} <span className="text-destructive">*</span>
                       </Label>
                       <Select
                         value={formData.experience}
@@ -313,13 +317,13 @@ export default function ContactSection({
                         required
                       >
                         <SelectTrigger id="experience" className="w-full">
-                          <SelectValue placeholder="Välj erfarenhetsnivå" />
+                          <SelectValue placeholder={t('selectExperience')} />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="student">Student</SelectItem>
-                          <SelectItem value="junior">Junior (0-2 år)</SelectItem>
-                          <SelectItem value="mid">Mellan (2-5 år)</SelectItem>
-                          <SelectItem value="any">Spelar ingen roll</SelectItem>
+                          <SelectItem value="student">{t('student')}</SelectItem>
+                          <SelectItem value="junior">{t('junior')}</SelectItem>
+                          <SelectItem value="mid">{t('mid')}</SelectItem>
+                          <SelectItem value="any">{t('any')}</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -330,7 +334,7 @@ export default function ContactSection({
               {/* Beskriv ditt behov (Fritext) */}
               <div className="space-y-2">
                 <Label htmlFor="message">
-                  {variant === 'full' ? 'Beskriv ditt behov' : 'Meddelande'}{' '}
+                  {variant === 'full' ? t('describeNeeds') : t('message')}{' '}
                   <span className="text-destructive">*</span>
                 </Label>
                 <Textarea
@@ -341,8 +345,8 @@ export default function ContactSection({
                   required
                   placeholder={
                     variant === 'full'
-                      ? 'Berätta hur vi kan hjälpa dig...'
-                      : 'Hur kan vi hjälpa dig?'
+                      ? t('describePlaceholder')
+                      : t('messagePlaceholder')
                   }
                   rows={6}
                 />
@@ -359,13 +363,12 @@ export default function ContactSection({
                   className="mt-1"
                 />
                 <label htmlFor="consent" className="cursor-pointer text-sm leading-relaxed">
-                  jag samtycker till att mina personuppgifter behandlas i Rookies databas i enlighet
-                  med vår{' '}
+                  {t('consentText')}{' '}
                   <a
                     href="/integritetspolicy"
                     className="text-primary underline hover:no-underline"
                   >
-                    integritetspolicy
+                    {t('consentLink')}
                   </a>{' '}
                   <span className="text-destructive">*</span>
                 </label>
@@ -377,7 +380,7 @@ export default function ContactSection({
                   aria-live="polite"
                   className="rounded-md bg-green-50 p-4 text-sm text-green-800 dark:bg-green-950 dark:text-green-200"
                 >
-                  Tack för ditt meddelande! Vi återkommer så snart vi kan.
+                  {t('successMessage')}
                 </div>
               )}
 
@@ -388,7 +391,7 @@ export default function ContactSection({
                   className="bg-destructive/10 text-destructive rounded-md p-4 text-sm"
                 >
                   {errorMessage ||
-                    'Något gick fel. Försök igen eller kontakta oss via telefon eller e-post.'}
+                    t('errorMessage')}
                 </div>
               )}
 
@@ -396,10 +399,10 @@ export default function ContactSection({
                 {isSubmitting ? (
                   <span className="flex items-center justify-center gap-2">
                     <Spinner size={16} />
-                    Skickar...
+                    {t('submitting')}
                   </span>
                 ) : (
-                  'Skicka meddelande'
+                  t('submit')
                 )}
               </Button>
             </form>

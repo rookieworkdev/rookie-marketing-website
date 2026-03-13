@@ -4,6 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { cn } from '@/lib/utils'
 import { SparklesIcon } from '@heroicons/react/20/solid'
 import { animate as animateValue, motion, useInView } from 'motion/react'
+import { useTranslations } from 'next-intl'
 import { useEffect, useMemo, useRef } from 'react'
 
 const DIGIT_HEIGHT = 52
@@ -58,6 +59,7 @@ interface MatchScoreProps {
 }
 
 export function MatchScore({ score = 85, className }: MatchScoreProps) {
+  const t = useTranslations('matchScore')
   const containerRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(containerRef, { once: true, margin: '0px 0px -100px 0px' })
 
@@ -134,7 +136,7 @@ export function MatchScore({ score = 85, className }: MatchScoreProps) {
   const onesStrip = useMemo(() => Array.from({ length: onesDigit + 1 }, (_, i) => i), [onesDigit])
 
   const matchLabel =
-    score >= 80 ? 'Stark match' : score >= 60 ? 'Bra match' : score >= 40 ? 'Medel' : 'Svag'
+    score >= 80 ? t('strongMatch') : score >= 60 ? t('goodMatch') : score >= 40 ? t('medium') : t('weak')
 
   return (
     <div ref={containerRef} className={cn('flex flex-col items-center', className)}>
@@ -287,7 +289,7 @@ export function MatchScore({ score = 85, className }: MatchScoreProps) {
             >
               <SparklesIcon className="text-primary size-[11px] shrink-0" />
               <span className="text-muted-foreground text-[10px] font-semibold">
-                Rookie AI Score:
+                {t('aiScore')}
               </span>
               <span className="text-primary text-[10px] font-semibold">{score}/100</span>
             </motion.div>
