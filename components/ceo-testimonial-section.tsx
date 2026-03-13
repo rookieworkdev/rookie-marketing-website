@@ -18,12 +18,12 @@ export default function CeoTestimonialSection({
   authorImage,
 }: CeoTestimonialSectionProps) {
   return (
-    <section className={sectionWrapper()}>
+    <section className={sectionWrapper('bg-background')}>
       <div className={sectionContainer()}>
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
+          initial={{ opacity: 0, filter: 'blur(12px)' }}
+          whileInView={{ opacity: 1, filter: 'blur(0px)' }}
+          viewport={{ once: true, margin: '0px 0px 200px 0px' }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
           className="grid grid-cols-1 gap-4 md:grid-cols-[1fr_2fr]"
         >

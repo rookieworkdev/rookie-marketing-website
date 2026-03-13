@@ -3,8 +3,8 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { cn } from '@/lib/utils'
 import { SparklesIcon } from '@heroicons/react/20/solid'
-import { motion, useInView } from 'motion/react'
-import { useMemo, useRef } from 'react'
+import { animate as animateValue, motion, useInView } from 'motion/react'
+import { useEffect, useMemo, useRef } from 'react'
 
 const DIGIT_HEIGHT = 52
 
@@ -89,14 +89,13 @@ export function MatchScore({ score = 85, className }: MatchScoreProps) {
   const fillLength = (score / 100) * arcLength
   const dashOffset = arcLength - fillLength
 
-  // Needle (tapered: wide at base, sharp at tip)
-  const needleAngle = startAngle + (score / 100) * totalAngle
+  // Needle (tapered: wide at base, sharp at tip) — drawn at start position
   const needleLength = radius - 14
   const needleBaseWidth = 6
-  const perpAngle = needleAngle + 90
+  const perpAngle = startAngle + 90
   const needleTip = {
-    x: round(centerX + needleLength * Math.cos(toRad(needleAngle))),
-    y: round(centerY + needleLength * Math.sin(toRad(needleAngle))),
+    x: round(centerX + needleLength * Math.cos(toRad(startAngle))),
+    y: round(centerY + needleLength * Math.sin(toRad(startAngle))),
   }
   const needleBaseLeft = {
     x: round(centerX + needleBaseWidth * Math.cos(toRad(perpAngle))),
@@ -110,6 +109,23 @@ export function MatchScore({ score = 85, className }: MatchScoreProps) {
   const animDuration = 1.2
   const needleRotation = (score / 100) * totalAngle
   const arcEase = [0.33, 1, 0.68, 1] as const
+
+  // Animate needle using SVG-native rotate(angle, cx, cy) — no CSS transform-origin issues
+  const needleRef = useRef<SVGGElement>(null)
+  useEffect(() => {
+    if (!isInView || !needleRef.current) return
+    const controls = animateValue(0, needleRotation, {
+      duration: animDuration,
+      ease: arcEase as unknown as [number, number, number, number],
+      onUpdate: (angle) => {
+        needleRef.current?.setAttribute(
+          'transform',
+          `rotate(${angle}, ${centerX}, ${centerY})`
+        )
+      },
+    })
+    return () => controls.stop()
+  }, [isInView, needleRotation])
 
   // Digit strips — each column only contains 0 → final digit value
   const tensDigit = Math.floor(score / 10)
@@ -235,13 +251,8 @@ export function MatchScore({ score = 85, className }: MatchScoreProps) {
             </motion.div>
           </foreignObject>
 
-          {/* Needle — rotates from start to final position */}
-          <motion.g
-            style={{ transformOrigin: `${centerX}px ${centerY}px` }}
-            initial={{ rotate: -needleRotation }}
-            animate={isInView ? { rotate: 0 } : undefined}
-            transition={{ duration: animDuration, ease: arcEase }}
-          >
+          {/* Needle — rotates from start to final position via SVG rotate(angle, cx, cy) */}
+          <g ref={needleRef}>
             <path
               d={`M ${needleBaseLeft.x},${needleBaseLeft.y} L ${needleTip.x},${needleTip.y} L ${needleBaseRight.x},${needleBaseRight.y} Z`}
               className="fill-foreground stroke-foreground"
@@ -249,15 +260,17 @@ export function MatchScore({ score = 85, className }: MatchScoreProps) {
               strokeLinejoin="round"
               strokeLinecap="round"
             />
-            <circle
-              cx={centerX}
-              cy={centerY}
-              r="12"
-              className="fill-foreground stroke-background"
-              strokeWidth="3"
-            />
-            <circle cx={centerX} cy={centerY} r="4" className="fill-background" />
-          </motion.g>
+          </g>
+
+          {/* Center hub — fixed, not rotating */}
+          <circle
+            cx={centerX}
+            cy={centerY}
+            r="12"
+            className="fill-foreground stroke-background"
+            strokeWidth="3"
+          />
+          <circle cx={centerX} cy={centerY} r="4" className="fill-background" />
 
           {/* Bottom score bar — connects to arc endpoints */}
           <foreignObject

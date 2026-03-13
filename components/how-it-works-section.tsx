@@ -66,8 +66,7 @@ function StepCard({ step, index }: { step: Step; index: number }) {
     >
       <div
         className={cn(
-          'bg-background flex h-14 w-14 items-center justify-center rounded-2xl shadow-sm',
-          'ring-border/50 ring-1'
+          'bg-background flex h-14 w-14 items-center justify-center rounded-2xl shadow-xs'
         )}
       >
         <step.icon className="text-foreground h-6 w-6" strokeWidth={1.5} />
