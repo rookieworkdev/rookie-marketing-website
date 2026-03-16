@@ -1,11 +1,14 @@
 'use client'
 
 import { Logo } from '@/components/logo'
+import { ThemeToggle } from '@/components/theme-toggle'
 import { Button } from '@/components/ui/button'
+import { setLocale } from '@/i18n/locale'
+import type { Locale } from '@/i18n/config'
 import { cn, containerBorders, horizontalPadding, sectionWrapper } from '@/lib/utils'
 import { motion } from 'motion/react'
 import Link from 'next/link'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 
 interface CTAItem {
   title: string
@@ -159,7 +162,7 @@ export default function FooterSection({
     buttonText: t('registerCompany'),
     buttonHref: '/personal',
     secondaryButtonText: t('loginAsCandidate'),
-    secondaryButtonHref: '/for-jobbsokande',
+    secondaryButtonHref: '/candidates',
   }
 
   const defaultDoubleContent: [CTAItem, CTAItem] = [
@@ -180,12 +183,19 @@ export default function FooterSection({
 
   const discoveryLinks = [
     { title: t('rookieOfMonth'), href: '/manadens-rookie' },
-    { title: t('forJobSeekers'), href: '/for-jobbsokande' },
-    { title: t('forCompanies'), href: '/for-foretag' },
+    { title: t('forJobSeekers'), href: '/candidates' },
+    { title: t('forCompanies'), href: '/companies' },
     { title: t('aboutUs'), href: '/om-oss' },
     { title: t('inspiration'), href: '/inspiration' },
     { title: t('contact'), href: '/kontakt' },
     { title: t('privacyPolicy'), href: '/integritetspolicy' },
+  ]
+
+  const locale = useLocale()
+
+  const languages: { label: string; value: Locale }[] = [
+    { label: t('english'), value: 'en' },
+    { label: t('swedish'), value: 'sv' },
   ]
 
   const singleContent = ctaContent && !Array.isArray(ctaContent) ? ctaContent : defaultSingleContent
@@ -205,7 +215,7 @@ export default function FooterSection({
 
         {/* Footer content */}
         <div className="pt-16 pb-8">
-          <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
+          <div className="grid gap-12 lg:grid-cols-[1fr_2fr] lg:gap-16">
             <div className="space-y-4">
               <Link href="/" aria-label="go home" className="block size-fit">
                 <Logo />
@@ -217,7 +227,7 @@ export default function FooterSection({
               </p>
             </div>
 
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
               <div className="space-y-4">
                 <h3 className="text-lg font-semibold">{t('discoverRookie')}</h3>
                 <nav className="flex flex-col space-y-3">
@@ -258,6 +268,30 @@ export default function FooterSection({
                   </a>
                 </div>
               </div>
+
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold">{t('language')}</h3>
+                <div className="flex flex-col space-y-3">
+                  {languages.map((lang) => (
+                    <button
+                      key={lang.value}
+                      onClick={() => {
+                        if (lang.value !== locale) {
+                          setLocale(lang.value)
+                        }
+                      }}
+                      className={cn(
+                        'text-muted-foreground w-fit text-left transition-colors duration-150',
+                        lang.value === locale
+                          ? 'underline underline-offset-4 decoration-muted-foreground/20'
+                          : 'hover:text-foreground cursor-pointer'
+                      )}
+                    >
+                      {lang.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
 
@@ -267,6 +301,7 @@ export default function FooterSection({
                 © {new Date().getFullYear()} Rookie, All rights reserved
               </span>
             </div>
+            <ThemeToggle />
           </div>
         </div>
       </div>

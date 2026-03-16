@@ -1,5 +1,4 @@
 'use client'
-import { LanguageSwitcher } from '@/components/language-switcher'
 import { Logo } from '@/components/logo'
 import { Button } from '@/components/ui/button'
 import { cn, defaultBorderOpacity, horizontalPadding } from '@/lib/utils'
@@ -11,8 +10,8 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 export const HeroHeader = () => {
   const t = useTranslations('nav')
   const menuItems = [
-    { name: t('forCompanies'), href: '/for-foretag' },
-    { name: t('forCandidates'), href: '/for-jobbsokande' },
+    { name: t('forCompanies'), href: '/companies' },
+    { name: t('forCandidates'), href: '/candidates' },
     { name: t('inspiration'), href: '/inspiration' },
   ]
   const [menuState, setMenuState] = useState(false)
@@ -108,8 +107,6 @@ export const HeroHeader = () => {
 
             {/* Right side — language + sign in */}
             <div className="flex items-center gap-2">
-              <LanguageSwitcher />
-
               {/* Mobile menu button */}
               <Button
                 ref={menuButtonRef}

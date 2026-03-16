@@ -1,7 +1,5 @@
 'use client'
 
-import { Badge } from '@/components/ui/badge'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { motion } from 'motion/react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -35,7 +33,7 @@ export function InspirationCard({
       transition={{ duration: 0.8, ease: 'easeOut', delay: index * 0.1 }}
     >
       <Link href={`/inspiration/${slug}`} className="group block">
-        <div className="relative aspect-video overflow-hidden rounded-t-xl">
+        <div className="relative aspect-video overflow-hidden rounded-xl">
           <Image
             src={image}
             alt={title}
@@ -44,32 +42,13 @@ export function InspirationCard({
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             loading="lazy"
           />
-          <div className="absolute top-4 left-4">
-            <Badge variant="default">{category}</Badge>
-          </div>
         </div>
-        <Card className="rounded-t-none transition-all duration-300 hover:shadow-md">
-          <CardHeader>
-            <CardTitle className="group-hover:text-primary line-clamp-2 text-xl transition-colors">
-              {title}
-            </CardTitle>
-            <CardDescription className="line-clamp-3 text-base">{description}</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="flex flex-wrap gap-2">
-              <Badge variant="secondary">
-                <time dateTime={date}>
-                  {new Date(date).toLocaleDateString('sv-SE', {
-                    year: 'numeric',
-                    month: 'short',
-                    day: 'numeric',
-                  })}
-                </time>
-              </Badge>
-              <Badge variant="secondary">{author}</Badge>
-            </div>
-          </CardContent>
-        </Card>
+        <div className="pt-4">
+          <h3 className="group-hover:text-primary line-clamp-2 text-xl font-semibold transition-colors">
+            {title}
+          </h3>
+          <p className="text-muted-foreground mt-2 line-clamp-3 text-base">{description}</p>
+        </div>
       </Link>
     </motion.div>
   )

@@ -6,8 +6,8 @@ import { InfiniteSlider } from '@/components/ui/infinite-slider'
 import { ProgressiveBlur } from '@/components/ui/progressive-blur'
 import { cn, containerBorders, horizontalPadding } from '@/lib/utils'
 import { motion } from 'motion/react'
-import Link from 'next/link'
 import { useTranslations } from 'next-intl'
+import Link from 'next/link'
 import { AutolivLogo, CoopLogistikLogo, KlarnaLogo, SkandiaLogo } from './company-logos'
 import { HeroHeader } from './header'
 import { MatchScore } from './match-score'
@@ -46,7 +46,7 @@ export default function HeroSection() {
             <div
               className={cn(
                 horizontalPadding,
-                'relative mx-auto flex max-w-4xl flex-1 flex-col items-center justify-center text-center'
+                'relative mx-auto flex max-w-5xl flex-1 flex-col items-center justify-center text-center'
               )}
             >
               {/* Stats bar */}
@@ -57,7 +57,9 @@ export default function HeroSection() {
                 className="border-border mb-8 inline-flex items-center rounded-full border p-1 shadow-xs"
               >
                 <div className="flex items-center gap-2 px-3 py-1">
-                  <span className="text-muted-foreground text-sm">{t('aiReviewedAssignments')}</span>
+                  <span className="text-muted-foreground text-sm">
+                    {t('aiReviewedAssignments')}
+                  </span>
                   <span className="text-foreground text-sm font-semibold">1 400+</span>
                 </div>
                 <div className="bg-border h-4 w-px" />
@@ -78,13 +80,10 @@ export default function HeroSection() {
                 animate={{ opacity: 1, filter: 'blur(0px)' }}
                 transition={{ duration: 0.8, ease: 'easeOut', delay: 0.1 }}
               >
-                <h1 className="text-foreground text-3xl font-medium tracking-tight md:text-4xl xl:text-5xl">
-                  {t('matchQuickly')}{' '}
-                  <span className="bg-linear-to-br from-green-700 via-green-600 to-yellow-400 bg-clip-text text-transparent">
-                    {t('withAI')}
-                  </span>
+                <h1 className="text-foreground text-4xl font-medium tracking-tighter md:text-5xl xl:text-6xl">
+                  {t('matchQuickly')}
                 </h1>
-                <p className="text-muted-foreground mx-auto mt-6 max-w-2xl text-base font-medium">
+                <p className="text-muted-foreground font-base mx-auto mt-6 max-w-2xl">
                   {t('subtitle')}
                 </p>
               </motion.div>

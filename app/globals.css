@@ -128,6 +128,16 @@
   }
 }
 
+/* Glowing border beam animation */
+@keyframes glow-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* Hide scrollbar for carousel */
 .no-scrollbar::-webkit-scrollbar {
   display: none;

@@ -27,10 +27,10 @@ function StepCard({ step, index }: { step: Step; index: number }) {
     >
       <div
         className={cn(
-          'bg-background flex h-14 w-14 items-center justify-center rounded-2xl shadow-xs'
+          'bg-background flex h-14 w-14 items-center justify-center rounded-2xl'
         )}
       >
-        <step.icon className="text-foreground h-6 w-6" strokeWidth={1.5} />
+        <step.icon className="text-primary h-6 w-6" strokeWidth={1.5} />
       </div>
       <span className="text-muted-foreground mt-4 text-sm font-medium">{t('step', { number: index + 1 })}</span>
       <h3 className="mt-2 text-lg font-medium">{step.title}</h3>
@@ -116,7 +116,7 @@ export default function HowItWorksSection() {
                 key={tab.key}
                 onClick={() => setActiveTab(tab.key)}
                 className={cn(
-                  'relative rounded-full px-5 py-2 text-sm font-medium transition-colors',
+                  'relative cursor-pointer rounded-full px-5 py-2 text-sm font-medium transition-colors',
                   activeTab === tab.key
                     ? 'bg-background text-foreground shadow-sm'
                     : 'text-muted-foreground hover:text-foreground'

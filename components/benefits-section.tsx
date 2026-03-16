@@ -40,7 +40,7 @@ export default function BenefitsSection({
 
   return (
     <section className={sectionWrapper()}>
-      <div className={sectionContainer('bg-muted')}>
+      <div className={sectionContainer()}>
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, filter: 'blur(12px)' }}
@@ -72,9 +72,9 @@ export default function BenefitsSection({
                 whileInView={{ opacity: 1, filter: 'blur(0px)' }}
                 viewport={{ once: true, margin: '-100px' }}
                 transition={{ duration: 0.8, ease: 'easeOut', delay: index * 0.1 }}
-                className="bg-background flex flex-col gap-4 rounded-2xl p-6 shadow-xs"
+                className="bg-muted flex flex-col gap-4 rounded-2xl p-6"
               >
-                <div className="bg-primary/10 flex h-12 w-12 items-center justify-center rounded-xl">
+                <div className="bg-background flex h-12 w-12 items-center justify-center rounded-xl">
                   <Icon className="text-primary h-6 w-6" strokeWidth={2} />
                 </div>
                 <div>

@@ -1,5 +1,6 @@
 'use client'
 
+import { FloatingAvatarsGraphic } from '@/components/floating-avatars-graphic'
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -11,6 +12,7 @@ import {
 import { Button } from '@/components/ui/button'
 import { FlickeringGrid } from '@/components/ui/flickering-grid'
 import { cn, containerBorders, horizontalPadding } from '@/lib/utils'
+import { Sparkles } from 'lucide-react'
 import { motion } from 'motion/react'
 import Link from 'next/link'
 
@@ -20,6 +22,7 @@ interface BreadcrumbItem {
 }
 
 interface PageHeaderProps {
+  eyebrow?: string
   title?: string
   description?: string
   buttonText?: string
@@ -29,9 +32,12 @@ interface PageHeaderProps {
   breadcrumbs?: BreadcrumbItem[]
   children?: React.ReactNode
   headingLevel?: 'h1' | 'h2' | 'p'
+  showAvatarGraphic?: boolean
+  avatarVariant?: 'companies' | 'candidates'
 }
 
 export function PageHeader({
+  eyebrow,
   title,
   description,
   buttonText,
@@ -41,6 +47,8 @@ export function PageHeader({
   breadcrumbs,
   children,
   headingLevel = 'h1',
+  showAvatarGraphic = false,
+  avatarVariant = 'companies',
 }: PageHeaderProps) {
   const HeadingTag = headingLevel === 'p' ? 'p' : headingLevel
   return (
@@ -66,14 +74,18 @@ export function PageHeader({
         {/* Gradient overlay: top-left to bottom-right */}
         <div className="from-background absolute inset-0 bg-gradient-to-br from-25% to-transparent" />
 
-        <div className={cn(horizontalPadding, 'relative pt-28 pb-16 md:pt-32 md:pb-20')}>
+        <div
+          className={cn(
+            horizontalPadding,
+            'relative flex min-h-[680px] flex-col pt-28 pb-16 md:pt-32 md:pb-20'
+          )}
+        >
           {/* Breadcrumb */}
           {breadcrumbs && breadcrumbs.length > 0 && (
             <motion.div
               initial={{ opacity: 0, filter: 'blur(12px)' }}
               animate={{ opacity: 1, filter: 'blur(0px)' }}
               transition={{ duration: 0.8, ease: 'easeOut' }}
-              className="mb-8"
             >
               <Breadcrumb>
                 <BreadcrumbList>
@@ -100,31 +112,50 @@ export function PageHeader({
           {children ? (
             children
           ) : (
-            <motion.div
-              initial={{ opacity: 0, filter: 'blur(12px)' }}
-              animate={{ opacity: 1, filter: 'blur(0px)' }}
-              transition={{ duration: 0.8, ease: 'easeOut' }}
-              className="max-w-3xl"
+            <div
+              className={cn(
+                'mt-auto',
+                showAvatarGraphic && 'lg:grid lg:grid-cols-2 lg:items-end lg:gap-12'
+              )}
             >
-              {title && (
-                <HeadingTag className="text-foreground text-4xl font-medium tracking-tight text-balance md:text-5xl xl:text-6xl">
-                  {title}
-                </HeadingTag>
-              )}
-              {description && (
-                <p className="text-muted-foreground mt-6 max-w-2xl text-lg">{description}</p>
-              )}
+              <motion.div
+                initial={{ opacity: 0, filter: 'blur(12px)' }}
+                animate={{ opacity: 1, filter: 'blur(0px)' }}
+                transition={{ duration: 0.8, ease: 'easeOut' }}
+                className="max-w-3xl"
+              >
+                {eyebrow && (
+                  <span className="text-primary mb-6 flex items-center gap-1.5 text-base font-medium">
+                    <Sparkles className="h-4 w-4" />
+                    {eyebrow}
+                  </span>
+                )}
+                {title && (
+                  <HeadingTag className="text-foreground text-4xl font-medium tracking-tighter text-balance md:text-5xl xl:text-6xl">
+                    {title}
+                  </HeadingTag>
+                )}
+                {description && (
+                  <p className="text-muted-foreground mt-6 max-w-2xl text-lg">{description}</p>
+                )}
 
-              {showButton && buttonText && buttonHref && (
-                <div className="mt-8">
-                  <Button asChild size="lg">
-                    <Link href={buttonHref} target={buttonOpenInNewTab ? '_blank' : undefined}>
-                      <span className="text-nowrap">{buttonText}</span>
-                    </Link>
-                  </Button>
+                {showButton && buttonText && buttonHref && (
+                  <div className="mt-8">
+                    <Button asChild size="lg">
+                      <Link href={buttonHref} target={buttonOpenInNewTab ? '_blank' : undefined}>
+                        <span className="text-nowrap">{buttonText}</span>
+                      </Link>
+                    </Button>
+                  </div>
+                )}
+              </motion.div>
+
+              {showAvatarGraphic && (
+                <div className="hidden lg:block">
+                  <FloatingAvatarsGraphic className="h-[320px] xl:h-[380px]" variant={avatarVariant} />
                 </div>
               )}
-            </motion.div>
+            </div>
           )}
         </div>
       </div>
