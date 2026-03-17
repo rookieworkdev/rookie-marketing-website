@@ -78,6 +78,10 @@ function getAvatars(variant: AvatarVariant) {
   return avatarImages.map((img, i) => ({ ...img, ...layout[i] }))
 }
 
+const glowPattern: ('green' | 'yellow')[] = [
+  'green', 'yellow', 'yellow', 'green', 'yellow', 'green', 'green', 'yellow',
+]
+
 const sizeClasses = {
   sm: '!size-10',
   md: '!size-14',
@@ -110,7 +114,7 @@ export function FloatingAvatarsGraphic({
             delay: 0.1 + i * 0.07,
           }}
         >
-          <GlowingBorder duration={4.5 + i * 0.4}>
+          <GlowingBorder duration={4.5 + i * 0.4} colorVariant={glowPattern[i]}>
             <Avatar
               size="lg"
               className={cn('border-background border-2 shadow-lg', sizeClasses[av.size])}

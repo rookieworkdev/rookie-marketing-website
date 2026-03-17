@@ -151,7 +151,7 @@ export function MatchScore({ score = 85, className }: MatchScoreProps) {
             animate={isInView ? { scale: 1, opacity: 1, filter: 'blur(0px)' } : undefined}
             transition={{ duration: 0.4, ease: 'easeOut', delay: 0.3 + i * 0.1 }}
           >
-            <GlowingBorder duration={4.5 + i * 0.5}>
+            <GlowingBorder duration={4.5 + i * 0.5} colorVariant={i % 2 === 0 ? 'green' : 'yellow'}>
               <Avatar size="lg" className="border-background !size-16 border-2 shadow-lg">
                 <AvatarImage src={av.image} alt={av.initials} />
                 <AvatarFallback className="text-sm font-medium">{av.initials}</AvatarFallback>
