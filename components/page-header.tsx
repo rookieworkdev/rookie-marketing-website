@@ -77,7 +77,7 @@ export function PageHeader({
         <div
           className={cn(
             horizontalPadding,
-            'relative flex min-h-[680px] flex-col pt-28 pb-16 md:pt-32 md:pb-20'
+            'relative flex min-h-[680px] flex-col pt-28 pb-16 md:pt-32'
           )}
         >
           {/* Breadcrumb */}

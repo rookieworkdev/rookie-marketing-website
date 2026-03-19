@@ -127,7 +127,6 @@ export default async function IntegritetspolicyPage() {
                 </ul>
                 <p>{t('section6Text2')}</p>
                 <p>{t('section6Text3')}</p>
-                <p>{t('section6Text4')}</p>
 
                 <h2>{t('section7Title')}</h2>
                 <p>{t('section7Text')}</p>

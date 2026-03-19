@@ -182,13 +182,10 @@ export default function FooterSection({
   ]
 
   const discoveryLinks = [
-    { title: t('rookieOfMonth'), href: '/manadens-rookie' },
     { title: t('forJobSeekers'), href: '/candidates' },
     { title: t('forCompanies'), href: '/companies' },
-    { title: t('aboutUs'), href: '/om-oss' },
     { title: t('inspiration'), href: '/inspiration' },
-    { title: t('contact'), href: '/kontakt' },
-    { title: t('privacyPolicy'), href: '/integritetspolicy' },
+    { title: t('privacyPolicy'), href: '/policy' },
   ]
 
   const locale = useLocale()
@@ -252,7 +249,9 @@ export default function FooterSection({
                     rel="noopener noreferrer"
                     className="hover:text-foreground transition-colors duration-150"
                   >
-                    Drottninggatan 32, 8tr, 111 51 Stockholm
+                    Drottninggatan 32, 8tr
+                    <br />
+                    111 51 Stockholm
                   </a>
                   <a
                     href="mailto:info@rookiework.se"

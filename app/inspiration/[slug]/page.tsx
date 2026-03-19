@@ -1,7 +1,6 @@
 import FooterSection from '@/components/footer'
 import { HeroHeader } from '@/components/header'
 import { PageHeader } from '@/components/page-header'
-import { Badge } from '@/components/ui/badge'
 import { getAllSlugs, getPostBySlug } from '@/lib/inspiration'
 import { generateArticleSchema } from '@/lib/seo'
 import { cn, containerBorders, topBorder } from '@/lib/utils'
@@ -103,10 +102,7 @@ export default async function InspirationPostPage({ params }: PageProps) {
           ]}
           headingLevel="p"
         >
-          <div className="max-w-4xl">
-            <Badge variant="default" className="mb-6">
-              {post.category}
-            </Badge>
+          <div className="mt-auto max-w-4xl">
             <h1 className="text-foreground text-4xl font-medium tracking-tight md:text-5xl lg:text-6xl">
               {post.title}
             </h1>

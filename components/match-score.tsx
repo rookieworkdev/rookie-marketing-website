@@ -121,10 +121,7 @@ export function MatchScore({ score = 85, className }: MatchScoreProps) {
       duration: animDuration,
       ease: arcEase as unknown as [number, number, number, number],
       onUpdate: (angle) => {
-        needleRef.current?.setAttribute(
-          'transform',
-          `rotate(${angle}, ${centerX}, ${centerY})`
-        )
+        needleRef.current?.setAttribute('transform', `rotate(${angle}, ${centerX}, ${centerY})`)
       },
     })
     return () => controls.stop()
@@ -137,7 +134,13 @@ export function MatchScore({ score = 85, className }: MatchScoreProps) {
   const onesStrip = useMemo(() => Array.from({ length: onesDigit + 1 }, (_, i) => i), [onesDigit])
 
   const matchLabel =
-    score >= 80 ? t('strongMatch') : score >= 60 ? t('goodMatch') : score >= 40 ? t('medium') : t('weak')
+    score >= 80
+      ? t('strongMatch')
+      : score >= 60
+        ? t('goodMatch')
+        : score >= 40
+          ? t('medium')
+          : t('weak')
 
   return (
     <div ref={containerRef} className={cn('flex flex-col items-center', className)}>
@@ -285,7 +288,7 @@ export function MatchScore({ score = 85, className }: MatchScoreProps) {
             height={26}
           >
             <motion.div
-              className="bg-card border-border flex h-full items-center justify-center gap-1 overflow-hidden rounded-sm border shadow-xs"
+              className="bg-card border-border flex h-full items-center justify-center gap-1 overflow-hidden rounded-full border shadow-xs"
               initial={{ opacity: 0, y: -4 }}
               animate={isInView ? { opacity: 1, y: 0 } : undefined}
               transition={{ duration: 0.4, delay: animDuration * 0.5 }}

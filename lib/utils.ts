@@ -35,7 +35,7 @@ export const sectionContainer = (
   variant: 'default' | 'no-padding' = 'default'
 ) => {
   const baseClasses = cn(containerBorders(), background)
-  const paddingClasses = variant === 'no-padding' ? '' : `${horizontalPadding} py-20`
+  const paddingClasses = variant === 'no-padding' ? '' : `${horizontalPadding} py-16`
 
   return cn(baseClasses, paddingClasses)
 }

@@ -1,27 +1,43 @@
 import FooterSection from '@/components/footer'
 import { HeroHeader } from '@/components/header'
+import { FlickeringGrid } from '@/components/ui/flickering-grid'
 import { Button } from '@/components/ui/button'
-import { cn, horizontalPadding, whiteBorderWrapper } from '@/lib/utils'
+import { cn, containerBorders, horizontalPadding } from '@/lib/utils'
 import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
 
 export default async function NotFound() {
   const t = await getTranslations('notFound')
-  const tCommon = await getTranslations('common')
 
   return (
     <>
       <HeroHeader />
       <main>
-        <section className="bg-muted relative min-h-screen">
-          {/* Border container */}
+        <section className="bg-background">
           <div
-            className={cn(
-              'relative mx-auto flex min-h-screen w-full max-w-7xl flex-col items-center justify-center',
-              whiteBorderWrapper()
-            )}
+            className={cn(containerBorders(), 'relative flex min-h-svh flex-col items-center justify-center overflow-hidden')}
           >
-            <div className={cn('text-center', horizontalPadding)}>
+            {/* Flickering grid background */}
+            <FlickeringGrid
+              squareSize={3}
+              gridGap={6}
+              flickerChance={0.3}
+              color="rgb(0, 0, 0)"
+              maxOpacity={0.15}
+              className="absolute inset-0 dark:hidden"
+            />
+            <FlickeringGrid
+              squareSize={4}
+              gridGap={6}
+              flickerChance={0.3}
+              color="rgb(255, 255, 255)"
+              maxOpacity={0.15}
+              className="absolute inset-0 hidden dark:block"
+            />
+            {/* Gradient overlay */}
+            <div className="from-background absolute inset-0 bg-gradient-to-b from-25% to-transparent" />
+
+            <div className={cn('relative text-center', horizontalPadding)}>
               <p className="text-primary mb-4 text-lg font-medium">404</p>
               <h1 className="text-4xl font-medium tracking-tight md:text-5xl lg:text-6xl">
                 {t('title')}
@@ -29,12 +45,9 @@ export default async function NotFound() {
               <p className="text-muted-foreground mt-6 text-lg">
                 {t('description')}
               </p>
-              <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
+              <div className="mt-10">
                 <Button asChild size="lg">
                   <Link href="/">{t('goHome')}</Link>
-                </Button>
-                <Button asChild variant="outline" size="lg">
-                  <Link href="/kontakt">{t('contactUs')}</Link>
                 </Button>
               </div>
             </div>
