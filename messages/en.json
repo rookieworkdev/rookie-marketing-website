@@ -15,8 +15,9 @@
     "matchQuickly": "Matching talent with companies",
     "withAI": "by AI",
     "subtitle": "For young talents moving forward and leaders looking for the next Rookie.",
-    "createAssignment": "Create assignment",
-    "createProfile": "Create profile"
+    "findTalents": "Find talents",
+    "findJobs": "Find jobs",
+    "benefitsText": "Get started in 3 minutes."
   },
   "howItWorks": {
     "title": "How Rookie works",
@@ -137,7 +138,12 @@
     "goodMatch": "Good match",
     "medium": "Medium",
     "weak": "Weak",
-    "aiScore": "Rookie AI Score:"
+    "aiScore": "Rookie Match Score:",
+    "pillSalary": "Salary in range",
+    "pillExperience": "Right experience level",
+    "pillCulture": "Culture match",
+    "pillAvailability": "Available immediately",
+    "pillSkills": "Skills match"
   },
   "jobsCarousel": {
     "title": "Open positions",

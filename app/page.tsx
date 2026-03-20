@@ -1,4 +1,3 @@
-import CeoTestimonialSection from '@/components/ceo-testimonial-section'
 import FooterSection from '@/components/footer'
 import HeroSection from '@/components/hero-section'
 import HowItWorksSection from '@/components/how-it-works-section'
@@ -36,12 +35,6 @@ export default async function Page() {
       <HeroSection />
       <HowItWorksSection />
       <JobsSection jobs={jobs} />
-      <CeoTestimonialSection
-        quote={t('ceoQuote')}
-        authorName={t('ceoName')}
-        authorTitle={t('ceoTitle')}
-        authorImage="/images/content/hakan-olsson.jpeg"
-      />
       <FooterSection />
     </>
   )

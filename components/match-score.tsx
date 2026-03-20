@@ -1,9 +1,7 @@
 'use client'
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { GlowingBorder } from '@/components/ui/glowing-border'
 import { cn } from '@/lib/utils'
-import { SparklesIcon } from '@heroicons/react/20/solid'
+import { CheckCircleIcon, SparklesIcon } from '@heroicons/react/20/solid'
 import { animate as animateValue, motion, useInView } from 'motion/react'
 import { useTranslations } from 'next-intl'
 import { useEffect, useMemo, useRef } from 'react'
@@ -15,44 +13,6 @@ const digitMask = {
   WebkitMaskImage:
     'linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)',
 } as const
-
-const floatingAvatars = [
-  {
-    initials: 'LK',
-    image:
-      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop&crop=face',
-    className: '-left-24 bottom-4',
-  },
-  {
-    initials: 'SJ',
-    image:
-      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face',
-    className: '-left-36 top-[36%]',
-  },
-  {
-    initials: 'KS',
-    image:
-      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face',
-    className: '-right-36 top-[36%]',
-  },
-  {
-    initials: 'SB',
-    image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=80&h=80&fit=crop&crop=face',
-    className: '-right-24 bottom-4',
-  },
-  {
-    initials: 'AE',
-    image:
-      'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&crop=face',
-    className: '-left-16 top-0',
-  },
-  {
-    initials: 'MR',
-    image:
-      'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&crop=face',
-    className: '-right-16 top-0',
-  },
-] as const
 
 interface MatchScoreProps {
   score?: number
@@ -145,24 +105,6 @@ export function MatchScore({ score = 85, className }: MatchScoreProps) {
   return (
     <div ref={containerRef} className={cn('flex flex-col items-center', className)}>
       <div className="relative w-full max-w-2xl">
-        {/* Floating avatars — staggered scale + blur/fade */}
-        {floatingAvatars.map((av, i) => (
-          <motion.div
-            key={av.initials}
-            className={cn('absolute z-0', av.className)}
-            initial={{ scale: 0, opacity: 0, filter: 'blur(4px)' }}
-            animate={isInView ? { scale: 1, opacity: 1, filter: 'blur(0px)' } : undefined}
-            transition={{ duration: 0.4, ease: 'easeOut', delay: 0.3 + i * 0.1 }}
-          >
-            <GlowingBorder duration={4.5 + i * 0.5} colorVariant={i % 2 === 0 ? 'green' : 'yellow'}>
-              <Avatar size="lg" className="border-background !size-16 border-2 shadow-lg">
-                <AvatarImage src={av.image} alt={av.initials} />
-                <AvatarFallback className="text-sm font-medium">{av.initials}</AvatarFallback>
-              </Avatar>
-            </GlowingBorder>
-          </motion.div>
-        ))}
-
         <svg viewBox="-10 -10 320 200" className="relative z-10 w-full overflow-visible">
           <defs>
             <linearGradient id="scoreGradient" x1="0%" y1="50%" x2="100%" y2="50%">
@@ -301,6 +243,24 @@ export function MatchScore({ score = 85, className }: MatchScoreProps) {
             </motion.div>
           </foreignObject>
         </svg>
+
+        {/* Match reason pills */}
+        <motion.div
+          className="relative z-10 mt-2 flex flex-wrap items-center justify-center gap-2"
+          initial={{ opacity: 0, y: 8 }}
+          animate={isInView ? { opacity: 1, y: 0 } : undefined}
+          transition={{ duration: 0.5, delay: animDuration * 0.7 }}
+        >
+          {[t('pillSalary'), t('pillExperience'), t('pillCulture'), t('pillAvailability'), t('pillSkills')].map((label) => (
+            <span
+              key={label}
+              className="bg-foreground text-background inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium shadow-xs"
+            >
+              <CheckCircleIcon className="text-background/60 size-3.5 shrink-0" />
+              {label}
+            </span>
+          ))}
+        </motion.div>
       </div>
     </div>
   )

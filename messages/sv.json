@@ -15,8 +15,9 @@
     "matchQuickly": "Matchar talanger med företag",
     "withAI": "med AI",
     "subtitle": "För unga talanger på väg framåt och ledare som söker nästa Rookie.",
-    "createAssignment": "Skapa uppdrag",
-    "createProfile": "Skapa profil"
+    "findTalents": "Hitta talanger",
+    "findJobs": "Hitta jobb",
+    "benefitsText": "Kom igång på 3 minuter"
   },
   "howItWorks": {
     "title": "Så fungerar Rookie",
@@ -137,7 +138,12 @@
     "goodMatch": "Bra match",
     "medium": "Medel",
     "weak": "Svag",
-    "aiScore": "Rookie AI Score:"
+    "aiScore": "Rookie Match Score:",
+    "pillSalary": "Lön inom spannet",
+    "pillExperience": "Rätt erfarenhetsnivå",
+    "pillCulture": "Kulturmatch",
+    "pillAvailability": "Tillgänglig omgående",
+    "pillSkills": "Kompetens matchar"
   },
   "jobsCarousel": {
     "title": "Lediga tjänster",
