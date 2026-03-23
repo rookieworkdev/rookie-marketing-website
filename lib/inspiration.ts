@@ -95,6 +95,45 @@ export async function getPostsByCategory(category: string): Promise<InspirationP
   return (data || []).map(transformPost)
 }
 
+export async function getRelatedPosts(slug: string, category: string, limit = 3): Promise<InspirationPost[]> {
+  const supabase = createServerClient()
+
+  // First try posts in the same category
+  const { data, error } = await supabase
+    .from('website_inspiration')
+    .select('*')
+    .eq('is_published', true)
+    .eq('category', category)
+    .neq('slug', slug)
+    .order('date', { ascending: false })
+    .limit(limit)
+
+  if (error) {
+    console.error('Error fetching related posts:', error)
+    return []
+  }
+
+  let posts = (data || []).map(transformPost)
+
+  // If not enough posts in same category, fill with latest posts
+  if (posts.length < limit) {
+    const existingSlugs = [slug, ...posts.map((p) => p.slug)]
+    const { data: extraData } = await supabase
+      .from('website_inspiration')
+      .select('*')
+      .eq('is_published', true)
+      .not('slug', 'in', `(${existingSlugs.join(',')})`)
+      .order('date', { ascending: false })
+      .limit(limit - posts.length)
+
+    if (extraData) {
+      posts = [...posts, ...extraData.map(transformPost)]
+    }
+  }
+
+  return posts
+}
+
 export async function getCategories(): Promise<string[]> {
   const supabase = createServerClient()
   

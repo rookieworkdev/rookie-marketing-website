@@ -14,6 +14,7 @@ import { FlickeringGrid } from '@/components/ui/flickering-grid'
 import { cn, containerBorders, horizontalPadding } from '@/lib/utils'
 import { Sparkles } from 'lucide-react'
 import { motion } from 'motion/react'
+import Image from 'next/image'
 import Link from 'next/link'
 
 interface BreadcrumbItem {
@@ -34,6 +35,8 @@ interface PageHeaderProps {
   headingLevel?: 'h1' | 'h2' | 'p'
   showAvatarGraphic?: boolean
   avatarVariant?: 'companies' | 'candidates'
+  image?: string
+  imageAlt?: string
 }
 
 export function PageHeader({
@@ -49,6 +52,8 @@ export function PageHeader({
   headingLevel = 'h1',
   showAvatarGraphic = false,
   avatarVariant = 'companies',
+  image,
+  imageAlt,
 }: PageHeaderProps) {
   const HeadingTag = headingLevel === 'p' ? 'p' : headingLevel
   return (
@@ -109,15 +114,63 @@ export function PageHeader({
           )}
 
           {/* Content */}
-          {children ? (
+          {children && image ? (
+            <div className="mt-auto lg:grid lg:grid-cols-2 lg:items-center lg:gap-12">
+              <motion.div
+                initial={{ opacity: 0, filter: 'blur(12px)' }}
+                animate={{ opacity: 1, filter: 'blur(0px)' }}
+                transition={{ duration: 0.8, ease: 'easeOut' }}
+                className="mb-8 lg:mb-0"
+              >
+                <div className="relative aspect-video overflow-hidden rounded-2xl">
+                  <Image
+                    src={image}
+                    alt={imageAlt || ''}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    priority
+                  />
+                </div>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, filter: 'blur(12px)' }}
+                animate={{ opacity: 1, filter: 'blur(0px)' }}
+                transition={{ duration: 0.8, ease: 'easeOut' }}
+              >
+                {children}
+              </motion.div>
+            </div>
+          ) : children ? (
             children
           ) : (
             <div
               className={cn(
                 'mt-auto',
-                showAvatarGraphic && 'lg:grid lg:grid-cols-2 lg:items-end lg:gap-12'
+                showAvatarGraphic && 'lg:grid lg:grid-cols-2 lg:items-end lg:gap-12',
+                image && 'lg:grid lg:grid-cols-2 lg:items-end lg:gap-12'
               )}
             >
+              {image && (
+                <motion.div
+                  initial={{ opacity: 0, filter: 'blur(12px)' }}
+                  animate={{ opacity: 1, filter: 'blur(0px)' }}
+                  transition={{ duration: 0.8, ease: 'easeOut' }}
+                  className="mb-8 lg:mb-0"
+                >
+                  <div className="relative aspect-video overflow-hidden rounded-2xl">
+                    <Image
+                      src={image}
+                      alt={imageAlt || ''}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      priority
+                    />
+                  </div>
+                </motion.div>
+              )}
+
               <motion.div
                 initial={{ opacity: 0, filter: 'blur(12px)' }}
                 animate={{ opacity: 1, filter: 'blur(0px)' }}
@@ -131,12 +184,12 @@ export function PageHeader({
                   </span>
                 )}
                 {title && (
-                  <HeadingTag className="text-foreground text-4xl font-medium tracking-tighter text-balance md:text-5xl xl:text-6xl">
+                  <HeadingTag className="text-foreground text-3xl font-medium tracking-tighter text-balance md:text-4xl xl:text-5xl">
                     {title}
                   </HeadingTag>
                 )}
                 {description && (
-                  <p className="text-muted-foreground mt-6 max-w-2xl text-lg">{description}</p>
+                  <p className="text-muted-foreground mt-6 max-w-2xl text-base">{description}</p>
                 )}
 
                 {showButton && buttonText && buttonHref && (

@@ -45,11 +45,11 @@ export default function BenefitsSection({
         <motion.div
           initial={{ opacity: 0, filter: 'blur(12px)' }}
           whileInView={{ opacity: 1, filter: 'blur(0px)' }}
-          viewport={{ once: true, margin: '-100px' }}
+          viewport={{ once: true, margin: '0px 0px 200px 0px' }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
           className="max-w-3xl"
         >
-          <h2 className="text-3xl font-medium tracking-tight md:text-4xl lg:text-5xl">{title}</h2>
+          <h2 className="text-3xl font-medium tracking-tight md:text-4xl">{title}</h2>
           <div className="mt-6 space-y-4">
             {descriptionArray.map((paragraph, index) => (
               <p key={index} className="text-muted-foreground">
@@ -70,7 +70,7 @@ export default function BenefitsSection({
                 key={benefit.title}
                 initial={{ opacity: 0, filter: 'blur(12px)' }}
                 whileInView={{ opacity: 1, filter: 'blur(0px)' }}
-                viewport={{ once: true, margin: '-100px' }}
+                viewport={{ once: true, margin: '0px 0px 200px 0px' }}
                 transition={{ duration: 0.8, ease: 'easeOut', delay: index * 0.1 }}
                 className="bg-muted flex flex-col gap-4 rounded-2xl p-6"
               >
@@ -91,8 +91,8 @@ export default function BenefitsSection({
           <motion.div
             initial={{ opacity: 0, filter: 'blur(12px)' }}
             whileInView={{ opacity: 1, filter: 'blur(0px)' }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.8, ease: 'easeOut', delay: 0.6 }}
+            viewport={{ once: true, margin: '0px 0px 200px 0px' }}
+            transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
             className="mt-12"
           >
             <Button asChild size="lg">

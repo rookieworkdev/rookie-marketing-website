@@ -1,9 +1,11 @@
 import FooterSection from '@/components/footer'
 import HeroSection from '@/components/hero-section'
 import HowItWorksSection from '@/components/how-it-works-section'
-import JobsSection from '@/components/jobs-section'
 import { getLatestJobs } from '@/lib/jobs'
+import dynamic from 'next/dynamic'
 import { getTranslations } from 'next-intl/server'
+
+const TestimonialSection = dynamic(() => import('@/components/testimonial-section'))
 
 export const revalidate = 86400
 
@@ -28,13 +30,20 @@ export async function generateMetadata() {
 
 export default async function Page() {
   const t = await getTranslations('pages.home')
+  const tCompanies = await getTranslations('pages.forCompanies')
   const jobs = await getLatestJobs(8)
 
   return (
     <>
-      <HeroSection />
+      <HeroSection jobs={jobs} />
       <HowItWorksSection />
-      <JobsSection jobs={jobs} />
+      <TestimonialSection
+        quote={tCompanies('testimonialQuote')}
+        authorName={tCompanies('testimonialName')}
+        authorTitle={tCompanies('testimonialTitle')}
+        authorImage="/avatars/karl-rudarp.png"
+        smallTitle
+      />
       <FooterSection />
     </>
   )

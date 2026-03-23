@@ -5,6 +5,8 @@ import { getLatestJobs } from '@/lib/jobs'
 import dynamic from 'next/dynamic'
 import { getTranslations } from 'next-intl/server'
 
+export const revalidate = 86400
+
 // Dynamic imports for below-the-fold components
 const BenefitsSection = dynamic(() => import('@/components/benefits-section'))
 const JobsSection = dynamic(() => import('@/components/jobs-section'))

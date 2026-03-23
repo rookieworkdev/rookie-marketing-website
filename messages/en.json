@@ -9,8 +9,8 @@
     "navigationMenu": "Navigation menu"
   },
   "hero": {
-    "aiReviewedAssignments": "AI-reviewed assignments",
-    "assignmentsAnalyzed": "Assignments analyzed",
+    "aiReviewedAssignments": "AI-reviewed positions",
+    "assignmentsAnalyzed": "Positions analyzed",
     "companiesInNetwork": "Companies in network",
     "matchQuickly": "Matching talent with companies",
     "withAI": "by AI",
@@ -29,27 +29,27 @@
       "step1Title": "Create your profile",
       "step1Description": "Add your skills, experience and preferences. Done in minutes.",
       "step2Title": "AI matches you",
-      "step2Description": "Our AI analyzes your profile and connects you to relevant assignments.",
+      "step2Description": "Our AI analyzes your profile and connects you to relevant positions.",
       "step3Title": "Start working",
-      "step3Description": "Complete the interview, get your assignment and get started. Hassle-free."
+      "step3Description": "Complete the interview, land your position and get started. Hassle-free."
     },
     "client": {
-      "step1Title": "Publish assignment",
+      "step1Title": "Post a position",
       "step1Description": "Describe the role, skill requirements and preferences. Done in minutes.",
       "step2Title": "AI finds candidates",
-      "step2Description": "Our AI ranks and presents the best candidates for your assignment.",
+      "step2Description": "Our AI ranks and presents the best candidates for your position.",
       "step3Title": "Fill the role",
       "step3Description": "Review profiles, book interviews and hire. All in one place."
     }
   },
   "jobsSection": {
-    "title": "Latest assignments",
-    "subtitle": "See a selection of current assignments matched with young talents.",
-    "viewAll": "View all assignments"
+    "title": "Latest positions",
+    "subtitle": "See a selection of current positions matched with young talents.",
+    "viewAll": "View all positions"
   },
   "footer": {
     "getStarted": "Get started with Rookie",
-    "getStartedDescription": "Looking for the next generation of talent or a candidate ready to take the next step in their career? We help you find the right match quickly and easily.",
+    "getStartedDescription": "Looking for the next generation of talent or a candidate ready to take the next step in their career? We help you find the right match.",
     "registerCompany": "Register company",
     "loginAsCandidate": "Log in as candidate",
     "tagline": "Matching young talents",
@@ -209,43 +209,43 @@
     },
     "forCompanies": {
       "metaTitle": "For companies",
-      "metaDescription": "Post an assignment and let AI match you with the most relevant junior candidates. Faster, smarter hiring with Rookie.",
-      "ogDescription": "Post an assignment and let AI match you with the most relevant junior candidates.",
+      "metaDescription": "Post a position and let AI match you with the most relevant junior candidates. Faster, smarter hiring with Rookie.",
+      "ogDescription": "Post a position and let AI match you with the most relevant junior candidates.",
       "eyebrow": "AI-powered hiring",
       "pageTitle": "Find the right candidate with AI",
       "pageDescription": "Post a listing and let our AI match you with relevant candidates.",
       "benefitsTitle": "Why companies choose Rookie",
       "benefitsDescription": "A platform built to make hiring young talent faster and smarter.",
       "benefit1Title": "AI-powered matching",
-      "benefit1Description": "Our AI analyzes your assignment and ranks candidates automatically.",
+      "benefit1Description": "Our AI analyzes your position and ranks candidates automatically.",
       "benefit2Title": "Faster time-to-hire",
-      "benefit2Description": "From published assignment to presented candidates in hours, not weeks.",
+      "benefit2Description": "From published position to presented candidates in hours, not weeks.",
       "benefit3Title": "Quality-scored candidates",
       "benefit3Description": "Every candidate gets an AI-based match score so you instantly see how well they fit the role.",
       "testimonialQuote": "I have used Håkan for recruitment in several roles and with several employers. The reason is that Håkan works hard, delivers high-quality candidates and is very easy to work with.",
       "testimonialName": "Karl Rudarp",
       "testimonialTitle": "Head of Volvo Cars Financial Services",
       "ctaTitle": "Ready to find the right candidate?",
-      "ctaDescription": "Create an assignment and let our AI match you with the best junior talent.",
-      "ctaButton": "Create assignment"
+      "ctaDescription": "Post a position and let our AI match you with the best junior talent.",
+      "ctaButton": "Post position"
     },
     "forJobSeekers": {
       "metaTitle": "For job seekers",
-      "metaDescription": "Create your profile and get matched with assignments that fit you. Rookie's AI connects you with companies looking for junior talent.",
-      "ogDescription": "Create your profile and get matched with assignments that fit you.",
+      "metaDescription": "Create your profile and get matched with positions that fit you. Rookie's AI connects you with companies looking for junior talent.",
+      "ogDescription": "Create your profile and get matched with positions that fit you.",
       "eyebrow": "AI matching for candidates",
       "pageTitle": "Get matched with the right role",
-      "pageDescription": "Our AI connects you to assignments that fit your profile.",
+      "pageDescription": "Our AI connects you to positions that fit your profile.",
       "benefitsTitle": "Why candidates choose Rookie",
       "benefitsDescription": "A platform built to give you the right start in your career.",
       "benefit1Title": "AI matches you",
-      "benefit1Description": "Our AI analyzes your profile and connects you to the most relevant assignments automatically.",
+      "benefit1Description": "Our AI analyzes your profile and connects you to the most relevant positions automatically.",
       "benefit2Title": "Junior roles only",
       "benefit2Description": "Rookie focuses entirely on junior roles — you only compete with others at the same career stage.",
       "benefit3Title": "Get started fast",
       "benefit3Description": "Create your profile in minutes and start getting matched right away.",
       "ctaTitle": "Ready to get started?",
-      "ctaDescription": "Create your profile and let our AI match you with the right assignments.",
+      "ctaDescription": "Create your profile and let our AI match you with the right positions.",
       "ctaButton": "Create profile"
     },
     "inspiration": {
@@ -256,7 +256,8 @@
       "pageDescription": "Get inspiration from successful young talents and companies. Read about career paths, tips and insights from the recruitment world."
     },
     "inspirationPost": {
-      "notFound": "Post not found"
+      "notFound": "Post not found",
+      "relatedPosts": "More inspiration"
     },
     "contact": {
       "metaTitle": "Contact",

@@ -18,7 +18,7 @@ export default function JobsSection({ jobs }: JobsSectionProps) {
 
   return (
     <section className={sectionWrapper('bg-background')}>
-      <div className={sectionContainer('bg-muted')}>
+      <div className={sectionContainer()}>
         <motion.div
           initial={{ opacity: 0, filter: 'blur(12px)' }}
           whileInView={{ opacity: 1, filter: 'blur(0px)' }}

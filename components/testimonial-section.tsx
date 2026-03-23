@@ -1,7 +1,7 @@
 'use client'
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { cn, fullBorders, mutedBorderOpacity, sectionContainer, sectionWrapper } from '@/lib/utils'
+import { cn, sectionContainer, sectionWrapper } from '@/lib/utils'
 import { motion } from 'motion/react'
 import { useTranslations } from 'next-intl'
 import { ReactNode } from 'react'
@@ -11,8 +11,9 @@ interface TestimonialProps {
   authorName: string
   authorTitle: string
   authorImage: string
-  companyLogo: ReactNode
-  companyName: string
+  companyLogo?: ReactNode
+  companyName?: string
+  smallTitle?: boolean
 }
 
 export default function TestimonialSection({
@@ -22,6 +23,7 @@ export default function TestimonialSection({
   authorImage,
   companyLogo,
   companyName,
+  smallTitle,
 }: TestimonialProps) {
   const t = useTranslations('testimonial')
   return (
@@ -35,7 +37,13 @@ export default function TestimonialSection({
           transition={{ duration: 0.8, ease: 'easeOut' }}
           className="max-w-3xl"
         >
-          <h2 className="text-3xl font-medium tracking-tight md:text-4xl lg:text-5xl">
+          <h2
+            className={
+              smallTitle
+                ? 'text-3xl font-medium tracking-tight md:text-4xl'
+                : 'text-3xl font-medium tracking-tight md:text-4xl'
+            }
+          >
             {t('title')}
           </h2>
         </motion.div>
@@ -46,20 +54,12 @@ export default function TestimonialSection({
           whileInView={{ opacity: 1, filter: 'blur(0px)' }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
-          className={cn(
-            'bg-muted dark:bg-card mt-12 rounded-2xl p-8 shadow-xs md:p-12',
-            fullBorders(mutedBorderOpacity)
-          )}
+          className={cn('bg-muted dark:bg-card mt-12 rounded-2xl p-8 shadow-xs md:p-12')}
         >
-          {/* Company logo */}
-          <div className="mb-8">
-            <div role="graphics-document" aria-label={companyName}>
-              {companyLogo}
-            </div>
-          </div>
+          {/* Company logo — hidden */}
 
           {/* Quote */}
-          <blockquote className="text-xl font-medium md:text-3xl lg:text-4xl">
+          <blockquote className="text-xl font-medium md:text-2xl lg:text-3xl">
             &ldquo;{quote}&rdquo;
           </blockquote>
 

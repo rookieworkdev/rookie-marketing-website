@@ -1,4 +1,3 @@
-import { VolvoLogo } from '@/components/company-logos'
 import FooterSection from '@/components/footer'
 import { HeroHeader } from '@/components/header'
 import { PageHeader } from '@/components/page-header'
@@ -60,8 +59,7 @@ export default async function ForForetagPage() {
           authorName={t('testimonialName')}
           authorTitle={t('testimonialTitle')}
           authorImage="/avatars/karl-rudarp.png"
-          companyLogo={<VolvoLogo />}
-          companyName="Volvo Cars Financial Services"
+          smallTitle
         />
       </main>
       <FooterSection

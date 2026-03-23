@@ -256,7 +256,8 @@
       "pageDescription": "Få inspiration från framgångsrika unga talanger och företag. Läs om karriärvägar, tips och insikter från rekryteringsvärlden."
     },
     "inspirationPost": {
-      "notFound": "Inlägg hittades inte"
+      "notFound": "Inlägg hittades inte",
+      "relatedPosts": "Mer inspiration"
     },
     "contact": {
       "metaTitle": "Kontakt",

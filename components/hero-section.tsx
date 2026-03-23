@@ -2,26 +2,27 @@
 
 import { Button } from '@/components/ui/button'
 import { FlickeringGrid } from '@/components/ui/flickering-grid'
+import type { JobDisplay } from '@/lib/jobs'
 import { cn, containerBorders, horizontalPadding } from '@/lib/utils'
 import { motion } from 'motion/react'
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { HeroHeader } from './header'
-import { MatchScore } from './match-score'
+import { JobPostingCard } from './job-posting-card'
 
-export default function HeroSection() {
+interface HeroSectionProps {
+  jobs: JobDisplay[]
+}
+
+export default function HeroSection({ jobs }: HeroSectionProps) {
   const t = useTranslations('hero')
+  const tJobs = useTranslations('jobsSection')
   return (
     <>
       <HeroHeader />
       <main className="overflow-x-hidden">
         <section className="bg-background">
-          <div
-            className={cn(
-              containerBorders(),
-              'relative flex min-h-svh flex-col overflow-hidden pt-16'
-            )}
-          >
+          <div className={cn(containerBorders(), 'relative flex flex-col overflow-hidden pt-16')}>
             {/* Flickering grid background — absolute fill, no gaps */}
             <FlickeringGrid
               squareSize={3}
@@ -46,15 +47,15 @@ export default function HeroSection() {
             <div
               className={cn(
                 horizontalPadding,
-                'relative mx-auto flex max-w-5xl flex-1 flex-col items-center justify-center text-center'
+                'relative mx-auto flex max-w-5xl flex-col items-center justify-center py-24 text-center'
               )}
             >
               {/* Stats bar */}
               <motion.div
-                initial={{ opacity: 0, filter: 'blur(12px)' }}
+                initial={{ opacity: 0, filter: 'blur(4px)' }}
                 animate={{ opacity: 1, filter: 'blur(0px)' }}
-                transition={{ duration: 0.8, ease: 'easeOut' }}
-                className="border-border mb-6 inline-flex items-center rounded-full border p-1 shadow-xs"
+                transition={{ duration: 0.5, ease: 'easeOut' }}
+                className="border-border mb-8 inline-flex items-center rounded-full border p-1 shadow-xs"
               >
                 <div className="flex items-center gap-2 px-3 py-1">
                   <span className="text-foreground text-sm font-medium">Direktrekrytering</span>
@@ -71,24 +72,24 @@ export default function HeroSection() {
 
               {/* Heading */}
               <motion.div
-                initial={{ opacity: 0, filter: 'blur(12px)' }}
+                initial={{ opacity: 0, filter: 'blur(4px)' }}
                 animate={{ opacity: 1, filter: 'blur(0px)' }}
-                transition={{ duration: 0.8, ease: 'easeOut', delay: 0.1 }}
+                transition={{ duration: 0.5, ease: 'easeOut', delay: 0.05 }}
               >
                 <h1 className="text-foreground text-3xl font-medium tracking-tighter md:text-4xl xl:text-5xl">
                   {t('matchQuickly')}
                 </h1>
-                <p className="text-muted-foreground mx-auto mt-4 max-w-2xl text-base">
+                <p className="text-muted-foreground mx-auto mt-6 max-w-2xl text-base">
                   {t('subtitle')}
                 </p>
               </motion.div>
 
               {/* CTA buttons */}
               <motion.div
-                initial={{ opacity: 0, filter: 'blur(12px)' }}
+                initial={{ opacity: 0, filter: 'blur(4px)' }}
                 animate={{ opacity: 1, filter: 'blur(0px)' }}
-                transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
-                className="mt-6 flex items-center justify-center gap-4"
+                transition={{ duration: 0.5, ease: 'easeOut', delay: 0.1 }}
+                className="mt-8 flex items-center justify-center gap-4"
               >
                 <Button asChild size="default" className="min-w-[160px]">
                   <Link href="#">
@@ -103,19 +104,48 @@ export default function HeroSection() {
               </motion.div>
 
               <motion.p
-                initial={{ opacity: 0, filter: 'blur(12px)' }}
+                initial={{ opacity: 0, filter: 'blur(4px)' }}
                 animate={{ opacity: 1, filter: 'blur(0px)' }}
-                transition={{ duration: 0.8, ease: 'easeOut', delay: 0.3 }}
+                transition={{ duration: 0.5, ease: 'easeOut', delay: 0.15 }}
                 className="text-muted-foreground mt-4 text-sm"
               >
                 {t('benefitsText')}
               </motion.p>
-
-              {/* Match score indicator */}
-              <div className="mt-4 w-full max-w-lg">
-                <MatchScore score={85} />
-              </div>
             </div>
+
+            {/* Available positions */}
+            {jobs && jobs.length > 0 && (
+              <div className={cn(horizontalPadding, 'relative w-full pb-16 text-left')}>
+                <motion.div
+                  initial={{ opacity: 0, filter: 'blur(4px)' }}
+                  animate={{ opacity: 1, filter: 'blur(0px)' }}
+                  transition={{ duration: 0.5, ease: 'easeOut', delay: 0.2 }}
+                  className="flex items-center justify-between"
+                >
+                  <h2 className="text-xl font-medium tracking-tight md:text-2xl">
+                    {tJobs('title')}
+                  </h2>
+                  <Link
+                    href="/jobb"
+                    className="text-primary text-sm font-medium underline underline-offset-4 hover:opacity-80"
+                  >
+                    {tJobs('viewAll')}
+                  </Link>
+                </motion.div>
+                <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                  {jobs.map((job, index) => (
+                    <motion.div
+                      key={job.id}
+                      initial={{ opacity: 0, filter: 'blur(4px)' }}
+                      animate={{ opacity: 1, filter: 'blur(0px)' }}
+                      transition={{ duration: 0.5, ease: 'easeOut', delay: 0.25 + index * 0.04 }}
+                    >
+                      <JobPostingCard job={job} />
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* Logo carousel — hidden */}
           </div>
