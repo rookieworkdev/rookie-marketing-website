@@ -6,7 +6,8 @@
     "closeMenu": "Close menu",
     "openMenu": "Open menu",
     "login": "Log in",
-    "navigationMenu": "Navigation menu"
+    "navigationMenu": "Navigation menu",
+    "registerCompany": "Register as a company"
   },
   "hero": {
     "aiReviewedAssignments": "AI-reviewed positions",
@@ -17,7 +18,10 @@
     "subtitle": "For young talents moving forward and leaders looking for the next Rookie.",
     "findTalents": "Find talents",
     "findJobs": "Find jobs",
-    "benefitsText": "Get started in 3 minutes."
+    "benefitsText": "Get started in 3 minutes.",
+    "directRecruitment": "Direct recruitment",
+    "tempRecruitment": "Temp-to-hire",
+    "staffing": "Staffing"
   },
   "howItWorks": {
     "title": "How Rookie works",
@@ -51,7 +55,7 @@
     "getStarted": "Get started with Rookie",
     "getStartedDescription": "Looking for the next generation of talent or a candidate ready to take the next step in their career? We help you find the right match.",
     "registerCompany": "Register company",
-    "loginAsCandidate": "Log in as candidate",
+    "loginAsCandidate": "Log in",
     "tagline": "Matching young talents",
     "taglineLine2": "with companies",
     "discoverRookie": "Discover Rookie",

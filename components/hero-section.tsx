@@ -58,15 +58,19 @@ export default function HeroSection({ jobs }: HeroSectionProps) {
                 className="border-border mb-8 inline-flex items-center rounded-full border p-1 shadow-xs"
               >
                 <div className="flex items-center gap-2 px-3 py-1">
-                  <span className="text-foreground text-sm font-medium">Direktrekrytering</span>
+                  <span className="text-foreground text-sm font-medium">
+                    {t('directRecruitment')}
+                  </span>
                 </div>
                 <div className="bg-border h-4 w-px" />
                 <div className="flex items-center gap-2 px-3 py-1">
-                  <span className="text-foreground text-sm font-medium">Hyrrekrytering</span>
+                  <span className="text-foreground text-sm font-medium">
+                    {t('tempRecruitment')}
+                  </span>
                 </div>
                 <div className="bg-border h-4 w-px" />
                 <div className="flex items-center gap-2 px-3 py-1">
-                  <span className="text-foreground text-sm font-medium">Bemanning</span>
+                  <span className="text-foreground text-sm font-medium">{t('staffing')}</span>
                 </div>
               </motion.div>
 
@@ -132,17 +136,20 @@ export default function HeroSection({ jobs }: HeroSectionProps) {
                     {tJobs('viewAll')}
                   </Link>
                 </motion.div>
-                <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                  {jobs.map((job, index) => (
-                    <motion.div
-                      key={job.id}
-                      initial={{ opacity: 0, filter: 'blur(4px)' }}
-                      animate={{ opacity: 1, filter: 'blur(0px)' }}
-                      transition={{ duration: 0.5, ease: 'easeOut', delay: 0.25 + index * 0.04 }}
-                    >
-                      <JobPostingCard job={job} />
-                    </motion.div>
-                  ))}
+                <div className="-mr-6 mt-6 md:-mr-8 lg:mr-0">
+                  <div className="no-scrollbar grid grid-rows-2 grid-flow-col auto-cols-[75vw] snap-x snap-mandatory gap-4 overflow-x-auto pr-6 sm:auto-cols-[45%] md:auto-cols-[32%] md:pr-8 lg:grid-flow-row lg:grid-rows-none lg:grid-cols-4 lg:auto-cols-auto lg:overflow-visible lg:pr-0">
+                    {jobs.map((job, index) => (
+                      <motion.div
+                        key={job.id}
+                        className="snap-start"
+                        initial={{ opacity: 0, filter: 'blur(4px)' }}
+                        animate={{ opacity: 1, filter: 'blur(0px)' }}
+                        transition={{ duration: 0.5, ease: 'easeOut', delay: 0.25 + index * 0.04 }}
+                      >
+                        <JobPostingCard job={job} />
+                      </motion.div>
+                    ))}
+                  </div>
                 </div>
               </div>
             )}

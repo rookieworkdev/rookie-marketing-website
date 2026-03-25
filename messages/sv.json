@@ -6,7 +6,8 @@
     "closeMenu": "Stäng meny",
     "openMenu": "Öppna meny",
     "login": "Logga in",
-    "navigationMenu": "Navigeringsmeny"
+    "navigationMenu": "Navigeringsmeny",
+    "registerCompany": "Registrera som företag"
   },
   "hero": {
     "aiReviewedAssignments": "AI-granskade uppdrag",
@@ -17,7 +18,10 @@
     "subtitle": "För unga talanger på väg framåt och ledare som söker nästa Rookie.",
     "findTalents": "Hitta talanger",
     "findJobs": "Hitta jobb",
-    "benefitsText": "Kom igång på 3 minuter"
+    "benefitsText": "Kom igång på 3 minuter",
+    "directRecruitment": "Direktrekrytering",
+    "tempRecruitment": "Hyrrekrytering",
+    "staffing": "Bemanning"
   },
   "howItWorks": {
     "title": "Så fungerar Rookie",
@@ -51,7 +55,7 @@
     "getStarted": "Kom igång med Rookie",
     "getStartedDescription": "Letar du efter nästa generations talanger eller en kandidat redo att ta nästa steg i karriären? Vi hjälper dig att hitta rätt match snabbt och smidigt.",
     "registerCompany": "Registrera företag",
-    "loginAsCandidate": "Logga in som kandidat",
+    "loginAsCandidate": "Logga in",
     "tagline": "Matchar unga talanger",
     "taglineLine2": "med företag",
     "discoverRookie": "Upptäck Rookie",
@@ -235,7 +239,7 @@
       "ogDescription": "Skapa din profil och bli matchad med uppdrag som passar dig.",
       "eyebrow": "AI-matchning för kandidater",
       "pageTitle": "Bli matchad med rätt uppdrag",
-      "pageDescription": "Lägg in din kompetens och dina preferenser. Vår AI kopplar dig till uppdrag som passar din profil.",
+      "pageDescription": "Din kompetens och preferenser matchas mot uppdrag som passar din profil.",
       "benefitsTitle": "Varför kandidater väljer Rookie",
       "benefitsDescription": "En plattform byggd för att ge dig rätt start i karriären.",
       "benefit1Title": "AI matchar dig",

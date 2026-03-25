@@ -42,8 +42,6 @@ export default async function ForForetagPage() {
           showButton
           buttonText={t('ctaButton')}
           buttonHref="/skapa-uppdrag"
-          showAvatarGraphic
-          avatarVariant="companies"
         />
         <BenefitsSection
           title={t('benefitsTitle')}

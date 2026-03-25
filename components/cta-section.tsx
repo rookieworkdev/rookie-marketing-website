@@ -76,7 +76,7 @@ export default function CTASection({ variant = 'single', content }: CTASectionPr
               {/* Content */}
               <div className="relative flex flex-col justify-between gap-8 md:min-h-[200px]">
                 <div className="max-w-2xl">
-                  <h2 className="text-3xl font-medium tracking-tight text-white md:text-3xl lg:text-4xl">
+                  <h2 className="text-3xl font-medium tracking-tight text-white md:text-4xl">
                     {doubleContent[0].title}
                   </h2>
                   <p className="mt-4 max-w-xl text-base text-white/80">
@@ -104,7 +104,7 @@ export default function CTASection({ variant = 'single', content }: CTASectionPr
               {/* Content */}
               <div className="relative flex flex-col justify-between gap-8 md:min-h-[200px]">
                 <div className="max-w-2xl">
-                  <h2 className="text-foreground text-3xl font-medium tracking-tight md:text-3xl lg:text-4xl">
+                  <h2 className="text-foreground text-3xl font-medium tracking-tight md:text-4xl">
                     {doubleContent[1].title}
                   </h2>
                   <p className="text-muted-foreground mt-4 max-w-xl text-base">
@@ -153,7 +153,7 @@ export default function CTASection({ variant = 'single', content }: CTASectionPr
             className={`relative flex flex-col justify-between gap-8 ${horizontalPadding} py-20 md:min-h-[200px]`}
           >
             <div className="max-w-2xl">
-              <h2 className="text-2xl font-medium tracking-tight text-white md:text-3xl lg:text-4xl">
+              <h2 className="text-3xl font-medium tracking-tight text-white md:text-4xl">
                 {singleContent.title}
               </h2>
               <p className="mt-4 max-w-xl text-base text-pretty text-white/80">

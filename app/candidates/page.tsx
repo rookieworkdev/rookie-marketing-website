@@ -46,8 +46,6 @@ export default async function ForJobbsokandePage() {
           showButton
           buttonText={t('ctaButton')}
           buttonHref="/skapa-profil"
-          showAvatarGraphic
-          avatarVariant="candidates"
         />
         <BenefitsSection
           title={t('benefitsTitle')}

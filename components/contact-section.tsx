@@ -122,7 +122,7 @@ export default function ContactSection({
             className="space-y-8"
           >
             <div>
-              <h2 className="mb-4 text-3xl font-medium md:text-3xl lg:text-4xl">
+              <h2 className="mb-4 text-3xl font-medium md:text-4xl">
                 {t('canWeHelp')}
               </h2>
               <p className="text-muted-foreground text-lg">

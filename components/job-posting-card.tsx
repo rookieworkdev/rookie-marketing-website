@@ -18,7 +18,7 @@ export function JobPostingCard({ job }: JobPostingCardProps) {
     <Link href={`/jobb/${job.id}`} className="group block">
       <Card className="border-border hover:border-primary cursor-pointer border transition-colors">
         <CardContent>
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-4">
             <div>
               <h3 className="line-clamp-1 text-base font-medium">{job.title}</h3>
               {job.companyName && (

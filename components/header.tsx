@@ -108,18 +108,16 @@ export const HeroHeader = () => {
             {/* Right side — language + sign in */}
             <div className="flex items-center gap-2">
               {/* Mobile menu button */}
-              <Button
+              <button
                 ref={menuButtonRef}
-                variant="default"
-                size="icon"
                 onClick={() => setMenuState(!menuState)}
                 aria-label={menuState ? t('closeMenu') : t('openMenu')}
                 aria-expanded={menuState}
                 aria-controls="mobile-menu"
-                className="lg:hidden"
+                className="text-foreground lg:hidden"
               >
                 {menuState ? <X className="size-6" /> : <Menu className="size-6" />}
-              </Button>
+              </button>
 
               {/* Desktop sign in */}
               <Button
@@ -141,7 +139,7 @@ export const HeroHeader = () => {
               role="dialog"
               aria-modal={menuState ? 'true' : undefined}
               aria-label={t('navigationMenu')}
-              className="bg-background absolute left-0 top-full mb-6 hidden w-full flex-wrap items-center space-y-8 rounded-3xl border p-6 shadow-2xl in-data-[state=active]:block lg:hidden"
+              className="bg-background absolute left-0 top-full mt-4 mb-6 hidden w-full flex-wrap items-center space-y-8 rounded-3xl border p-6 shadow-2xl in-data-[state=active]:block lg:hidden"
             >
               <ul className="space-y-6 text-base">
                 {menuItems.map((item, index) => (
@@ -155,11 +153,21 @@ export const HeroHeader = () => {
                   </li>
                 ))}
               </ul>
-              <div className="pt-4">
+              <div className="flex flex-col gap-3 pt-4">
+                <Button
+                  asChild
+                  size="sm"
+                  className="w-full"
+                >
+                  <Link href="/personal">
+                    <span>{t('registerCompany')}</span>
+                  </Link>
+                </Button>
                 <Button
                   asChild
                   size="sm"
                   variant="outline"
+                  className="w-full"
                 >
                   <Link href="https://rookie-se.on.intelliplan.eu/">
                     <span>{t('login')}</span>

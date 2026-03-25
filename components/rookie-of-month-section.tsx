@@ -2,12 +2,10 @@
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
 import { PreviousRookie } from '@/lib/previous-rookies'
 import { sectionContainer, sectionWrapper } from '@/lib/utils'
-import { GraduationCap } from 'lucide-react'
+import { GraduationCap, User } from 'lucide-react'
 import { motion } from 'motion/react'
-import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 
 interface RookieOfMonthSectionProps {
@@ -34,13 +32,10 @@ export default function RookieOfMonthSection({ rookie }: RookieOfMonthSectionPro
           >
             {/* Avatar, Name, and City grouped */}
             <div className="mb-8 flex flex-col items-center text-center">
-              <Avatar className="mb-4 size-28 md:size-28">
+              <Avatar className="mb-4 size-16 md:size-20">
                 <AvatarImage src={rookie.imageSrc} alt={rookie.name} />
-                <AvatarFallback className="text-3xl">
-                  {rookie.name
-                    .split(' ')
-                    .map((n) => n[0])
-                    .join('')}
+                <AvatarFallback className="bg-linear-to-br from-green-700 via-green-600 to-yellow-400">
+                  <User className="size-8 text-white md:size-10" strokeWidth={1.5} />
                 </AvatarFallback>
               </Avatar>
               <h3 className="mb-3 text-2xl font-semibold md:text-3xl">{rookie.name}</h3>
@@ -84,13 +79,6 @@ export default function RookieOfMonthSection({ rookie }: RookieOfMonthSectionPro
             <p className="text-muted-foreground mt-6">
               {t('description')}
             </p>
-            <div className="mt-8">
-              <Button asChild size="lg" variant="secondary">
-                <Link href="/manadens-rookie">
-                  <span className="text-nowrap">{t('viewAllAwards')}</span>
-                </Link>
-              </Button>
-            </div>
           </motion.div>
         </div>
       </div>
