@@ -1,83 +1,42 @@
 'use client'
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { cn, sectionContainer, sectionWrapper } from '@/lib/utils'
+import { sectionContainer, sectionWrapper } from '@/lib/utils'
 import { motion } from 'motion/react'
-import { useTranslations } from 'next-intl'
-import { ReactNode } from 'react'
 
 interface TestimonialProps {
   quote: string
-  authorName: string
-  authorTitle: string
-  authorImage: string
-  companyLogo?: ReactNode
-  companyName?: string
+  role: string
+  company: string
+  authorName?: string
+  authorTitle?: string
+  authorImage?: string
   smallTitle?: boolean
 }
 
-export default function TestimonialSection({
-  quote,
-  authorName,
-  authorTitle,
-  authorImage,
-  companyLogo,
-  companyName,
-  smallTitle,
-}: TestimonialProps) {
-  const t = useTranslations('testimonial')
+export default function TestimonialSection({ quote, role, company }: TestimonialProps) {
   return (
     <section className={sectionWrapper()}>
       <div className={sectionContainer()}>
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, filter: 'blur(12px)' }}
           whileInView={{ opacity: 1, filter: 'blur(0px)' }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="max-w-3xl"
+          className="mx-auto max-w-5xl text-center"
         >
-          <h2
-            className={
-              smallTitle
-                ? 'text-3xl font-medium tracking-tight md:text-4xl'
-                : 'text-3xl font-medium tracking-tight md:text-4xl'
-            }
-          >
-            {t('title')}
-          </h2>
-        </motion.div>
-
-        {/* Testimonial card */}
-        <motion.div
-          initial={{ opacity: 0, filter: 'blur(12px)' }}
-          whileInView={{ opacity: 1, filter: 'blur(0px)' }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
-          className={cn('bg-muted dark:bg-card mt-12 rounded-2xl p-8 shadow-xs md:p-12')}
-        >
-          {/* Company logo — hidden */}
-
-          {/* Quote */}
-          <blockquote className="text-xl font-medium md:text-2xl lg:text-3xl">
+          <div className="flex justify-center gap-1 text-yellow-400">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <svg key={i} className="size-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+            ))}
+          </div>
+          <blockquote className="mt-8 text-xl font-medium md:text-2xl lg:text-3xl">
             &ldquo;{quote}&rdquo;
           </blockquote>
-
-          {/* Author info */}
-          <div className="mt-8 flex items-center gap-4">
-            <Avatar className="size-12">
-              <AvatarImage src={authorImage} alt={authorName} />
-              <AvatarFallback>
-                {authorName
-                  .split(' ')
-                  .map((n) => n[0])
-                  .join('')}
-              </AvatarFallback>
-            </Avatar>
-            <div>
-              <div className="font-medium">{authorName}</div>
-              <div className="text-muted-foreground text-sm">{authorTitle}</div>
-            </div>
+          <div className="mt-8">
+            <div className="font-medium">{role}</div>
+            <div className="text-muted-foreground mt-1 text-sm">{company}</div>
           </div>
         </motion.div>
       </div>

@@ -71,6 +71,14 @@
     "swedish": "Svenska"
   },
   "cta": {
+    "readyTitle": "Redo att komma igång?",
+    "readySubtitle": "Oavsett om du söker din drömtjänst eller din nästa stjärnrekrytering — Rookie är din partner.",
+    "forCompanies": "För företag",
+    "forCompaniesDescription": "Hitta kvalitetssäkrade unga talanger för rekrytering, hyrrekrytering eller konsultuppdrag.",
+    "forCompaniesLink": "Kom igång",
+    "forJobSeekers": "För jobbsökande",
+    "forJobSeekersDescription": "Ladda upp ditt CV, upptäck lediga jobb och gör dig synlig för spännande företag.",
+    "forJobSeekersLink": "Skapa profil",
     "canWeHelp": "Kan vi hjälpa dig?",
     "canWeHelpDescription": "Kontakta oss så berättar vi gärna mer om hur vi matchar unga talanger med rätt företag.",
     "contactUs": "Kontakta oss",
@@ -148,6 +156,11 @@
     "pillCulture": "Kulturmatch",
     "pillAvailability": "Tillgänglig omgående",
     "pillSkills": "Kompetens matchar"
+  },
+  "blogSection": {
+    "title": "Inspiration",
+    "subtitle": "Tips, insikter och berättelser från rekryteringsvärlden.",
+    "viewMore": "Visa fler"
   },
   "jobsCarousel": {
     "title": "Lediga tjänster",
@@ -229,6 +242,8 @@
       "testimonialQuote": "Jag har använt mig av Håkan för rekrytering i flera roller och hos flera arbetsgivare. Anledningen är att Håkan arbetar hårt, levererar högkvalitativa kandidater och är mycket enkel att ha att göra med.",
       "testimonialName": "Karl Rudarp",
       "testimonialTitle": "Head of Volvo Cars Financial Services",
+      "testimonialRole": "Head of Financial Services",
+      "testimonialCompany": "Volvo Cars",
       "ctaTitle": "Redo att hitta rätt kandidat?",
       "ctaDescription": "Skapa ett uppdrag och låt vår AI matcha dig med de bästa juniora talangerna.",
       "ctaButton": "Skapa uppdrag"

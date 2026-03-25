@@ -76,7 +76,15 @@
     "contactUs": "Contact us",
     "guide": "Guide",
     "guideDescription": "Key steps for a more effective recruitment process of young talents",
-    "getAccess": "Get access"
+    "getAccess": "Get access",
+    "readyTitle": "Ready to get started?",
+    "readySubtitle": "Whether you're looking for your dream job or your next star recruit — Rookie is your partner.",
+    "forCompanies": "For companies",
+    "forCompaniesDescription": "Find quality-assured young talents for recruitment, temp-to-hire or consulting assignments.",
+    "forCompaniesLink": "Get started",
+    "forJobSeekers": "For job seekers",
+    "forJobSeekersDescription": "Upload your CV, discover open positions and get noticed by exciting companies.",
+    "forJobSeekersLink": "Create profile"
   },
   "contact": {
     "canWeHelp": "Can we help you?",
@@ -148,6 +156,11 @@
     "pillCulture": "Culture match",
     "pillAvailability": "Available immediately",
     "pillSkills": "Skills match"
+  },
+  "blogSection": {
+    "title": "Inspiration",
+    "subtitle": "Tips, insights and stories from the world of recruitment.",
+    "viewMore": "View more"
   },
   "jobsCarousel": {
     "title": "Open positions",
@@ -229,6 +242,8 @@
       "testimonialQuote": "I have used Håkan for recruitment in several roles and with several employers. The reason is that Håkan works hard, delivers high-quality candidates and is very easy to work with.",
       "testimonialName": "Karl Rudarp",
       "testimonialTitle": "Head of Volvo Cars Financial Services",
+      "testimonialRole": "Head of Financial Services",
+      "testimonialCompany": "Volvo Cars",
       "ctaTitle": "Ready to find the right candidate?",
       "ctaDescription": "Post a position and let our AI match you with the best junior talent.",
       "ctaButton": "Post position"

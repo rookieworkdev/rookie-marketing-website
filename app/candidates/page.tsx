@@ -58,14 +58,7 @@ export default async function ForJobbsokandePage() {
         />
         <JobsSection jobs={jobs} />
       </main>
-      <FooterSection
-        ctaContent={{
-          title: t('ctaTitle'),
-          description: t('ctaDescription'),
-          buttonText: t('ctaButton'),
-          buttonHref: '/skapa-profil',
-        }}
-      />
+      <FooterSection />
     </>
   )
 }

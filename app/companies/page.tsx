@@ -54,20 +54,11 @@ export default async function ForForetagPage() {
         />
         <TestimonialSection
           quote={t('testimonialQuote')}
-          authorName={t('testimonialName')}
-          authorTitle={t('testimonialTitle')}
-          authorImage="/avatars/karl-rudarp.png"
-          smallTitle
+          role={t('testimonialRole')}
+          company={t('testimonialCompany')}
         />
       </main>
-      <FooterSection
-        ctaContent={{
-          title: t('ctaTitle'),
-          description: t('ctaDescription'),
-          buttonText: t('ctaButton'),
-          buttonHref: '/skapa-uppdrag',
-        }}
-      />
+      <FooterSection />
     </>
   )
 }

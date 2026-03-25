@@ -44,10 +44,10 @@ export function InspirationCard({
           />
         </div>
         <div className="pt-4">
-          <h3 className="group-hover:text-primary line-clamp-2 text-xl font-semibold transition-colors">
+          <h3 className="group-hover:text-primary line-clamp-1 text-xl font-semibold transition-colors">
             {title}
           </h3>
-          <p className="text-muted-foreground mt-2 line-clamp-3 text-base">{description}</p>
+          <p className="text-muted-foreground mt-2 line-clamp-2 text-base">{description}</p>
         </div>
       </Link>
     </motion.div>

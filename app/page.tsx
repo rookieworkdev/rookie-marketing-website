@@ -6,6 +6,7 @@ import { getCurrentRookie } from '@/lib/previous-rookies'
 import dynamic from 'next/dynamic'
 import { getTranslations } from 'next-intl/server'
 
+const BlogSection = dynamic(() => import('@/components/blog-section'))
 const RookieOfMonthSection = dynamic(() => import('@/components/rookie-of-month-section'))
 const TestimonialSection = dynamic(() => import('@/components/testimonial-section'))
 
@@ -40,12 +41,11 @@ export default async function Page() {
       <HeroSection jobs={jobs} />
       <HowItWorksSection />
       <RookieOfMonthSection rookie={rookie} />
+      <BlogSection />
       <TestimonialSection
         quote={tCompanies('testimonialQuote')}
-        authorName={tCompanies('testimonialName')}
-        authorTitle={tCompanies('testimonialTitle')}
-        authorImage="/avatars/karl-rudarp.png"
-        smallTitle
+        role={tCompanies('testimonialRole')}
+        company={tCompanies('testimonialCompany')}
       />
       <FooterSection />
     </>
