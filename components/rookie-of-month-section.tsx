@@ -69,7 +69,7 @@ export default function RookieOfMonthSection({ rookie }: RookieOfMonthSectionPro
             transition={{ duration: 0.8, ease: 'easeOut', delay: 0.1 }}
             className="flex flex-col"
           >
-            <h2 className="text-3xl font-medium tracking-tight md:text-4xl lg:text-5xl">
+            <h2 className="text-3xl font-medium tracking-tight md:text-4xl">
               {/* Månadens rookie för <em className="text-primary not-italic">{rookie.month}</em> */}
               {t('titlePrefix')}{' '}
               <em className="bg-linear-to-br from-green-700 via-green-600 to-yellow-400 bg-clip-text text-transparent not-italic">

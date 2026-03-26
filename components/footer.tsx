@@ -2,13 +2,13 @@
 
 import { Logo } from '@/components/logo'
 import { ThemeToggle } from '@/components/theme-toggle'
-import { setLocale } from '@/i18n/locale'
 import type { Locale } from '@/i18n/config'
+import { setLocale } from '@/i18n/locale'
 import { cn, containerBorders, horizontalPadding, sectionWrapper } from '@/lib/utils'
 import { Building2, ChevronRight, GraduationCap } from 'lucide-react'
 import { motion } from 'motion/react'
-import Link from 'next/link'
 import { useLocale, useTranslations } from 'next-intl'
+import Link from 'next/link'
 
 interface FooterSectionProps {
   hideCta?: boolean
@@ -34,7 +34,7 @@ export default function FooterSection({ hideCta }: FooterSectionProps = {}) {
 
   return (
     <footer className={sectionWrapper('bg-background')}>
-      <div className={cn(containerBorders(), horizontalPadding)}>
+      <div className={cn(containerBorders(), horizontalPadding, 'bg-muted/50')}>
         {/* CTA */}
         {!hideCta && (
           <div className="pt-16">
@@ -61,9 +61,11 @@ export default function FooterSection({ hideCta }: FooterSectionProps = {}) {
               >
                 <Link
                   href="/personal"
-                  className="group block rounded-2xl border p-6 transition-colors hover:bg-muted/50 md:p-8"
+                  className="group hover:bg-muted/50 bg-background block rounded-2xl border p-6 transition-colors md:p-8"
                 >
-                  <Building2 className="text-muted-foreground size-6" />
+                  <div className="bg-primary/10 w-fit rounded-lg p-2">
+                    <Building2 className="text-primary size-6" />
+                  </div>
                   <h3 className="mt-4 text-lg font-semibold">{tCta('forCompanies')}</h3>
                   <p className="text-muted-foreground mt-2 text-base">
                     {tCta('forCompaniesDescription')}
@@ -82,9 +84,11 @@ export default function FooterSection({ hideCta }: FooterSectionProps = {}) {
               >
                 <Link
                   href="/candidates"
-                  className="group block rounded-2xl border p-6 transition-colors hover:bg-muted/50 md:p-8"
+                  className="group hover:bg-muted/50 bg-background block rounded-2xl border p-6 transition-colors md:p-8"
                 >
-                  <GraduationCap className="text-muted-foreground size-6" />
+                  <div className="bg-primary/10 w-fit rounded-lg p-2">
+                    <GraduationCap className="text-primary size-6" />
+                  </div>
                   <h3 className="mt-4 text-lg font-semibold">{tCta('forJobSeekers')}</h3>
                   <p className="text-muted-foreground mt-2 text-base">
                     {tCta('forJobSeekersDescription')}
@@ -171,7 +175,7 @@ export default function FooterSection({ hideCta }: FooterSectionProps = {}) {
                       className={cn(
                         'text-muted-foreground w-fit text-left transition-colors duration-150',
                         lang.value === locale
-                          ? 'underline underline-offset-4 decoration-muted-foreground/20'
+                          ? 'decoration-muted-foreground/20 underline underline-offset-4'
                           : 'hover:text-foreground cursor-pointer'
                       )}
                     >

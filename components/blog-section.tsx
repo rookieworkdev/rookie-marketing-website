@@ -2,8 +2,8 @@ import { InspirationCard } from '@/components/inspiration-card'
 import { Button } from '@/components/ui/button'
 import { getAllPosts } from '@/lib/inspiration'
 import { sectionContainer, sectionWrapper } from '@/lib/utils'
-import Link from 'next/link'
 import { getTranslations } from 'next-intl/server'
+import Link from 'next/link'
 
 export default async function BlogSection() {
   const t = await getTranslations('blogSection')
@@ -18,7 +18,7 @@ export default async function BlogSection() {
         <div className="flex items-end justify-between">
           <div>
             <h2 className="text-3xl font-medium tracking-tight md:text-4xl">{t('title')}</h2>
-            <p className="text-muted-foreground mt-2 text-lg">{t('subtitle')}</p>
+            <p className="text-muted-foreground mt-2">{t('subtitle')}</p>
           </div>
           <Button asChild variant="outline" size="sm" className="hidden md:inline-flex">
             <Link href="/inspiration">{t('viewMore')}</Link>
