@@ -1,19 +1,17 @@
-'use client'
-
+import { AnimateOnScroll } from '@/components/animate-on-scroll'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { PreviousRookie } from '@/lib/previous-rookies'
 import { sectionContainer, sectionWrapper } from '@/lib/utils'
 import { GraduationCap, User } from 'lucide-react'
-import { motion } from 'motion/react'
-import { useTranslations } from 'next-intl'
+import { getTranslations } from 'next-intl/server'
 
 interface RookieOfMonthSectionProps {
   rookie: PreviousRookie | null
 }
 
-export default function RookieOfMonthSection({ rookie }: RookieOfMonthSectionProps) {
-  const t = useTranslations('rookieOfMonth')
+export default async function RookieOfMonthSection({ rookie }: RookieOfMonthSectionProps) {
+  const t = await getTranslations('rookieOfMonth')
   if (!rookie) {
     return null
   }
@@ -23,11 +21,8 @@ export default function RookieOfMonthSection({ rookie }: RookieOfMonthSectionPro
       <div className={sectionContainer()}>
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Employee card - Left side */}
-          <motion.div
-            initial={{ opacity: 0, filter: 'blur(12px)' }}
-            whileInView={{ opacity: 1, filter: 'blur(0px)' }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
+          <AnimateOnScroll
+            margin="-100px"
             className="bg-muted flex flex-col justify-between rounded-xl p-6 shadow-xs md:p-8 dark:bg-gradient-to-br"
           >
             {/* Avatar, Name, and City grouped */}
@@ -59,18 +54,11 @@ export default function RookieOfMonthSection({ rookie }: RookieOfMonthSectionPro
                 </div>
               </div>
             </div>
-          </motion.div>
+          </AnimateOnScroll>
 
           {/* Text container - Right side */}
-          <motion.div
-            initial={{ opacity: 0, filter: 'blur(12px)' }}
-            whileInView={{ opacity: 1, filter: 'blur(0px)' }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.8, ease: 'easeOut', delay: 0.1 }}
-            className="flex flex-col"
-          >
+          <AnimateOnScroll delay={0.1} margin="-100px" className="flex flex-col">
             <h2 className="text-3xl font-medium tracking-tight md:text-4xl">
-              {/* Månadens rookie för <em className="text-primary not-italic">{rookie.month}</em> */}
               {t('titlePrefix')}{' '}
               <em className="bg-linear-to-br from-green-700 via-green-600 to-yellow-400 bg-clip-text text-transparent not-italic">
                 {rookie.month}
@@ -79,7 +67,7 @@ export default function RookieOfMonthSection({ rookie }: RookieOfMonthSectionPro
             <p className="text-muted-foreground mt-6">
               {t('description')}
             </p>
-          </motion.div>
+          </AnimateOnScroll>
         </div>
       </div>
     </section>

@@ -1,6 +1,4 @@
-'use client'
-
-import { motion } from 'motion/react'
+import { AnimateOnScroll } from '@/components/animate-on-scroll'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -19,19 +17,11 @@ export function InspirationCard({
   slug,
   title,
   description,
-  date,
-  author,
   image,
-  category,
   index = 0,
 }: InspirationCardProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, filter: 'blur(12px)' }}
-      whileInView={{ opacity: 1, filter: 'blur(0px)' }}
-      viewport={{ once: true, margin: '0px 0px 200px 0px' }}
-      transition={{ duration: 0.8, ease: 'easeOut', delay: index * 0.1 }}
-    >
+    <AnimateOnScroll delay={index * 0.1}>
       <Link href={`/inspiration/${slug}`} className="group block">
         <div className="relative aspect-video overflow-hidden rounded-xl">
           <Image
@@ -50,6 +40,6 @@ export function InspirationCard({
           <p className="text-muted-foreground mt-2 line-clamp-2 text-base">{description}</p>
         </div>
       </Link>
-    </motion.div>
+    </AnimateOnScroll>
   )
 }

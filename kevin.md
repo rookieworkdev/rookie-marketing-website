@@ -1,2 +1,0 @@
-- Rookie of the month
-- Start manual, wait with automated logic

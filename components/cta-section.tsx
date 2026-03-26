@@ -1,10 +1,8 @@
-'use client'
-
+import { AnimateOnScroll } from '@/components/animate-on-scroll'
 import { Button } from '@/components/ui/button'
 import { horizontalPadding, sectionContainer, sectionWrapper } from '@/lib/utils'
-import { motion } from 'motion/react'
 import Link from 'next/link'
-import { useTranslations } from 'next-intl'
+import { getTranslations } from 'next-intl/server'
 
 interface CTAItem {
   title: string
@@ -20,14 +18,14 @@ interface CTASectionProps {
   content?: CTAItem | [CTAItem, CTAItem]
 }
 
-export default function CTASection({ variant = 'single', content }: CTASectionProps) {
-  const t = useTranslations('cta')
+export default async function CTASection({ variant = 'single', content }: CTASectionProps) {
+  const t = await getTranslations('cta')
 
   const defaultSingleContent: CTAItem = {
     title: t('canWeHelp'),
     description: t('canWeHelpDescription'),
     buttonText: t('contactUs'),
-    buttonHref: '/kontakt',
+    buttonHref: 'https://app.rookiework.com/request-access',
   }
 
   const defaultDoubleContent: [CTAItem, CTAItem] = [
@@ -35,13 +33,13 @@ export default function CTASection({ variant = 'single', content }: CTASectionPr
       title: t('canWeHelp'),
       description: t('canWeHelpDescription'),
       buttonText: t('contactUs'),
-      buttonHref: '/kontakt',
+      buttonHref: 'https://app.rookiework.com/request-access',
     },
     {
       title: t('guide'),
       description: t('guideDescription'),
       buttonText: t('getAccess'),
-      buttonHref: '/kontakt',
+      buttonHref: 'https://app.rookiework.com/request-access',
       buttonVariant: 'secondary',
     },
   ]
@@ -55,11 +53,8 @@ export default function CTASection({ variant = 'single', content }: CTASectionPr
         <div className={sectionContainer()}>
           <div className="flex flex-col gap-6 lg:flex-row">
             {/* First CTA Container */}
-            <motion.div
-              initial={{ opacity: 0, filter: 'blur(12px)' }}
-              whileInView={{ opacity: 1, filter: 'blur(0px)' }}
-              viewport={{ once: true, margin: '-100px' }}
-              transition={{ duration: 0.8, ease: 'easeOut' }}
+            <AnimateOnScroll
+              margin="-100px"
               className="relative flex-1 overflow-hidden rounded-2xl p-6 shadow-xs md:p-8 lg:p-10"
             >
               {/* Background Image */}
@@ -85,20 +80,18 @@ export default function CTASection({ variant = 'single', content }: CTASectionPr
                 </div>
                 <div className="self-start">
                   <Button asChild size="lg" variant={doubleContent[0].buttonVariant || 'default'}>
-                    <Link href={doubleContent[0].buttonHref || '/kontakt'} target={doubleContent[0].buttonOpenInNewTab ? '_blank' : undefined}>
+                    <Link href={doubleContent[0].buttonHref || 'https://app.rookiework.com/request-access'} target={doubleContent[0].buttonOpenInNewTab ? '_blank' : undefined}>
                       <span className="text-nowrap">{doubleContent[0].buttonText}</span>
                     </Link>
                   </Button>
                 </div>
               </div>
-            </motion.div>
+            </AnimateOnScroll>
 
             {/* Second CTA Container */}
-            <motion.div
-              initial={{ opacity: 0, filter: 'blur(12px)' }}
-              whileInView={{ opacity: 1, filter: 'blur(0px)' }}
-              viewport={{ once: true, margin: '-100px' }}
-              transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
+            <AnimateOnScroll
+              delay={0.2}
+              margin="-100px"
               className="bg-muted relative flex-1 overflow-hidden rounded-2xl p-6 shadow-xs md:p-8 lg:p-10"
             >
               {/* Content */}
@@ -113,13 +106,13 @@ export default function CTASection({ variant = 'single', content }: CTASectionPr
                 </div>
                 <div className="self-start">
                   <Button asChild size="lg" variant={doubleContent[1].buttonVariant || 'default'}>
-                    <Link href={doubleContent[1].buttonHref || '/kontakt'} target={doubleContent[1].buttonOpenInNewTab ? '_blank' : undefined}>
+                    <Link href={doubleContent[1].buttonHref || 'https://app.rookiework.com/request-access'} target={doubleContent[1].buttonOpenInNewTab ? '_blank' : undefined}>
                       <span className="text-nowrap">{doubleContent[1].buttonText}</span>
                     </Link>
                   </Button>
                 </div>
               </div>
-            </motion.div>
+            </AnimateOnScroll>
           </div>
         </div>
       </section>
@@ -130,11 +123,8 @@ export default function CTASection({ variant = 'single', content }: CTASectionPr
   return (
     <section className={sectionWrapper('bg-background')}>
       <div className={sectionContainer(undefined, 'no-padding')}>
-        <motion.div
-          initial={{ opacity: 0, filter: 'blur(12px)' }}
-          whileInView={{ opacity: 1, filter: 'blur(0px)' }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
+        <AnimateOnScroll
+          margin="-100px"
           className="relative overflow-hidden shadow-xs"
         >
           {/* Background Image */}
@@ -162,13 +152,13 @@ export default function CTASection({ variant = 'single', content }: CTASectionPr
             </div>
             <div className="self-start">
               <Button asChild size="lg" variant={singleContent.buttonVariant || 'default'}>
-                <Link href={singleContent.buttonHref || '/kontakt'} target={singleContent.buttonOpenInNewTab ? '_blank' : undefined}>
+                <Link href={singleContent.buttonHref || 'https://app.rookiework.com/request-access'} target={singleContent.buttonOpenInNewTab ? '_blank' : undefined}>
                   <span className="text-nowrap">{singleContent.buttonText}</span>
                 </Link>
               </Button>
             </div>
           </div>
-        </motion.div>
+        </AnimateOnScroll>
       </div>
     </section>
   )

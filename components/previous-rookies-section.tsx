@@ -1,47 +1,37 @@
-'use client'
-
+import { AnimateOnScroll } from '@/components/animate-on-scroll'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { PreviousRookie } from '@/lib/previous-rookies'
 import { sectionContainer, sectionWrapper } from '@/lib/utils'
 import { GraduationCap } from 'lucide-react'
-import { motion } from 'motion/react'
-import { useTranslations } from 'next-intl'
+import { getTranslations } from 'next-intl/server'
 
 interface PreviousRookiesSectionProps {
   rookies: PreviousRookie[]
 }
 
-export default function PreviousRookiesSection({ rookies }: PreviousRookiesSectionProps) {
-  const t = useTranslations('previousRookies')
+export default async function PreviousRookiesSection({ rookies }: PreviousRookiesSectionProps) {
+  const t = await getTranslations('previousRookies')
   return (
     <section id="utmarkelser" className={sectionWrapper()}>
       <div className={sectionContainer('bg-muted')}>
         {/* Section header */}
-        <motion.div
-          initial={{ opacity: 0, filter: 'blur(12px)' }}
-          whileInView={{ opacity: 1, filter: 'blur(0px)' }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="mb-12 flex flex-col items-start text-left"
-        >
+        <AnimateOnScroll margin="-100px" className="mb-12 flex flex-col items-start text-left">
           <h2 className="text-3xl font-medium tracking-tight md:text-4xl lg:text-5xl">
             {t('title')}
           </h2>
           <p className="text-muted-foreground mt-4 max-w-2xl text-pretty">
             {t('description')}
           </p>
-        </motion.div>
+        </AnimateOnScroll>
 
         {/* Grid of previous rookies */}
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {rookies.map((rookie, index) => (
-            <motion.div
+            <AnimateOnScroll
               key={rookie.id}
-              initial={{ opacity: 0, filter: 'blur(12px)' }}
-              whileInView={{ opacity: 1, filter: 'blur(0px)' }}
-              viewport={{ once: true, margin: '-100px' }}
-              transition={{ duration: 0.8, ease: 'easeOut', delay: index * 0.1 }}
+              delay={index * 0.1}
+              margin="-100px"
               className="bg-background flex aspect-4/3 flex-col justify-between rounded-xl p-6 shadow-xs"
             >
               {/* Avatar, Name, and City grouped */}
@@ -76,7 +66,7 @@ export default function PreviousRookiesSection({ rookies }: PreviousRookiesSecti
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </AnimateOnScroll>
           ))}
         </div>
       </div>

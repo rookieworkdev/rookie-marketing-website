@@ -26,7 +26,11 @@ export function ThemeToggle() {
       variant="ghost"
       size="icon"
       className="size-9 cursor-pointer shadow-none"
-      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+      onClick={() => {
+        const next = theme === 'dark' ? 'light' : 'dark'
+        setTheme(next)
+        document.cookie = `theme=${next};path=/;domain=.rookiework.com;max-age=${60 * 60 * 24 * 365};SameSite=Lax`
+      }}
     >
       {theme === 'dark' ? <Moon className="size-5" /> : <Sun className="size-5" />}
       <span className="sr-only">Toggle theme</span>

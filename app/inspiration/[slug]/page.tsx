@@ -3,7 +3,7 @@ import { HeroHeader } from '@/components/header'
 import { InspirationCard } from '@/components/inspiration-card'
 import { PageHeader } from '@/components/page-header'
 import { getAllSlugs, getPostBySlug, getRelatedPosts } from '@/lib/inspiration'
-import { generateArticleSchema } from '@/lib/seo'
+import { generateArticleSchema, generateBreadcrumbSchema } from '@/lib/seo'
 import { sectionContainer, sectionWrapper } from '@/lib/utils'
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
@@ -44,7 +44,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     },
     openGraph: {
       url: `/inspiration/${slug}`,
-      title: `${post.title} - Rookie`,
+      title: post.title,
       description: post.description,
       images: [
         {
@@ -59,7 +59,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       authors: [post.author],
     },
     twitter: {
-      title: `${post.title} - Rookie`,
+      title: post.title,
       description: post.description,
       images: [post.image],
       card: 'summary_large_image',
@@ -69,14 +69,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function InspirationPostPage({ params }: PageProps) {
   const { slug } = await params
-  const post = await getPostBySlug(slug)
+  const [post, t, tPost] = await Promise.all([
+    getPostBySlug(slug),
+    getTranslations('common'),
+    getTranslations('pages.inspirationPost'),
+  ])
 
   if (!post) {
     notFound()
   }
 
-  const t = await getTranslations('common')
-  const tPost = await getTranslations('pages.inspirationPost')
   const relatedPosts = await getRelatedPosts(slug, post.category, 3)
 
   const articleSchema = generateArticleSchema({
@@ -88,11 +90,21 @@ export default async function InspirationPostPage({ params }: PageProps) {
     image: post.image,
   })
 
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: t('home'), url: '/' },
+    { name: 'Inspiration', url: '/inspiration' },
+    { name: post.title, url: `/inspiration/${slug}` },
+  ])
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: articleSchema }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: breadcrumbSchema }}
       />
       <HeroHeader />
       <main>

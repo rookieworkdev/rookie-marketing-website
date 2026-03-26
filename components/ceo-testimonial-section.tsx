@@ -1,7 +1,5 @@
-'use client'
-
+import { AnimateOnScroll } from '@/components/animate-on-scroll'
 import { sectionContainer, sectionWrapper } from '@/lib/utils'
-import { motion } from 'motion/react'
 import Image from 'next/image'
 
 interface CeoTestimonialSectionProps {
@@ -20,13 +18,7 @@ export default function CeoTestimonialSection({
   return (
     <section className={sectionWrapper('bg-background')}>
       <div className={sectionContainer()}>
-        <motion.div
-          initial={{ opacity: 0, filter: 'blur(12px)' }}
-          whileInView={{ opacity: 1, filter: 'blur(0px)' }}
-          viewport={{ once: true, margin: '0px 0px 200px 0px' }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="grid grid-cols-1 gap-4 md:grid-cols-[1fr_2fr]"
-        >
+        <AnimateOnScroll className="grid grid-cols-1 gap-4 md:grid-cols-[1fr_2fr]">
           {/* Author image */}
           <div className="relative aspect-square w-full overflow-hidden rounded-2xl">
             <Image
@@ -49,7 +41,7 @@ export default function CeoTestimonialSection({
               {authorName} &ndash; {authorTitle}
             </p>
           </div>
-        </motion.div>
+        </AnimateOnScroll>
       </div>
     </section>
   )

@@ -50,6 +50,8 @@ export const metadata: Metadata = {
     type: 'website',
     siteName: SITE_NAME,
     title: SITE_NAME,
+    locale: 'sv_SE',
+    alternateLocale: 'en_US',
     images: [
       {
         url: OG_IMAGE_PATH,

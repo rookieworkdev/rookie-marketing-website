@@ -9,14 +9,14 @@ export async function generateMetadata() {
   return {
     title: t('metaTitle'),
     description: t('metaDescription'),
-    alternates: { canonical: '/integritetspolicy' },
+    alternates: { canonical: '/policy' },
     openGraph: {
-      url: '/integritetspolicy',
-      title: t('metaTitle') + ' - Rookie',
+      url: '/policy',
+      title: t('metaTitle'),
       description: t('ogDescription'),
     },
     twitter: {
-      title: t('metaTitle') + ' - Rookie',
+      title: t('metaTitle'),
       description: t('ogDescription'),
     },
   }

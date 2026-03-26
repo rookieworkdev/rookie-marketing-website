@@ -8,14 +8,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const staticRoutes = [
     '',
-    'manadens-rookie',
     'candidates',
     'companies',
-    'om-oss',
     'inspiration',
-    'kontakt',
-    'integritetspolicy',
-    'personal',
+    'policy',
   ]
 
   const staticPages: MetadataRoute.Sitemap = staticRoutes.map((route) => ({

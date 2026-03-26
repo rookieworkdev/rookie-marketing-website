@@ -17,11 +17,11 @@ export async function generateMetadata() {
     alternates: { canonical: '/inspiration' },
     openGraph: {
       url: '/inspiration',
-      title: t('metaTitle') + ' - Rookie',
+      title: t('metaTitle'),
       description: t('ogDescription'),
     },
     twitter: {
-      title: t('metaTitle') + ' - Rookie',
+      title: t('metaTitle'),
       description: t('ogDescription'),
     },
   }

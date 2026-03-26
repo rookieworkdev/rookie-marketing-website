@@ -3,8 +3,14 @@ import { HeroHeader } from '@/components/header'
 import { FlickeringGrid } from '@/components/ui/flickering-grid'
 import { Button } from '@/components/ui/button'
 import { cn, containerBorders, horizontalPadding } from '@/lib/utils'
+import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
+
+export const metadata: Metadata = {
+  title: '404',
+  robots: { index: false, follow: false },
+}
 
 export default async function NotFound() {
   const t = await getTranslations('notFound')

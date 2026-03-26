@@ -166,7 +166,7 @@ export default function JobsCarouselSection({
             className="mt-8 flex justify-start text-center"
           >
             <Button asChild size="lg" variant="secondary">
-              <Link href="https://rookie-se.intelliplan.net/jobb/9/ansok" target="_blank">
+              <Link href="https://app.rookiework.com/login" target="_blank">
                 <span className="text-nowrap">{t('viewAllJobs')}</span>
               </Link>
             </Button>

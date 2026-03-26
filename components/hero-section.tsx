@@ -96,12 +96,12 @@ export default function HeroSection({ jobs }: HeroSectionProps) {
                 className="mt-8 flex items-center justify-center gap-4"
               >
                 <Button asChild size="default" className="min-w-[160px]">
-                  <Link href="#">
+                  <Link href="https://app.rookiework.com/request-access">
                     <span>{t('findTalents')}</span>
                   </Link>
                 </Button>
                 <Button asChild size="default" variant="outline" className="min-w-[160px]">
-                  <Link href="#">
+                  <Link href="https://app.rookiework.com/login">
                     <span>{t('findJobs')}</span>
                   </Link>
                 </Button>
@@ -130,7 +130,7 @@ export default function HeroSection({ jobs }: HeroSectionProps) {
                     {tJobs('title')}
                   </h2>
                   <Link
-                    href="/jobb"
+                    href="https://app.rookiework.com/login"
                     className="text-primary text-sm font-medium underline underline-offset-4 hover:opacity-80"
                   >
                     {tJobs('viewAll')}

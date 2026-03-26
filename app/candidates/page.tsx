@@ -1,15 +1,12 @@
 import FooterSection from '@/components/footer'
 import { HeroHeader } from '@/components/header'
 import { PageHeader } from '@/components/page-header'
+import BenefitsSection from '@/components/benefits-section'
+import JobsSection from '@/components/jobs-section'
 import { getLatestJobs } from '@/lib/jobs'
-import dynamic from 'next/dynamic'
 import { getTranslations } from 'next-intl/server'
 
 export const revalidate = 86400
-
-// Dynamic imports for below-the-fold components
-const BenefitsSection = dynamic(() => import('@/components/benefits-section'))
-const JobsSection = dynamic(() => import('@/components/jobs-section'))
 
 export async function generateMetadata() {
   const t = await getTranslations('pages.forJobSeekers')
@@ -19,11 +16,11 @@ export async function generateMetadata() {
     alternates: { canonical: '/candidates' },
     openGraph: {
       url: '/candidates',
-      title: t('metaTitle') + ' - Rookie',
+      title: t('metaTitle'),
       description: t('ogDescription'),
     },
     twitter: {
-      title: t('metaTitle') + ' - Rookie',
+      title: t('metaTitle'),
       description: t('ogDescription'),
     },
   }
@@ -45,7 +42,7 @@ export default async function ForJobbsokandePage() {
           description={t('pageDescription')}
           showButton
           buttonText={t('ctaButton')}
-          buttonHref="/skapa-profil"
+          buttonHref="https://app.rookiework.com/login"
         />
         <BenefitsSection
           title={t('benefitsTitle')}

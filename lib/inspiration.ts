@@ -1,3 +1,4 @@
+import { cache } from 'react'
 import { createServerClient } from './supabase/server'
 import { WebsiteInspiration } from './supabase'
 
@@ -43,7 +44,7 @@ export async function getAllPosts(): Promise<InspirationPost[]> {
   return (data || []).map(transformPost)
 }
 
-export async function getPostBySlug(slug: string): Promise<InspirationPost | null> {
+export const getPostBySlug = cache(async (slug: string): Promise<InspirationPost | null> => {
   const supabase = createServerClient()
   
   const { data, error } = await supabase
@@ -59,7 +60,7 @@ export async function getPostBySlug(slug: string): Promise<InspirationPost | nul
   }
 
   return transformPost(data)
-}
+})
 
 export async function getAllSlugs(): Promise<string[]> {
   const supabase = createServerClient()
@@ -98,40 +99,40 @@ export async function getPostsByCategory(category: string): Promise<InspirationP
 export async function getRelatedPosts(slug: string, category: string, limit = 3): Promise<InspirationPost[]> {
   const supabase = createServerClient()
 
-  // First try posts in the same category
-  const { data, error } = await supabase
-    .from('website_inspiration')
-    .select('*')
-    .eq('is_published', true)
-    .eq('category', category)
-    .neq('slug', slug)
-    .order('date', { ascending: false })
-    .limit(limit)
-
-  if (error) {
-    console.error('Error fetching related posts:', error)
-    return []
-  }
-
-  let posts = (data || []).map(transformPost)
-
-  // If not enough posts in same category, fill with latest posts
-  if (posts.length < limit) {
-    const existingSlugs = [slug, ...posts.map((p) => p.slug)]
-    const { data: extraData } = await supabase
+  // Fetch same-category and all other posts in a single parallel request
+  const [categoryResult, allResult] = await Promise.all([
+    supabase
       .from('website_inspiration')
       .select('*')
       .eq('is_published', true)
-      .not('slug', 'in', `(${existingSlugs.join(',')})`)
+      .eq('category', category)
+      .neq('slug', slug)
       .order('date', { ascending: false })
-      .limit(limit - posts.length)
+      .limit(limit),
+    supabase
+      .from('website_inspiration')
+      .select('*')
+      .eq('is_published', true)
+      .neq('slug', slug)
+      .neq('category', category)
+      .order('date', { ascending: false })
+      .limit(limit),
+  ])
 
-    if (extraData) {
-      posts = [...posts, ...extraData.map(transformPost)]
-    }
+  if (categoryResult.error) {
+    console.error('Error fetching related posts:', categoryResult.error)
+    return []
   }
 
-  return posts
+  const categoryPosts = (categoryResult.data || []).map(transformPost)
+
+  if (categoryPosts.length >= limit) {
+    return categoryPosts.slice(0, limit)
+  }
+
+  // Fill remaining slots with posts from other categories
+  const extraPosts = (allResult.data || []).map(transformPost)
+  return [...categoryPosts, ...extraPosts].slice(0, limit)
 }
 
 export async function getCategories(): Promise<string[]> {

@@ -1,0 +1,1 @@
+- [No unnecessary suggestions](feedback_no_unnecessary_suggestions.md) — only suggest changes that solve a real problem, not speculative nice-to-haves

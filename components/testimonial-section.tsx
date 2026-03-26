@@ -1,7 +1,5 @@
-'use client'
-
+import { AnimateOnScroll } from '@/components/animate-on-scroll'
 import { sectionContainer, sectionWrapper } from '@/lib/utils'
-import { motion } from 'motion/react'
 
 interface TestimonialProps {
   quote: string
@@ -17,13 +15,7 @@ export default function TestimonialSection({ quote, role, company }: Testimonial
   return (
     <section className={sectionWrapper()}>
       <div className={sectionContainer()}>
-        <motion.div
-          initial={{ opacity: 0, filter: 'blur(12px)' }}
-          whileInView={{ opacity: 1, filter: 'blur(0px)' }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="mx-auto max-w-5xl text-center"
-        >
+        <AnimateOnScroll margin="-100px" className="mx-auto max-w-5xl text-center">
           <div className="flex justify-center gap-1 text-yellow-400">
             {Array.from({ length: 5 }).map((_, i) => (
               <svg key={i} className="size-5" fill="currentColor" viewBox="0 0 20 20">
@@ -38,7 +30,7 @@ export default function TestimonialSection({ quote, role, company }: Testimonial
             <div className="font-medium">{role}</div>
             <div className="text-muted-foreground mt-1 text-sm">{company}</div>
           </div>
-        </motion.div>
+        </AnimateOnScroll>
       </div>
     </section>
   )

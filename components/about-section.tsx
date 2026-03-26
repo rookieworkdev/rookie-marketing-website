@@ -1,12 +1,10 @@
-'use client'
-
+import { AnimateOnScroll } from '@/components/animate-on-scroll'
 import { Button } from '@/components/ui/button'
 import { sectionContainer, sectionWrapper } from '@/lib/utils'
 import { Check } from 'lucide-react'
-import { motion } from 'motion/react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useTranslations } from 'next-intl'
+import { getTranslations } from 'next-intl/server'
 
 interface AboutSectionProps {
   title?: string
@@ -19,7 +17,7 @@ interface AboutSectionProps {
   reversed?: boolean
 }
 
-export default function AboutSection({
+export default async function AboutSection({
   title,
   description,
   imageUrl = 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&auto=format&fit=crop&q=80',
@@ -29,7 +27,7 @@ export default function AboutSection({
   ctaHref,
   reversed = false,
 }: AboutSectionProps) {
-  const t = useTranslations('about')
+  const t = await getTranslations('about')
   const effectiveTitle = title || t('defaultTitle')
   const effectiveDescription = description || [t('defaultDescription1'), t('defaultDescription2'), t('defaultDescription3')]
   const effectiveImageAlt = imageAlt || t('defaultImageAlt')
@@ -40,11 +38,7 @@ export default function AboutSection({
       <div className={sectionContainer()}>
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Image container */}
-          <motion.div
-            initial={{ opacity: 0, filter: 'blur(12px)' }}
-            whileInView={{ opacity: 1, filter: 'blur(0px)' }}
-            viewport={{ once: true, margin: '0px 0px 200px 0px' }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
+          <AnimateOnScroll
             className={`bg-muted relative aspect-square w-full overflow-hidden rounded-2xl ${
               reversed ? 'lg:order-2' : ''
             }`}
@@ -57,14 +51,11 @@ export default function AboutSection({
               sizes="(max-width: 1024px) 100vw, 50vw"
               loading="lazy"
             />
-          </motion.div>
+          </AnimateOnScroll>
 
           {/* Text container */}
-          <motion.div
-            initial={{ opacity: 0, filter: 'blur(12px)' }}
-            whileInView={{ opacity: 1, filter: 'blur(0px)' }}
-            viewport={{ once: true, margin: '0px 0px 200px 0px' }}
-            transition={{ duration: 0.8, ease: 'easeOut', delay: 0.1 }}
+          <AnimateOnScroll
+            delay={0.1}
             className={`flex flex-col ${reversed ? 'lg:order-1' : ''}`}
           >
             <h2 className="mb-6 text-3xl font-medium tracking-tight md:text-4xl lg:text-5xl">
@@ -102,7 +93,7 @@ export default function AboutSection({
                 </Button>
               </div>
             )}
-          </motion.div>
+          </AnimateOnScroll>
         </div>
       </div>
     </section>

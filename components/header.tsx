@@ -126,7 +126,7 @@ export const HeroHeader = () => {
                 variant="outline"
                 className="hidden lg:inline-flex"
               >
-                <Link href="https://rookie-se.on.intelliplan.eu/">
+                <Link href="https://app.rookiework.com/login">
                   <span>{t('login')}</span>
                 </Link>
               </Button>
@@ -159,7 +159,7 @@ export const HeroHeader = () => {
                   size="sm"
                   className="w-full"
                 >
-                  <Link href="/personal">
+                  <Link href="https://app.rookiework.com/request-access">
                     <span>{t('registerCompany')}</span>
                   </Link>
                 </Button>
@@ -169,7 +169,7 @@ export const HeroHeader = () => {
                   variant="outline"
                   className="w-full"
                 >
-                  <Link href="https://rookie-se.on.intelliplan.eu/">
+                  <Link href="https://app.rookiework.com/login">
                     <span>{t('login')}</span>
                   </Link>
                 </Button>

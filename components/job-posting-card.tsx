@@ -15,7 +15,7 @@ export function JobPostingCard({ job }: JobPostingCardProps) {
   const locationLabel = job.regionName || job.location
 
   return (
-    <Link href={`/jobb/${job.id}`} className="group block">
+    <Link href="https://app.rookiework.com/login" className="group block">
       <Card className="border-border hover:border-primary cursor-pointer border transition-colors">
         <CardContent>
           <div className="flex flex-col gap-4">

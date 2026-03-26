@@ -1,14 +1,13 @@
 import FooterSection from '@/components/footer'
 import HeroSection from '@/components/hero-section'
 import HowItWorksSection from '@/components/how-it-works-section'
+import BlogSection from '@/components/blog-section'
+import TestimonialSection from '@/components/testimonial-section'
 import { getLatestJobs } from '@/lib/jobs'
 // import { getCurrentRookie } from '@/lib/previous-rookies'
-import dynamic from 'next/dynamic'
 import { getTranslations } from 'next-intl/server'
 
-const BlogSection = dynamic(() => import('@/components/blog-section'))
-// const RookieOfMonthSection = dynamic(() => import('@/components/rookie-of-month-section'))
-const TestimonialSection = dynamic(() => import('@/components/testimonial-section'))
+// import RookieOfMonthSection from '@/components/rookie-of-month-section'
 
 export const revalidate = 86400
 
@@ -21,11 +20,11 @@ export async function generateMetadata() {
     alternates: { canonical: '/' },
     openGraph: {
       url: '/',
-      title: t('title') + ' - Rookie',
+      title: t('title'),
       description: tSeo('defaultDescription'),
     },
     twitter: {
-      title: t('title') + ' - Rookie',
+      title: t('title'),
       description: tSeo('defaultDescription'),
     },
   }

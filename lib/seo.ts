@@ -1,6 +1,6 @@
 export const SITE_NAME = 'Rookie'
 
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://rookiework.se').replace(
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://rookiework.com').replace(
   /\/$/,
   ''
 )
@@ -76,6 +76,7 @@ export function generateArticleSchema(article: ArticleSchemaProps): string {
     image: article.image.startsWith('http') ? article.image : `${SITE_URL}${article.image}`,
     datePublished: article.date,
     dateModified: article.date,
+    inLanguage: 'sv',
     author: {
       '@type': 'Person',
       name: article.author,
@@ -97,6 +98,7 @@ export interface JobSchemaProps {
   location: string
   postedDate: string
   externalUrl: string
+  employmentType?: string
 }
 
 export function generateJobPostingSchema(job: JobSchemaProps): string {
@@ -118,8 +120,26 @@ export function generateJobPostingSchema(job: JobSchemaProps): string {
         addressCountry: 'SE',
       },
     },
-    employmentType: 'FULL_TIME',
+    employmentType: job.employmentType ?? 'FULL_TIME',
     url: job.externalUrl,
+  })
+}
+
+export interface BreadcrumbItem {
+  name: string
+  url: string
+}
+
+export function generateBreadcrumbSchema(items: BreadcrumbItem[]): string {
+  return JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: item.url.startsWith('http') ? item.url : `${SITE_URL}${item.url}`,
+    })),
   })
 }
 

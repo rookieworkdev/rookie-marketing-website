@@ -60,8 +60,8 @@ export default function FooterSection({ hideCta }: FooterSectionProps = {}) {
                 transition={{ duration: 0.8, ease: 'easeOut', delay: 0.1 }}
               >
                 <Link
-                  href="/personal"
-                  className="group hover:bg-muted/50 bg-background block rounded-2xl border p-6 transition-colors md:p-8"
+                  href="https://app.rookiework.com/request-access"
+                  className="group bg-background block rounded-2xl border p-6 shadow-xs transition-shadow hover:shadow-sm md:p-8"
                 >
                   <div className="bg-primary/10 w-fit rounded-lg p-2">
                     <Building2 className="text-primary size-6" />
@@ -84,7 +84,7 @@ export default function FooterSection({ hideCta }: FooterSectionProps = {}) {
               >
                 <Link
                   href="/candidates"
-                  className="group hover:bg-muted/50 bg-background block rounded-2xl border p-6 transition-colors md:p-8"
+                  className="group bg-background block rounded-2xl border p-6 shadow-xs transition-shadow hover:shadow-sm md:p-8"
                 >
                   <div className="bg-primary/10 w-fit rounded-lg p-2">
                     <GraduationCap className="text-primary size-6" />
