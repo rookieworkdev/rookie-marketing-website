@@ -6,7 +6,7 @@ import { Job } from '@/lib/jobs'
 import { sectionContainer, sectionWrapper } from '@/lib/utils'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { motion } from 'motion/react'
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 import { useTranslations } from 'next-intl'
 import { useCallback, useEffect, useRef, useState } from 'react'
 

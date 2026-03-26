@@ -15,7 +15,7 @@ import { cn, containerBorders, horizontalPadding } from '@/lib/utils'
 import { Sparkles } from 'lucide-react'
 import { motion } from 'motion/react'
 import Image from 'next/image'
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 
 interface BreadcrumbItem {
   label: string

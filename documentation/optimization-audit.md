@@ -327,6 +327,45 @@ Removed all `import dynamic from 'next/dynamic'` (no longer used anywhere).
 
 ---
 
+### 25. Path-based i18n routing with hreflang tags
+
+**Problem:** Cookie-based locale switching meant search engines couldn't discover language variants. No hreflang tags, no separate URLs per language. Swedish content from rookiework.se redirecting to rookiework.com had nowhere to land.
+
+**Fix:** Migrated from cookie-based to path-based i18n routing using next-intl's routing infrastructure:
+
+Architecture:
+- Created `i18n/routing.ts` — `defineRouting()` with `localePrefix: 'as-needed'`
+- Created `i18n/navigation.ts` — locale-aware `Link`, `usePathname`, `useRouter`, `getPathname`
+- Created `proxy.ts` — Next.js 16 proxy (replaces middleware.ts) with `createMiddleware(routing)`
+- Rewrote `i18n/request.ts` — uses `requestLocale` from proxy instead of manual cookie/header parsing
+
+Directory restructure:
+- Moved all pages under `app/[locale]/` with `setRequestLocale()` for static rendering
+- Root `app/layout.tsx` → minimal pass-through, `app/[locale]/layout.tsx` → full layout with providers
+- Every page now receives locale from params and calls `setRequestLocale(locale)`
+
+Navigation:
+- Replaced `import Link from 'next/link'` with `import { Link } from '@/i18n/navigation'` in all 17 component/page files
+- Rewrote language switcher in footer from `setLocale()` cookie action to `<Link href={pathname} locale={value}>`
+- Deleted `i18n/locale.ts` (no longer needed)
+
+SEO:
+- All pages have `alternates.languages` metadata with hreflang for `en`, `sv`, and `x-default`
+- Sitemap generates entries with locale alternates for both languages
+- OG locale dynamically set per language (`en_US` vs `sv_SE`)
+- Article schema `inLanguage` now locale-aware
+- Internationalized `inspiration/[slug]/not-found.tsx` (was hardcoded Swedish)
+
+URL structure:
+- English (default): `/candidates`, `/inspiration/my-post` (clean, no prefix)
+- Swedish: `/sv/candidates`, `/sv/inspiration/my-post`
+- Root `/` serves English; Swedish browsers auto-redirected to `/sv/`
+- `/en/...` redirected to `/...` (default prefix stripped)
+
+**Impact:** Both languages properly indexed at separate URLs. Search engines discover variants via hreflang. Build generates 81 pages (both locales). rookiework.se traffic redirecting to rookiework.com now lands on proper Swedish URLs when Accept-Language is Swedish.
+
+---
+
 ## Verified — Already Correct
 
 | Area | Status | Details |
@@ -338,12 +377,12 @@ Removed all `import dynamic from 'next/dynamic'` (no longer used anywhere).
 | robots.txt | OK | Correct allow/disallow rules, sitemap reference |
 | Server-side data fetching | OK | All Supabase calls in server components, no client-side DB access |
 | ISR revalidation | OK | Home/candidates/companies: 24h, inspiration: 2h |
-| `generateStaticParams` | OK | Blog posts pre-rendered at build time |
+| `generateStaticParams` | OK | Blog posts and locale variants pre-rendered at build time |
 | PWA manifest | OK | Full icon set (32, 180, 192, 512), standalone display |
-| Sitemap | OK | All routes match actual pages, proper priorities and change frequencies |
-| Canonical URLs | OK | All pages have correct canonical matching actual routes |
+| Sitemap | OK | Both locale variants with hreflang alternates |
+| Canonical URLs | OK | Locale-aware canonicals on all pages |
 | Heading hierarchy | OK | Proper h1/h2/h3 nesting, one h1 per page via PageHeader |
-| Internal links | OK | No broken links or `href="#"` placeholders |
+| Internal links | OK | All links use locale-aware `Link` from `@/i18n/navigation` |
 | Structured data | OK | Organization, WebSite, BlogPosting, BreadcrumbList, JobPosting schemas |
 | Image alt text | OK | All `next/image` components have meaningful alt attributes |
 | TypeScript strict mode | OK | `strict: true` in tsconfig.json |
@@ -352,16 +391,14 @@ Removed all `import dynamic from 'next/dynamic'` (no longer used anywhere).
 | External image domains | OK | Only `images.unsplash.com` allowed in `next.config.ts` |
 | No exposed API routes | OK | Only public image-generation routes (`pwa-icon-192`, `pwa-icon-512`) |
 | Security headers | OK | X-Frame-Options, HSTS, nosniff, Referrer-Policy, Permissions-Policy |
-| Cookie security | OK | Locale cookie uses `Secure` flag in production |
-| 404 pages | OK | Both not-found pages have `noindex` metadata |
+| Cookie security | OK | Proxy-managed locale cookie with proper settings |
+| 404 pages | OK | Both not-found pages have `noindex` metadata and i18n support |
+| hreflang tags | OK | All pages have `en`, `sv`, and `x-default` alternates |
+| i18n routing | OK | Path-based with `proxy.ts`, `localePrefix: 'as-needed'` |
 
 ---
 
 ## Still Outstanding
-
-### SEO: No hreflang tags
-
-The site supports EN and SV via `next-intl` but uses cookie-based locale switching with no URL structure changes. Search engines cannot discover language variants. Consider adding hreflang alternate links or path-based i18n routing (`/en/...`, `/sv/...`) for proper multilingual SEO.
 
 ### SEO: Static pages missing page-specific OG images
 

@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button'
 import { getAllPosts } from '@/lib/inspiration'
 import { sectionContainer, sectionWrapper } from '@/lib/utils'
 import { getTranslations } from 'next-intl/server'
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 
 export default async function BlogSection() {
   const t = await getTranslations('blogSection')

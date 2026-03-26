@@ -2,7 +2,7 @@ import { AnimateOnScroll } from '@/components/animate-on-scroll'
 import { Button } from '@/components/ui/button'
 import { sectionContainer, sectionWrapper } from '@/lib/utils'
 import { Battery, Laptop, Lightbulb, Rocket, Target, Users, type LucideIcon } from 'lucide-react'
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 
 const iconMap: Record<string, LucideIcon> = {
   target: Target,

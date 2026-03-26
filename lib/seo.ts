@@ -65,6 +65,7 @@ export interface ArticleSchemaProps {
   date: string
   author: string
   image: string
+  locale?: string
 }
 
 export function generateArticleSchema(article: ArticleSchemaProps): string {
@@ -76,7 +77,7 @@ export function generateArticleSchema(article: ArticleSchemaProps): string {
     image: article.image.startsWith('http') ? article.image : `${SITE_URL}${article.image}`,
     datePublished: article.date,
     dateModified: article.date,
-    inLanguage: 'sv',
+    inLanguage: article.locale === 'sv' ? 'sv' : 'en',
     author: {
       '@type': 'Person',
       name: article.author,

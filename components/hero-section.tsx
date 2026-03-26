@@ -6,7 +6,7 @@ import type { JobDisplay } from '@/lib/jobs'
 import { cn, containerBorders, horizontalPadding } from '@/lib/utils'
 import { motion } from 'motion/react'
 import { useTranslations } from 'next-intl'
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 import { HeroHeader } from './header'
 import { JobPostingCard } from './job-posting-card'
 

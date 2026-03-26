@@ -3,18 +3,28 @@ import { HeroHeader } from '@/components/header'
 import { PageHeader } from '@/components/page-header'
 import BenefitsSection from '@/components/benefits-section'
 import TestimonialSection from '@/components/testimonial-section'
-import { getTranslations } from 'next-intl/server'
+import { routing } from '@/i18n/routing'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 
 export const revalidate = 86400
 
-export async function generateMetadata() {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+  const prefix = locale === routing.defaultLocale ? '' : `/${locale}`
   const t = await getTranslations('pages.forCompanies')
   return {
     title: t('metaTitle'),
     description: t('metaDescription'),
-    alternates: { canonical: '/companies' },
+    alternates: {
+      canonical: `${prefix}/companies`,
+      languages: {
+        en: '/companies',
+        sv: '/sv/companies',
+        'x-default': '/companies',
+      },
+    },
     openGraph: {
-      url: '/companies',
+      url: `${prefix}/companies`,
       title: t('metaTitle'),
       description: t('ogDescription'),
     },
@@ -25,7 +35,10 @@ export async function generateMetadata() {
   }
 }
 
-export default async function ForForetagPage() {
+export default async function ForForetagPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+  setRequestLocale(locale)
+
   const t = await getTranslations('pages.forCompanies')
   const tCommon = await getTranslations('common')
 

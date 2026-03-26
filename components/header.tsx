@@ -3,7 +3,7 @@ import { Logo } from '@/components/logo'
 import { Button } from '@/components/ui/button'
 import { cn, defaultBorderOpacity, horizontalPadding } from '@/lib/utils'
 import { Menu, X } from 'lucide-react'
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 import { useTranslations } from 'next-intl'
 import { useCallback, useEffect, useRef, useState } from 'react'
 

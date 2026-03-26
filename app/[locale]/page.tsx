@@ -5,21 +5,31 @@ import BlogSection from '@/components/blog-section'
 import TestimonialSection from '@/components/testimonial-section'
 import { getLatestJobs } from '@/lib/jobs'
 // import { getCurrentRookie } from '@/lib/previous-rookies'
-import { getTranslations } from 'next-intl/server'
+import { routing } from '@/i18n/routing'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 
 // import RookieOfMonthSection from '@/components/rookie-of-month-section'
 
 export const revalidate = 86400
 
-export async function generateMetadata() {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+  const prefix = locale === routing.defaultLocale ? '' : `/${locale}`
   const t = await getTranslations('pages.home')
   const tSeo = await getTranslations('seo')
   return {
     title: t('title'),
     description: tSeo('defaultDescription'),
-    alternates: { canonical: '/' },
+    alternates: {
+      canonical: `${prefix}/`,
+      languages: {
+        en: '/',
+        sv: '/sv',
+        'x-default': '/',
+      },
+    },
     openGraph: {
-      url: '/',
+      url: `${prefix}/`,
       title: t('title'),
       description: tSeo('defaultDescription'),
     },
@@ -30,7 +40,10 @@ export async function generateMetadata() {
   }
 }
 
-export default async function Page() {
+export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+  setRequestLocale(locale)
+
   const t = await getTranslations('pages.home')
   const tCompanies = await getTranslations('pages.forCompanies')
   const jobs = await getLatestJobs(8)

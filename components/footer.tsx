@@ -2,13 +2,11 @@
 
 import { Logo } from '@/components/logo'
 import { ThemeToggle } from '@/components/theme-toggle'
-import type { Locale } from '@/i18n/config'
-import { setLocale } from '@/i18n/locale'
+import { Link, usePathname } from '@/i18n/navigation'
 import { cn, containerBorders, horizontalPadding, sectionWrapper } from '@/lib/utils'
 import { Building2, ChevronRight, GraduationCap } from 'lucide-react'
 import { motion } from 'motion/react'
 import { useLocale, useTranslations } from 'next-intl'
-import Link from 'next/link'
 
 interface FooterSectionProps {
   hideCta?: boolean
@@ -26,8 +24,9 @@ export default function FooterSection({ hideCta }: FooterSectionProps = {}) {
   ]
 
   const locale = useLocale()
+  const pathname = usePathname()
 
-  const languages: { label: string; value: Locale }[] = [
+  const languages: { label: string; value: string }[] = [
     { label: t('english'), value: 'en' },
     { label: t('swedish'), value: 'sv' },
   ]
@@ -165,22 +164,19 @@ export default function FooterSection({ hideCta }: FooterSectionProps = {}) {
                 <h3 className="text-lg font-semibold">{t('language')}</h3>
                 <div className="flex flex-col space-y-3">
                   {languages.map((lang) => (
-                    <button
+                    <Link
                       key={lang.value}
-                      onClick={() => {
-                        if (lang.value !== locale) {
-                          setLocale(lang.value)
-                        }
-                      }}
+                      href={pathname}
+                      locale={lang.value}
                       className={cn(
                         'text-muted-foreground w-fit text-left transition-colors duration-150',
                         lang.value === locale
                           ? 'decoration-muted-foreground/20 underline underline-offset-4'
-                          : 'hover:text-foreground cursor-pointer'
+                          : 'hover:text-foreground'
                       )}
                     >
                       {lang.label}
-                    </button>
+                    </Link>
                   ))}
                 </div>
               </div>

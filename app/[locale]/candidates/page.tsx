@@ -4,18 +4,28 @@ import { PageHeader } from '@/components/page-header'
 import BenefitsSection from '@/components/benefits-section'
 import JobsSection from '@/components/jobs-section'
 import { getLatestJobs } from '@/lib/jobs'
-import { getTranslations } from 'next-intl/server'
+import { routing } from '@/i18n/routing'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 
 export const revalidate = 86400
 
-export async function generateMetadata() {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+  const prefix = locale === routing.defaultLocale ? '' : `/${locale}`
   const t = await getTranslations('pages.forJobSeekers')
   return {
     title: t('metaTitle'),
     description: t('metaDescription'),
-    alternates: { canonical: '/candidates' },
+    alternates: {
+      canonical: `${prefix}/candidates`,
+      languages: {
+        en: '/candidates',
+        sv: '/sv/candidates',
+        'x-default': '/candidates',
+      },
+    },
     openGraph: {
-      url: '/candidates',
+      url: `${prefix}/candidates`,
       title: t('metaTitle'),
       description: t('ogDescription'),
     },
@@ -26,7 +36,10 @@ export async function generateMetadata() {
   }
 }
 
-export default async function ForJobbsokandePage() {
+export default async function ForJobbsokandePage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+  setRequestLocale(locale)
+
   const t = await getTranslations('pages.forJobSeekers')
   const tCommon = await getTranslations('common')
   const jobs = await getLatestJobs(8)

@@ -1,7 +1,7 @@
 import { AnimateOnScroll } from '@/components/animate-on-scroll'
 import { Button } from '@/components/ui/button'
 import { horizontalPadding, sectionContainer, sectionWrapper } from '@/lib/utils'
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 import { getTranslations } from 'next-intl/server'
 
 interface CTAItem {

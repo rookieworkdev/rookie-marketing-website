@@ -2,16 +2,26 @@ import FooterSection from '@/components/footer'
 import { HeroHeader } from '@/components/header'
 import { PageHeader } from '@/components/page-header'
 import { cn, containerBorders, topBorder } from '@/lib/utils'
-import { getTranslations } from 'next-intl/server'
+import { routing } from '@/i18n/routing'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 
-export async function generateMetadata() {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+  const prefix = locale === routing.defaultLocale ? '' : `/${locale}`
   const t = await getTranslations('pages.privacyPolicy')
   return {
     title: t('metaTitle'),
     description: t('metaDescription'),
-    alternates: { canonical: '/policy' },
+    alternates: {
+      canonical: `${prefix}/policy`,
+      languages: {
+        en: '/policy',
+        sv: '/sv/policy',
+        'x-default': '/policy',
+      },
+    },
     openGraph: {
-      url: '/policy',
+      url: `${prefix}/policy`,
       title: t('metaTitle'),
       description: t('ogDescription'),
     },
@@ -22,7 +32,10 @@ export async function generateMetadata() {
   }
 }
 
-export default async function IntegritetspolicyPage() {
+export default async function IntegritetspolicyPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+  setRequestLocale(locale)
+
   const t = await getTranslations('pages.privacyPolicy')
   const tCommon = await getTranslations('common')
 

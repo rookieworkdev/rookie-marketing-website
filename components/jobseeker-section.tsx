@@ -4,7 +4,7 @@ import { InfiniteSlider } from '@/components/ui/infinite-slider'
 import { carouselItems } from '@/lib/career-carousel-data'
 import { sectionContainer, sectionWrapper } from '@/lib/utils'
 import Image from 'next/image'
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 import { getTranslations } from 'next-intl/server'
 
 export default async function JobseekerSection() {

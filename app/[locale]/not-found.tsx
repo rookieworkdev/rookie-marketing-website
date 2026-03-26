@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { cn, containerBorders, horizontalPadding } from '@/lib/utils'
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 
 export const metadata: Metadata = {
   title: '404',

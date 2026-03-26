@@ -419,5 +419,11 @@
   },
   "common": {
     "home": "Home"
+  },
+  "inspirationNotFound": {
+    "title": "Post not found",
+    "description": "It seems like the post you're looking for doesn't exist or has been removed.",
+    "backToInspiration": "Back to inspiration",
+    "goHome": "Homepage"
   }
 }

@@ -6,7 +6,8 @@ import { getAllSlugs, getPostBySlug, getRelatedPosts } from '@/lib/inspiration'
 import { generateArticleSchema, generateBreadcrumbSchema } from '@/lib/seo'
 import { sectionContainer, sectionWrapper } from '@/lib/utils'
 import type { Metadata } from 'next'
-import { getTranslations } from 'next-intl/server'
+import { routing } from '@/i18n/routing'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import { notFound } from 'next/navigation'
 
@@ -15,7 +16,7 @@ import { notFound } from 'next/navigation'
 export const revalidate = 7200
 
 interface PageProps {
-  params: Promise<{ slug: string }>
+  params: Promise<{ locale: string; slug: string }>
 }
 
 export async function generateStaticParams() {
@@ -26,7 +27,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = await params
+  const { locale, slug } = await params
+  const prefix = locale === routing.defaultLocale ? '' : `/${locale}`
   const post = await getPostBySlug(slug)
 
   if (!post) {
@@ -40,10 +42,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: post.title,
     description: post.description,
     alternates: {
-      canonical: `/inspiration/${slug}`,
+      canonical: `${prefix}/inspiration/${slug}`,
+      languages: {
+        en: `/inspiration/${slug}`,
+        sv: `/sv/inspiration/${slug}`,
+        'x-default': `/inspiration/${slug}`,
+      },
     },
     openGraph: {
-      url: `/inspiration/${slug}`,
+      url: `${prefix}/inspiration/${slug}`,
       title: post.title,
       description: post.description,
       images: [
@@ -68,7 +75,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function InspirationPostPage({ params }: PageProps) {
-  const { slug } = await params
+  const { locale, slug } = await params
+  setRequestLocale(locale)
+
   const [post, t, tPost] = await Promise.all([
     getPostBySlug(slug),
     getTranslations('common'),
@@ -88,6 +97,7 @@ export default async function InspirationPostPage({ params }: PageProps) {
     date: post.date,
     author: post.author,
     image: post.image,
+    locale,
   })
 
   const breadcrumbSchema = generateBreadcrumbSchema([

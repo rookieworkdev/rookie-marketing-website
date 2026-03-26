@@ -3,20 +3,30 @@ import { HeroHeader } from '@/components/header'
 import InspirationGridSection from '@/components/inspiration-grid-section'
 import { PageHeader } from '@/components/page-header'
 import { getAllPosts } from '@/lib/inspiration'
-import { getTranslations } from 'next-intl/server'
+import { routing } from '@/i18n/routing'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 
 // Revalidate this page every 2 hours (7200 seconds)
 // Inspiration posts are updated less frequently than jobs
 export const revalidate = 7200
 
-export async function generateMetadata() {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+  const prefix = locale === routing.defaultLocale ? '' : `/${locale}`
   const t = await getTranslations('pages.inspiration')
   return {
     title: t('metaTitle'),
     description: t('metaDescription'),
-    alternates: { canonical: '/inspiration' },
+    alternates: {
+      canonical: `${prefix}/inspiration`,
+      languages: {
+        en: '/inspiration',
+        sv: '/sv/inspiration',
+        'x-default': '/inspiration',
+      },
+    },
     openGraph: {
-      url: '/inspiration',
+      url: `${prefix}/inspiration`,
       title: t('metaTitle'),
       description: t('ogDescription'),
     },
@@ -27,7 +37,10 @@ export async function generateMetadata() {
   }
 }
 
-export default async function InspirationPage() {
+export default async function InspirationPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+  setRequestLocale(locale)
+
   const t = await getTranslations('pages.inspiration')
   const tCommon = await getTranslations('common')
   const posts = await getAllPosts()

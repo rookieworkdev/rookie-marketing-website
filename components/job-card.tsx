@@ -3,7 +3,7 @@ import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import type { Job } from '@/lib/jobs'
 import { ArrowUpRight, MapPin } from 'lucide-react'
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 
 interface JobCardProps {
   job: Job

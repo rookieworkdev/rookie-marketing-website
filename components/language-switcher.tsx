@@ -1,23 +1,18 @@
 'use client'
 
-import { setLocale } from '@/i18n/locale'
-import type { Locale } from '@/i18n/config'
+import { Link, usePathname } from '@/i18n/navigation'
 import { useLocale } from 'next-intl'
 import { cn } from '@/lib/utils'
 
 export function LanguageSwitcher() {
   const locale = useLocale()
-
-  const handleChange = (newLocale: Locale) => {
-    if (newLocale !== locale) {
-      setLocale(newLocale)
-    }
-  }
+  const pathname = usePathname()
 
   return (
     <div className="flex items-center gap-1 text-sm">
-      <button
-        onClick={() => handleChange('en')}
+      <Link
+        href={pathname}
+        locale="en"
         className={cn(
           'rounded px-1.5 py-0.5 transition-colors',
           locale === 'en'
@@ -26,10 +21,11 @@ export function LanguageSwitcher() {
         )}
       >
         EN
-      </button>
+      </Link>
       <span className="text-muted-foreground/50">/</span>
-      <button
-        onClick={() => handleChange('sv')}
+      <Link
+        href={pathname}
+        locale="sv"
         className={cn(
           'rounded px-1.5 py-0.5 transition-colors',
           locale === 'sv'
@@ -38,7 +34,7 @@ export function LanguageSwitcher() {
         )}
       >
         SV
-      </button>
+      </Link>
     </div>
   )
 }

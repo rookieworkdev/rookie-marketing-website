@@ -419,5 +419,11 @@
   },
   "common": {
     "home": "Hem"
+  },
+  "inspirationNotFound": {
+    "title": "Inlägget hittades inte",
+    "description": "Det verkar som att det inlägg du letar efter inte finns eller har tagits bort.",
+    "backToInspiration": "Tillbaka till inspiration",
+    "goHome": "Startsida"
   }
 }
