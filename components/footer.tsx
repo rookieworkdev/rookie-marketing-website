@@ -21,6 +21,8 @@ export default function FooterSection({ hideCta }: FooterSectionProps = {}) {
     { title: t('forCompanies'), href: '/companies' },
     { title: t('inspiration'), href: '/inspiration' },
     { title: t('privacyPolicy'), href: '/policy' },
+    { title: t('login'), href: 'https://app.rookiework.com/login' },
+    { title: t('requestAccess'), href: 'https://app.rookiework.com/request-access' },
   ]
 
   const locale = useLocale()
@@ -146,16 +148,10 @@ export default function FooterSection({ hideCta }: FooterSectionProps = {}) {
                     111 51 Stockholm
                   </a>
                   <a
-                    href="mailto:info@rookiework.se"
+                    href="mailto:support@rookiework.com"
                     className="hover:text-foreground transition-colors duration-150"
                   >
-                    info@rookiework.se
-                  </a>
-                  <a
-                    href="tel:+46101296000"
-                    className="hover:text-foreground transition-colors duration-150"
-                  >
-                    010 129 60 00
+                    support@rookiework.com
                   </a>
                 </div>
               </div>
