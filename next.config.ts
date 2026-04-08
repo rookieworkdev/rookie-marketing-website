@@ -30,6 +30,28 @@ const nextConfig: NextConfig = {
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'rookiework.se' }],
+        destination: 'https://rookiework.com/:path*',
+        permanent: true,
+      },
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.rookiework.se' }],
+        destination: 'https://rookiework.com/:path*',
+        permanent: true,
+      },
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.rookiework.com' }],
+        destination: 'https://rookiework.com/:path*',
+        permanent: true,
+      },
+    ]
+  },
   async headers() {
     return [
       {
