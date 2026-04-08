@@ -19,7 +19,7 @@
     "findTalents": "Find talents",
     "findJobs": "Find jobs",
     "benefitsText": "Get started in 3 minutes.",
-    "directRecruitment": "Direct hire",
+    "directRecruitment": "Recruitment",
     "tempRecruitment": "Contract-to-hire",
     "staffing": "Staffing"
   },
@@ -116,7 +116,7 @@
     "industryOther": "Other industry",
     "serviceType": "Service type",
     "selectServiceType": "Select service type",
-    "directRecruitment": "Direct hire (permanent)",
+    "directRecruitment": "Recruitment (permanent)",
     "tempRecruitment": "Contract-to-hire",
     "staffing": "Staffing/Consulting",
     "experience": "Experience (Seniority)",

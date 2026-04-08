@@ -31,22 +31,121 @@ const nextConfig: NextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
   async redirects() {
+    const seHosts = [
+      { type: 'host' as const, value: 'rookiework.se' },
+      { type: 'host' as const, value: 'www.rookiework.se' },
+    ]
+
+    // Specific page redirects from old Swedish site to new Swedish routes
+    const sePageRedirects = seHosts.flatMap((host) => [
+      {
+        source: '/',
+        has: [host],
+        destination: 'https://rookiework.com/sv',
+        permanent: true,
+      },
+      {
+        source: '/for-foretag',
+        has: [host],
+        destination: 'https://rookiework.com/sv/companies',
+        permanent: true,
+      },
+      {
+        source: '/sok-personal',
+        has: [host],
+        destination: 'https://rookiework.com/sv/companies',
+        permanent: true,
+      },
+      {
+        source: '/for-jobbsokande',
+        has: [host],
+        destination: 'https://rookiework.com/sv/candidates',
+        permanent: true,
+      },
+      {
+        source: '/sok-jobb',
+        has: [host],
+        destination: 'https://rookiework.com/sv/candidates',
+        permanent: true,
+      },
+      {
+        source: '/lediga-jobb',
+        has: [host],
+        destination: 'https://rookiework.com/sv/candidates',
+        permanent: true,
+      },
+      {
+        source: '/kontakt',
+        has: [host],
+        destination: 'https://rookiework.com/sv',
+        permanent: true,
+      },
+      {
+        source: '/om-oss',
+        has: [host],
+        destination: 'https://rookiework.com/sv',
+        permanent: true,
+      },
+      {
+        source: '/manadens-rookie',
+        has: [host],
+        destination: 'https://rookiework.com/sv',
+        permanent: true,
+      },
+      {
+        source: '/guide-rekrytering',
+        has: [host],
+        destination: 'https://rookiework.com/sv/inspiration',
+        permanent: true,
+      },
+      {
+        source: '/integritetspolicy',
+        has: [host],
+        destination: 'https://rookiework.com/sv/policy',
+        permanent: true,
+      },
+      {
+        source: '/visselblasning',
+        has: [host],
+        destination: 'https://rookiework.com/sv/policy',
+        permanent: true,
+      },
+      // Inspiration category pages
+      {
+        source: '/inspiration/category/:path*',
+        has: [host],
+        destination: 'https://rookiework.com/sv/inspiration',
+        permanent: true,
+      },
+      // Inspiration listing page
+      {
+        source: '/inspiration',
+        has: [host],
+        destination: 'https://rookiework.com/sv/inspiration',
+        permanent: true,
+      },
+      // Individual articles — same slugs, redirect to Swedish route
+      {
+        source: '/inspiration/:slug',
+        has: [host],
+        destination: 'https://rookiework.com/sv/inspiration/:slug',
+        permanent: true,
+      },
+      // Catch-all fallback for any other old .se pages
+      {
+        source: '/:path*',
+        has: [host],
+        destination: 'https://rookiework.com/sv',
+        permanent: true,
+      },
+    ])
+
     return [
+      ...sePageRedirects,
+      // www.rookiework.com → rookiework.com (preserve path as-is)
       {
         source: '/:path*',
-        has: [{ type: 'host', value: 'rookiework.se' }],
-        destination: 'https://rookiework.com/:path*',
-        permanent: true,
-      },
-      {
-        source: '/:path*',
-        has: [{ type: 'host', value: 'www.rookiework.se' }],
-        destination: 'https://rookiework.com/:path*',
-        permanent: true,
-      },
-      {
-        source: '/:path*',
-        has: [{ type: 'host', value: 'www.rookiework.com' }],
+        has: [{ type: 'host' as const, value: 'www.rookiework.com' }],
         destination: 'https://rookiework.com/:path*',
         permanent: true,
       },
