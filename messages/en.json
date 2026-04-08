@@ -70,7 +70,8 @@
     "login": "Log in",
     "requestAccess": "Request access",
     "english": "English",
-    "swedish": "Svenska"
+    "swedish": "Svenska",
+    "followUs": "Follow us on"
   },
   "cta": {
     "canWeHelp": "Can we help you?",
@@ -178,7 +179,9 @@
     "description": "We celebrate and recognize the most outstanding students from various programs and universities. Based on students' academic achievements, we award the Rookie of the Month every month!",
     "viewAllAwards": "View all awards",
     "studies": "Studies",
-    "school": "School"
+    "school": "School",
+    "registerCompany": "Register as a company",
+    "registerCandidate": "Register as a candidate"
   },
   "previousRookies": {
     "title": "Previous awards",

@@ -1,9 +1,10 @@
 'use client'
 import { Logo } from '@/components/logo'
+import { ThemeToggle } from '@/components/theme-toggle'
 import { Button } from '@/components/ui/button'
+import { Link } from '@/i18n/navigation'
 import { cn, defaultBorderOpacity, horizontalPadding } from '@/lib/utils'
 import { Menu, X } from 'lucide-react'
-import { Link } from '@/i18n/navigation'
 import { useTranslations } from 'next-intl'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
@@ -90,7 +91,7 @@ export const HeroHeader = () => {
             </div>
 
             {/* Nav links — center (desktop) */}
-            <div className="hidden lg:flex lg:absolute lg:left-1/2 lg:-translate-x-1/2">
+            <div className="hidden lg:absolute lg:left-1/2 lg:flex lg:-translate-x-1/2">
               <ul className="flex gap-6 text-sm">
                 {menuItems.map((item, index) => (
                   <li key={index}>
@@ -105,27 +106,26 @@ export const HeroHeader = () => {
               </ul>
             </div>
 
-            {/* Right side — language + sign in */}
-            <div className="flex items-center gap-2">
+            {/* Right side */}
+            <div className="flex items-center gap-1.5">
+              <ThemeToggle />
+
               {/* Mobile menu button */}
-              <button
+              <Button
                 ref={menuButtonRef}
+                variant="outline"
+                size="icon-sm"
                 onClick={() => setMenuState(!menuState)}
                 aria-label={menuState ? t('closeMenu') : t('openMenu')}
                 aria-expanded={menuState}
                 aria-controls="mobile-menu"
-                className="text-foreground lg:hidden"
+                className="lg:hidden"
               >
-                {menuState ? <X className="size-6" /> : <Menu className="size-6" />}
-              </button>
+                {menuState ? <X className="size-5" /> : <Menu className="size-5" />}
+              </Button>
 
               {/* Desktop sign in */}
-              <Button
-                asChild
-                size="sm"
-                variant="outline"
-                className="hidden lg:inline-flex"
-              >
+              <Button asChild size="sm" variant="outline" className="hidden lg:inline-flex">
                 <Link href="https://app.rookiework.com/login">
                   <span>{t('login')}</span>
                 </Link>
@@ -139,7 +139,7 @@ export const HeroHeader = () => {
               role="dialog"
               aria-modal={menuState ? 'true' : undefined}
               aria-label={t('navigationMenu')}
-              className="bg-background absolute left-0 top-full mt-4 mb-6 hidden w-full flex-wrap items-center space-y-8 rounded-3xl border p-6 shadow-2xl in-data-[state=active]:block lg:hidden"
+              className="bg-background absolute top-full left-0 mt-4 mb-6 hidden w-full flex-wrap items-center space-y-8 rounded-3xl border p-6 shadow-2xl in-data-[state=active]:block lg:hidden"
             >
               <ul className="space-y-6 text-base">
                 {menuItems.map((item, index) => (
@@ -154,21 +154,12 @@ export const HeroHeader = () => {
                 ))}
               </ul>
               <div className="flex flex-col gap-3 pt-4">
-                <Button
-                  asChild
-                  size="sm"
-                  className="w-full"
-                >
+                <Button asChild size="sm" className="w-full">
                   <Link href="https://app.rookiework.com/request-access">
                     <span>{t('registerCompany')}</span>
                   </Link>
                 </Button>
-                <Button
-                  asChild
-                  size="sm"
-                  variant="outline"
-                  className="w-full"
-                >
+                <Button asChild size="sm" variant="outline" className="w-full">
                   <Link href="https://app.rookiework.com/login">
                     <span>{t('login')}</span>
                   </Link>

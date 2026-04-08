@@ -4,11 +4,11 @@ import HowItWorksSection from '@/components/how-it-works-section'
 import BlogSection from '@/components/blog-section'
 import TestimonialSection from '@/components/testimonial-section'
 import { getLatestJobs } from '@/lib/jobs'
-// import { getCurrentRookie } from '@/lib/previous-rookies'
+import { fetchRookieOfMonth } from '@/lib/rookie-of-month'
 import { routing } from '@/i18n/routing'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 
-// import RookieOfMonthSection from '@/components/rookie-of-month-section'
+import RookieOfMonthSection from '@/components/rookie-of-month-section'
 
 export const revalidate = 86400
 
@@ -46,14 +46,13 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
 
   const t = await getTranslations('pages.home')
   const tCompanies = await getTranslations('pages.forCompanies')
-  const jobs = await getLatestJobs(8)
-  // const [jobs, rookie] = await Promise.all([getLatestJobs(8), getCurrentRookie()])
+  const [jobs, rookie] = await Promise.all([getLatestJobs(8), fetchRookieOfMonth()])
 
   return (
     <>
       <HeroSection jobs={jobs} />
       <HowItWorksSection />
-      {/* <RookieOfMonthSection rookie={rookie} /> */}
+      <RookieOfMonthSection rookie={rookie} />
       <BlogSection />
       <TestimonialSection
         quote={tCompanies('testimonialQuote')}

@@ -70,7 +70,8 @@
     "login": "Logga in",
     "requestAccess": "Begär åtkomst",
     "english": "English",
-    "swedish": "Svenska"
+    "swedish": "Svenska",
+    "followUs": "Följ oss på"
   },
   "cta": {
     "readyTitle": "Redo att komma igång?",
@@ -178,7 +179,9 @@
     "description": "Vi hyllar och uppmärksammar de mest framstående studenterna från olika program och universitet. Baserat på studenters akademiska prestationer utser vi varje månad Månadens Rookie!",
     "viewAllAwards": "Visa alla utmärkelser",
     "studies": "Studier",
-    "school": "Skola"
+    "school": "Skola",
+    "registerCompany": "Registrera som företag",
+    "registerCandidate": "Registrera som kandidat"
   },
   "previousRookies": {
     "title": "Tidigare utmärkelser",

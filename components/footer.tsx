@@ -1,10 +1,10 @@
 'use client'
 
 import { Logo } from '@/components/logo'
-import { ThemeToggle } from '@/components/theme-toggle'
+import { Button } from '@/components/ui/button'
 import { Link, usePathname } from '@/i18n/navigation'
 import { cn, containerBorders, horizontalPadding, sectionWrapper } from '@/lib/utils'
-import { Building2, ChevronRight, GraduationCap } from 'lucide-react'
+import { Building2, ChevronRight, GraduationCap, Linkedin } from 'lucide-react'
 import { motion } from 'motion/react'
 import { useLocale, useTranslations } from 'next-intl'
 
@@ -185,7 +185,24 @@ export default function FooterSection({ hideCta }: FooterSectionProps = {}) {
                 © {new Date().getFullYear()} Rookie, All rights reserved
               </span>
             </div>
-            <ThemeToggle />
+            <a
+              href="https://www.linkedin.com/company/rookie-work/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-foreground inline-flex items-center gap-2 text-sm transition-colors duration-150"
+            >
+              <span>{t('followUs')}</span>
+              <Button
+                asChild
+                variant="outline"
+                size="icon-sm"
+                className="pointer-events-none rounded-full"
+              >
+                <span>
+                  <Linkedin className="size-4" />
+                </span>
+              </Button>
+            </a>
           </div>
         </div>
       </div>
