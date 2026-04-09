@@ -29,7 +29,15 @@ export function ThemeToggle() {
       onClick={() => {
         const next = resolvedTheme === 'dark' ? 'light' : 'dark'
         setTheme(next)
-        document.cookie = `theme=${next};path=/;domain=.rookiework.com;max-age=${60 * 60 * 24 * 365};SameSite=Lax`
+        const isProdDomain =
+          window.location.hostname === 'rookiework.com' ||
+          window.location.hostname.endsWith('.rookiework.com')
+        const parts = [`theme=${next}`, 'path=/', `max-age=${60 * 60 * 24 * 365}`, 'SameSite=Lax']
+        if (isProdDomain) {
+          parts.push('domain=.rookiework.com')
+          parts.push('Secure')
+        }
+        document.cookie = parts.join('; ')
       }}
     >
       {resolvedTheme === 'dark' ? <Moon className="size-4" /> : <Sun className="size-4" />}

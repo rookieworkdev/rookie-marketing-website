@@ -10,11 +10,19 @@ import {
 } from '@/lib/seo'
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
+import { cookies } from 'next/headers'
 import { notFound } from 'next/navigation'
 import { getMessages, setRequestLocale } from 'next-intl/server'
 import { NextIntlClientProvider } from 'next-intl'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+
+// Runs synchronously in <head> before next-themes' own inline script. Copies
+// the cross-domain `theme` cookie (set by both rookiework.com and
+// app.rookiework.com via Domain=.rookiework.com) into localStorage so
+// next-themes picks up the latest value and there is no flash of the wrong
+// theme when navigating between the marketing site and the platform app.
+const cookieToLocalStorageScript = `(function(){try{var m=document.cookie.match(/(?:^|; )theme=([^;]*)/);if(m){localStorage.setItem('theme',decodeURIComponent(m[1]));}}catch(e){}})();`
 
 // Local Inter font for better performance (no external requests)
 const inter = localFont({
@@ -111,15 +119,24 @@ export default async function LocaleLayout({
 
   setRequestLocale(locale)
   const messages = await getMessages()
+  const cookieStore = await cookies()
+  const cookieTheme = cookieStore.get('theme')?.value
+  const initialTheme =
+    cookieTheme === 'light' || cookieTheme === 'dark' || cookieTheme === 'system'
+      ? cookieTheme
+      : 'system'
 
   return (
     <html lang={locale} className={inter.variable} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: cookieToLocalStorageScript }} />
+      </head>
       <body className="antialiased">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: structuredData }} />
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider
             attribute="class"
-            defaultTheme="system"
+            defaultTheme={initialTheme}
             enableSystem
             disableTransitionOnChange
           >
