@@ -1,8 +1,15 @@
 import type { MetadataRoute } from 'next'
 
-import { SITE_URL } from '@/lib/seo'
+import { INDEXING_ENABLED, SITE_URL } from '@/lib/seo'
 
 export default function robots(): MetadataRoute.Robots {
+  if (!INDEXING_ENABLED) {
+    return {
+      rules: [{ userAgent: '*', disallow: '/' }],
+      host: SITE_URL,
+    }
+  }
+
   return {
     rules: [
       {

@@ -1,6 +1,7 @@
 import { ThemeProvider } from '@/components/theme-provider'
 import { routing } from '@/i18n/routing'
 import {
+  INDEXING_ENABLED,
   metadataBase,
   OG_IMAGE_PATH,
   SITE_NAME,
@@ -51,17 +52,23 @@ export async function generateMetadata({
     },
     applicationName: SITE_NAME,
     manifest: '/manifest.webmanifest',
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
-        'max-video-preview': -1,
-      },
-    },
+    robots: INDEXING_ENABLED
+      ? {
+          index: true,
+          follow: true,
+          googleBot: {
+            index: true,
+            follow: true,
+            'max-image-preview': 'large',
+            'max-snippet': -1,
+            'max-video-preview': -1,
+          },
+        }
+      : {
+          index: false,
+          follow: false,
+          googleBot: { index: false, follow: false },
+        },
     openGraph: {
       type: 'website',
       siteName: SITE_NAME,

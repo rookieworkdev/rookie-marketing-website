@@ -4,6 +4,24 @@ Migration from the current WordPress site at rookiework.se to the new Next.js si
 
 ---
 
+## Current status
+
+_Last updated: 2026-04-09_
+
+**Phase 1 — ✅ Complete.** rookiework.com and www.rookiework.com both resolve to the new Next.js site on Vercel with valid SSL certs, in the noindexed Phase 1 state. Verified in browser and via `curl`.
+
+- ✅ `rookiework.com` added as Vercel domain → Valid Configuration
+- ✅ Cloudflare apex `A @` → `216.198.79.1`, DNS only (gray cloud)
+- ✅ Stale GoDaddy parking A records (`15.197.148.33`, `3.33.130.190`) deleted from Cloudflare
+- ✅ `www.rookiework.com` Cloudflare proxy disabled (gray cloud), "Proxy Detected" warning cleared in Vercel
+- ✅ Site is noindexed (`NEXT_PUBLIC_ALLOW_INDEXING` unset → robots.txt disallow + meta noindex confirmed)
+
+**Phase 1.5 — ⏳ Not started.** Do not lift the noindex until you're ready to flip rookiework.se DNS in Phase 2 (within minutes/hours, not days).
+
+**Phase 2 onwards — ⏳ Not started.** rookiework.se is still serving the WordPress site. No DNS changes have been made on the .se domain yet.
+
+---
+
 ## Pre-launch checklist
 
 Before touching any DNS or domains, make sure these are done:
@@ -13,6 +31,7 @@ Before touching any DNS or domains, make sure these are done:
 - [ ] Swedish translations complete and reviewed (`/sv` routes)
 - [ ] Contact email still uses info@rookiework.se — decide if this stays or moves to @rookiework.com
 - [ ] Environment variables set in Vercel production (NEXT_PUBLIC_SITE_URL, Supabase keys, etc.)
+- [ ] `NEXT_PUBLIC_ALLOW_INDEXING` is **not set** (or set to anything other than `true`) so Phase 1 launches noindexed
 - [ ] Supabase project accessible from production (no IP restrictions, correct API keys)
 - [ ] Test the Vercel subdomain deployment end-to-end
 
@@ -26,18 +45,43 @@ Before touching any DNS or domains, make sure these are done:
    - Vercel Dashboard → Project → Settings → Domains → Add `rookiework.com`
    - Vercel will provide DNS records (either A record or CNAME)
 
-2. **Update rookiework.com DNS**
-   - Point `rookiework.com` to Vercel (A record: `76.76.21.21` or CNAME to `cname.vercel-dns.com`)
-   - Point `www.rookiework.com` to Vercel as well (the config redirects www → non-www)
-   - SSL certificate is provisioned automatically by Vercel
+2. **Update rookiework.com DNS in Cloudflare**
+   - Delete any pre-existing apex A records left over from the registrar (rookiework.com had two GoDaddy parking IPs — `15.197.148.33` and `3.33.130.190` — that needed cleaning out first)
+   - Add `A @ → 216.198.79.1` (Vercel's current apex IP — `76.76.21.21` still works but is the legacy target)
+   - For `www`: either point `CNAME www → 22ed6676a4583dac.vercel-dns-017.com.` OR leave it pointing to `rookiework.com` (the chain still resolves correctly via the apex A record)
+   - **Critical:** set Proxy status to **DNS only (gray cloud)** for both records. The orange-cloud Cloudflare proxy breaks Vercel's domain verification, hides real client IPs, and disables Vercel's own DDoS/bot mitigation. This is the single most common mistake.
+   - SSL certificate is provisioned automatically by Vercel within ~1 minute of DNS resolving
 
 3. **Verify rookiework.com is working**
    - Check all pages load: `/`, `/sv`, `/candidates`, `/sv/candidates`, `/companies`, `/sv/companies`, `/inspiration`, `/sv/inspiration`, `/policy`, `/sv/policy`
    - Check a few article pages in both locales
    - Confirm `www.rookiework.com` redirects to `rookiework.com`
    - Confirm sitemap is accessible at `rookiework.com/sitemap.xml`
+   - Confirm the site is noindexed:
+     - `curl -I https://rookiework.com/sv` → response headers should include `x-robots-tag: noindex` (or the page `<head>` should contain `<meta name="robots" content="noindex, nofollow">`)
+     - `curl https://rookiework.com/robots.txt` → should return `User-agent: *` / `Disallow: /`
 
-At this point both sites run in parallel. No SEO impact on the old site yet.
+At this point both sites run in parallel. The new site is live but invisible to search engines, so there's no duplicate-content risk against rookiework.se and no SEO impact on the old site yet.
+
+---
+
+## Phase 1.5: Lift the noindex
+
+**Goal:** Make rookiework.com indexable. Must happen *before* Phase 2's DNS cutover, never after.
+
+> Why the order matters: if rookiework.se starts redirecting to a noindexed rookiework.com, Google will drop the rankings instead of transferring them. Always lift the noindex first, verify, then flip DNS.
+
+1. **Set the env var in Vercel production**
+   - Vercel Dashboard → Project → Settings → Environment Variables
+   - Add `NEXT_PUBLIC_ALLOW_INDEXING=true` for the Production environment
+   - Trigger a redeploy (the var is inlined at build time, so a redeploy is required — changing it without redeploying does nothing)
+
+2. **Verify indexing is now allowed**
+   - `curl -I https://rookiework.com/sv` → `x-robots-tag` header should be gone, or page `<head>` should contain `<meta name="robots" content="index, follow, ...">`
+   - `curl https://rookiework.com/robots.txt` → should return the normal `Allow: /` rules and the sitemap line
+   - Spot-check a couple of article pages too
+
+3. **Only proceed to Phase 2 once the above is confirmed.** Do not flip .se DNS until rookiework.com is verifiably indexable.
 
 ---
 

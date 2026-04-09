@@ -5,6 +5,11 @@ export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://rookiework
   ''
 )
 
+// Default is noindex so previews and the initial Phase 1 launch stay out of search.
+// Set NEXT_PUBLIC_ALLOW_INDEXING=true in Vercel production once we're ready to flip
+// rookiework.se DNS over to the new site. See documentation/go-live-action-plan.md.
+export const INDEXING_ENABLED = process.env.NEXT_PUBLIC_ALLOW_INDEXING === 'true'
+
 export const DEFAULT_DESCRIPTION =
   'Rookie är dedikerade till att underlätta rekryteringsprocessen för både företag och unga jobbsökande genom att matcha rätt kompetens med rätt möjligheter.'
 
