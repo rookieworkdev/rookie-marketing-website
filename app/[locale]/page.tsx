@@ -1,6 +1,7 @@
 import FooterSection from '@/components/footer'
 import HeroSection from '@/components/hero-section'
 import HowItWorksSection from '@/components/how-it-works-section'
+import JobseekerSection from '@/components/jobseeker-section'
 import BlogSection from '@/components/blog-section'
 import TestimonialSection from '@/components/testimonial-section'
 import { getLatestJobs } from '@/lib/jobs'
@@ -44,7 +45,6 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
   const { locale } = await params
   setRequestLocale(locale)
 
-  const t = await getTranslations('pages.home')
   const tCompanies = await getTranslations('pages.forCompanies')
   const [jobs, rookie] = await Promise.all([getLatestJobs(8), fetchRookieOfMonth()])
 
@@ -52,13 +52,14 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
     <>
       <HeroSection jobs={jobs} />
       <HowItWorksSection />
-      <RookieOfMonthSection rookie={rookie} />
+      <JobseekerSection />
       <BlogSection />
       <TestimonialSection
         quote={tCompanies('testimonialQuote')}
         role={tCompanies('testimonialRole')}
         company={tCompanies('testimonialCompany')}
       />
+      <RookieOfMonthSection rookie={rookie} />
       <FooterSection />
     </>
   )

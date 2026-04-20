@@ -37,8 +37,8 @@ export default async function RookieOfMonthSection({ rookie }: RookieOfMonthSect
             <div className="mb-8 flex flex-col items-center text-center">
               <Avatar className="mb-4 size-16 md:size-20">
                 <AvatarImage src={rookie.avatarUrl} alt={fullName} />
-                <AvatarFallback className="bg-linear-to-br from-green-700 via-green-600 to-yellow-400">
-                  <User className="size-8 text-white md:size-10" strokeWidth={1.5} />
+                <AvatarFallback className="bg-foreground">
+                  <User className="text-background size-8 md:size-10" strokeWidth={1.5} />
                 </AvatarFallback>
               </Avatar>
               <h3 className="mb-3 text-2xl font-semibold md:text-3xl">{fullName}</h3>

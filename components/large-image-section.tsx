@@ -27,7 +27,7 @@ export default async function LargeImageSection({
         <div className="mb-12 grid gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Title column */}
           <AnimateOnScroll delay={0.1}>
-            <h2 className="text-3xl font-medium tracking-tight md:text-4xl lg:text-5xl">{title}</h2>
+            <h2 className="text-3xl font-medium tracking-tight md:text-4xl">{title}</h2>
           </AnimateOnScroll>
 
           {/* Text column */}

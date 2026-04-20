@@ -58,7 +58,7 @@ export default async function AboutSection({
             delay={0.1}
             className={`flex flex-col ${reversed ? 'lg:order-1' : ''}`}
           >
-            <h2 className="mb-6 text-3xl font-medium tracking-tight md:text-4xl lg:text-5xl">
+            <h2 className="mb-6 text-3xl font-medium tracking-tight md:text-4xl">
               {effectiveTitle}
             </h2>
 

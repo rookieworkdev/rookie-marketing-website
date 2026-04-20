@@ -2,6 +2,7 @@ import FooterSection from '@/components/footer'
 import { HeroHeader } from '@/components/header'
 import { PageHeader } from '@/components/page-header'
 import BenefitsSection from '@/components/benefits-section'
+import LargeImageSection from '@/components/large-image-section'
 import TestimonialSection from '@/components/testimonial-section'
 import { routing } from '@/i18n/routing'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
@@ -63,6 +64,48 @@ export default async function ForForetagPage({ params }: { params: Promise<{ loc
             { icon: 'rocket', title: t('benefit2Title'), description: t('benefit2Description') },
             { icon: 'users', title: t('benefit3Title'), description: t('benefit3Description') },
           ]}
+        />
+        <LargeImageSection
+          title={t('largeImageTitle')}
+          description={t('largeImageDescription')}
+        />
+        <BenefitsSection
+          title={t('talentBenefitsTitle')}
+          description={t('talentBenefitsDescription')}
+          benefits={[
+            {
+              icon: 'target',
+              title: t('talentBenefit1Title'),
+              description: t('talentBenefit1Description'),
+            },
+            {
+              icon: 'users',
+              title: t('talentBenefit2Title'),
+              description: t('talentBenefit2Description'),
+            },
+            {
+              icon: 'lightbulb',
+              title: t('talentBenefit3Title'),
+              description: t('talentBenefit3Description'),
+            },
+            {
+              icon: 'laptop',
+              title: t('talentBenefit4Title'),
+              description: t('talentBenefit4Description'),
+            },
+            {
+              icon: 'rocket',
+              title: t('talentBenefit5Title'),
+              description: t('talentBenefit5Description'),
+            },
+            {
+              icon: 'battery',
+              title: t('talentBenefit6Title'),
+              description: t('talentBenefit6Description'),
+            },
+          ]}
+          ctaText={t('talentBenefitsCta')}
+          ctaHref="https://app.rookiework.com/request-access"
         />
         <TestimonialSection
           quote={t('testimonialQuote')}
