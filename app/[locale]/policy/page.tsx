@@ -2,32 +2,47 @@ import FooterSection from '@/components/footer'
 import { HeroHeader } from '@/components/header'
 import { PageHeader } from '@/components/page-header'
 import { cn, containerBorders, topBorder } from '@/lib/utils'
-import { routing } from '@/i18n/routing'
+import {
+  buildLanguageAlternates,
+  localePrefixedPath,
+  OG_IMAGE_PATH,
+  SITE_NAME,
+  TWITTER_IMAGE_PATH,
+} from '@/lib/seo'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
-  const prefix = locale === routing.defaultLocale ? '' : `/${locale}`
   const t = await getTranslations('pages.privacyPolicy')
+  const ogLocale = locale === 'sv' ? 'sv_SE' : 'en_US'
+  const ogAlternateLocale = locale === 'sv' ? 'en_US' : 'sv_SE'
+  const canonical = localePrefixedPath(locale, '/policy')
   return {
     title: t('metaTitle'),
     description: t('metaDescription'),
     alternates: {
-      canonical: `${prefix}/policy`,
-      languages: {
-        en: '/policy',
-        sv: '/sv/policy',
-        'x-default': '/policy',
-      },
+      canonical,
+      languages: buildLanguageAlternates('/policy'),
     },
     openGraph: {
-      url: `${prefix}/policy`,
+      url: canonical,
       title: t('metaTitle'),
       description: t('ogDescription'),
+      locale: ogLocale,
+      alternateLocale: ogAlternateLocale,
+      images: [
+        {
+          url: OG_IMAGE_PATH,
+          width: 1200,
+          height: 630,
+          alt: SITE_NAME,
+        },
+      ],
     },
     twitter: {
       title: t('metaTitle'),
       description: t('ogDescription'),
+      images: [TWITTER_IMAGE_PATH],
     },
   }
 }

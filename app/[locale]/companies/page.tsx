@@ -4,34 +4,49 @@ import { PageHeader } from '@/components/page-header'
 import BenefitsSection from '@/components/benefits-section'
 import LargeImageSection from '@/components/large-image-section'
 import TestimonialSection from '@/components/testimonial-section'
-import { routing } from '@/i18n/routing'
+import {
+  buildLanguageAlternates,
+  localePrefixedPath,
+  OG_IMAGE_PATH,
+  SITE_NAME,
+  TWITTER_IMAGE_PATH,
+} from '@/lib/seo'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 
 export const revalidate = 86400
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
-  const prefix = locale === routing.defaultLocale ? '' : `/${locale}`
   const t = await getTranslations('pages.forCompanies')
+  const ogLocale = locale === 'sv' ? 'sv_SE' : 'en_US'
+  const ogAlternateLocale = locale === 'sv' ? 'en_US' : 'sv_SE'
+  const canonical = localePrefixedPath(locale, '/companies')
   return {
     title: t('metaTitle'),
     description: t('metaDescription'),
     alternates: {
-      canonical: `${prefix}/companies`,
-      languages: {
-        en: '/companies',
-        sv: '/sv/companies',
-        'x-default': '/companies',
-      },
+      canonical,
+      languages: buildLanguageAlternates('/companies'),
     },
     openGraph: {
-      url: `${prefix}/companies`,
+      url: canonical,
       title: t('metaTitle'),
       description: t('ogDescription'),
+      locale: ogLocale,
+      alternateLocale: ogAlternateLocale,
+      images: [
+        {
+          url: OG_IMAGE_PATH,
+          width: 1200,
+          height: 630,
+          alt: SITE_NAME,
+        },
+      ],
     },
     twitter: {
       title: t('metaTitle'),
       description: t('ogDescription'),
+      images: [TWITTER_IMAGE_PATH],
     },
   }
 }

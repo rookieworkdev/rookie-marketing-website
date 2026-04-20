@@ -1,17 +1,15 @@
 import type { MetadataRoute } from 'next'
 
-import { routing } from '@/i18n/routing'
 import { getAllSlugs } from '@/lib/inspiration'
-import { SITE_URL } from '@/lib/seo'
+import { buildLanguageAlternates, SITE_URL } from '@/lib/seo'
 
-function getAlternates(path: string) {
+function absoluteAlternates(path: string) {
+  const languages = buildLanguageAlternates(path)
   return {
     languages: Object.fromEntries(
-      routing.locales.map((locale) => [
+      Object.entries(languages).map(([locale, relativePath]) => [
         locale,
-        locale === routing.defaultLocale
-          ? `${SITE_URL}${path}`
-          : `${SITE_URL}/${locale}${path}`,
+        `${SITE_URL}${relativePath}`,
       ])
     ),
   }
@@ -20,20 +18,14 @@ function getAlternates(path: string) {
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const lastModified = new Date()
 
-  const staticRoutes = [
-    '',
-    '/candidates',
-    '/companies',
-    '/inspiration',
-    '/policy',
-  ]
+  const staticRoutes = ['/', '/candidates', '/companies', '/inspiration', '/policy']
 
   const staticPages: MetadataRoute.Sitemap = staticRoutes.map((route) => ({
-    url: `${SITE_URL}${route}`,
+    url: `${SITE_URL}${route === '/' ? '' : route}`,
     lastModified,
     changeFrequency: 'weekly',
-    priority: route === '' ? 1 : 0.7,
-    alternates: getAlternates(route || '/'),
+    priority: route === '/' ? 1 : 0.7,
+    alternates: absoluteAlternates(route),
   }))
 
   const inspirationSlugs = await getAllSlugs()
@@ -42,7 +34,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified,
     changeFrequency: 'monthly',
     priority: 0.6,
-    alternates: getAlternates(`/inspiration/${slug}`),
+    alternates: absoluteAlternates(`/inspiration/${slug}`),
   }))
 
   return [...staticPages, ...inspirationPages]

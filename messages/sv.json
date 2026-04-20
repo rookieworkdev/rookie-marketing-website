@@ -235,6 +235,9 @@
   "pages": {
     "home": {
       "title": "Vi matchar företag med unga talanger",
+      "metaTitle": "Rookie — AI-matchad rekrytering av unga talanger",
+      "metaDescription": "Rookie använder AI för att matcha unga talanger med framåtblickande företag. Skapa din profil eller publicera ett uppdrag och hitta rätt match på minuter.",
+      "ogDescription": "AI-matchad rekrytering som kopplar ihop unga talanger med framåtblickande företag.",
       "ceoQuote": "Vår mission är att göra rekryteringsprocessen enklare och att få fler företag att se den otroliga potential som finns hos unga. Om fler vågar investera i den yngre arbetskraften så skapar vi en arbetsmarknad som är rustad för att möta framtidens utmaningar.",
       "ceoName": "Håkan Olsson",
       "ceoTitle": "VD och grundare av Rookie AB"
@@ -312,7 +315,8 @@
     },
     "inspirationPost": {
       "notFound": "Inlägg hittades inte",
-      "relatedPosts": "Mer inspiration"
+      "relatedPosts": "Mer inspiration",
+      "breadcrumb": "Inspiration"
     },
     "contact": {
       "metaTitle": "Kontakt",

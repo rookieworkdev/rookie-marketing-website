@@ -1,3 +1,5 @@
+import { routing } from '@/i18n/routing'
+
 export const SITE_NAME = 'Rookie'
 
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://rookiework.com').replace(
@@ -10,29 +12,46 @@ export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://rookiework
 // rookiework.se DNS over to the new site. See documentation/go-live-action-plan.md.
 export const INDEXING_ENABLED = process.env.NEXT_PUBLIC_ALLOW_INDEXING === 'true'
 
-export const DEFAULT_DESCRIPTION =
-  'Rookie är dedikerade till att underlätta rekryteringsprocessen för både företag och unga jobbsökande genom att matcha rätt kompetens med rätt möjligheter.'
+export const DEFAULT_DESCRIPTIONS = {
+  en: 'Rookie is dedicated to facilitating the recruitment process for both companies and young job seekers by matching the right skills with the right opportunities.',
+  sv: 'Rookie är dedikerade till att underlätta rekryteringsprocessen för både företag och unga jobbsökande genom att matcha rätt kompetens med rätt möjligheter.',
+} as const
 
-export const DEFAULT_KEYWORDS = [
-  'rekrytering',
-  'jobb',
-  'karriär',
-  'unga talanger',
-  'nyexaminerade',
-  'junior',
-  'jobbsökande',
-  'arbetsgivare',
-  'Stockholm',
-  'Sverige',
-  'hyrrekrytering',
-  'konsult',
-  'trainee',
-]
+export function getDefaultDescription(locale: string): string {
+  return (
+    DEFAULT_DESCRIPTIONS[locale as keyof typeof DEFAULT_DESCRIPTIONS] ?? DEFAULT_DESCRIPTIONS.en
+  )
+}
+
+// Fallback for contexts without a locale (e.g. manifest.webmanifest is a single file).
+export const DEFAULT_DESCRIPTION = DEFAULT_DESCRIPTIONS.en
 
 export const metadataBase = new URL(SITE_URL)
 
 export const OG_IMAGE_PATH = '/opengraph-image'
 export const TWITTER_IMAGE_PATH = '/twitter-image'
+
+// Returns a path prefixed with the locale when it isn't the default.
+// Used for canonical/openGraph URLs on per-page metadata (resolved via metadataBase).
+export function localePrefixedPath(locale: string, path: string): string {
+  const normalized = path.startsWith('/') ? path : `/${path}`
+  return locale === routing.defaultLocale ? normalized : `/${locale}${normalized === '/' ? '' : normalized}`
+}
+
+// Builds a `Metadata['alternates']['languages']` map where each locale points
+// at its prefixed path and `x-default` points at the default locale.
+export function buildLanguageAlternates(
+  path: string
+): Record<string, string> {
+  const entries = routing.locales.map((locale) => [
+    locale,
+    localePrefixedPath(locale, path),
+  ])
+  return {
+    ...Object.fromEntries(entries),
+    'x-default': localePrefixedPath(routing.defaultLocale, path),
+  }
+}
 
 export const structuredData = JSON.stringify([
   {

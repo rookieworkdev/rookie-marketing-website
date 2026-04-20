@@ -235,6 +235,9 @@
   "pages": {
     "home": {
       "title": "We match companies with young talents",
+      "metaTitle": "Rookie — AI-matched hiring for young talent",
+      "metaDescription": "Rookie uses AI to match young talent with forward-looking companies. Create your profile or post a position and find the right match in minutes.",
+      "ogDescription": "AI-matched hiring that connects young talent with forward-looking companies.",
       "ceoQuote": "Our mission is to make the recruitment process easier and to get more companies to see the incredible potential in young people. If more companies dare to invest in the younger workforce, we create a labor market that is equipped to meet the challenges of the future.",
       "ceoName": "Håkan Olsson",
       "ceoTitle": "CEO and founder of Rookie AB"
@@ -312,7 +315,8 @@
     },
     "inspirationPost": {
       "notFound": "Post not found",
-      "relatedPosts": "More inspiration"
+      "relatedPosts": "More inspiration",
+      "breadcrumb": "Inspiration"
     },
     "contact": {
       "metaTitle": "Contact",

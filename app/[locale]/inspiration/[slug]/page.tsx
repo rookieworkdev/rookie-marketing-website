@@ -3,10 +3,14 @@ import { HeroHeader } from '@/components/header'
 import { InspirationCard } from '@/components/inspiration-card'
 import { PageHeader } from '@/components/page-header'
 import { getAllSlugs, getPostBySlug, getRelatedPosts } from '@/lib/inspiration'
-import { generateArticleSchema, generateBreadcrumbSchema } from '@/lib/seo'
+import {
+  buildLanguageAlternates,
+  generateArticleSchema,
+  generateBreadcrumbSchema,
+  localePrefixedPath,
+} from '@/lib/seo'
 import { sectionContainer, sectionWrapper } from '@/lib/utils'
 import type { Metadata } from 'next'
-import { routing } from '@/i18n/routing'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import { notFound } from 'next/navigation'
@@ -28,7 +32,6 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale, slug } = await params
-  const prefix = locale === routing.defaultLocale ? '' : `/${locale}`
   const post = await getPostBySlug(slug)
 
   if (!post) {
@@ -38,21 +41,24 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     }
   }
 
+  const ogLocale = locale === 'sv' ? 'sv_SE' : 'en_US'
+  const ogAlternateLocale = locale === 'sv' ? 'en_US' : 'sv_SE'
+  const postPath = `/inspiration/${slug}`
+  const canonical = localePrefixedPath(locale, postPath)
+
   return {
     title: post.title,
     description: post.description,
     alternates: {
-      canonical: `${prefix}/inspiration/${slug}`,
-      languages: {
-        en: `/inspiration/${slug}`,
-        sv: `/sv/inspiration/${slug}`,
-        'x-default': `/inspiration/${slug}`,
-      },
+      canonical,
+      languages: buildLanguageAlternates(postPath),
     },
     openGraph: {
-      url: `${prefix}/inspiration/${slug}`,
+      url: canonical,
       title: post.title,
       description: post.description,
+      locale: ogLocale,
+      alternateLocale: ogAlternateLocale,
       images: [
         {
           url: post.image,
@@ -102,7 +108,7 @@ export default async function InspirationPostPage({ params }: PageProps) {
 
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: t('home'), url: '/' },
-    { name: 'Inspiration', url: '/inspiration' },
+    { name: tPost('breadcrumb'), url: '/inspiration' },
     { name: post.title, url: `/inspiration/${slug}` },
   ])
 
@@ -122,7 +128,7 @@ export default async function InspirationPostPage({ params }: PageProps) {
         <PageHeader
           breadcrumbs={[
             { label: t('home'), href: '/' },
-            { label: 'Inspiration', href: '/inspiration' },
+            { label: tPost('breadcrumb'), href: '/inspiration' },
             { label: post.title },
           ]}
           image={post.image}
