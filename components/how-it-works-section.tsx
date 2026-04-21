@@ -143,7 +143,7 @@ export default function HowItWorksSection() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="grid gap-3 sm:grid-cols-3"
+              className="grid gap-4 sm:grid-cols-3"
             >
               {steps.map((step, index) => (
                 <StepCard key={step.title} step={step} index={index} />

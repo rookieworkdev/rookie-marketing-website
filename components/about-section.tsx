@@ -86,7 +86,7 @@ export default async function AboutSection({
             {/* Optional CTA button */}
             {ctaText && ctaHref && (
               <div className={items && items.length > 0 ? 'mt-6' : 'mt-2'}>
-                <Button asChild size="lg">
+                <Button asChild>
                   <Link href={ctaHref}>
                     <span className="text-nowrap">{ctaText}</span>
                   </Link>

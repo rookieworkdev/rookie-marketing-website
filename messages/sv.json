@@ -192,21 +192,6 @@
   "testimonial": {
     "title": "Vad andra säger"
   },
-  "jobseeker": {
-    "title": "Vad Rookie erbjuder unga arbetssökande",
-    "description": "Är du i början av din karriär? Då har du kommit helt rätt. Upptäck lediga jobb och ladda enkelt upp ditt CV för att göra dig synlig för spännande företag.",
-    "findJobs": "Hitta jobb"
-  },
-  "careerCategories": {
-    "sales": "Sälj",
-    "customerService": "Kundservice",
-    "marketing": "Marknad",
-    "itTech": "IT & Tech",
-    "admin": "Admin",
-    "finance": "Ekonomi",
-    "hr": "HR",
-    "logistics": "Logistik"
-  },
   "jobCard": {
     "apply": "Ansök"
   },
@@ -238,6 +223,22 @@
       "metaTitle": "Rookie — AI-matchad rekrytering av unga talanger",
       "metaDescription": "Rookie använder AI för att matcha unga talanger med framåtblickande företag. Skapa din profil eller publicera ett uppdrag och hitta rätt match på minuter.",
       "ogDescription": "AI-matchad rekrytering som kopplar ihop unga talanger med framåtblickande företag.",
+      "talentTitle": "Byggt för unga talanger",
+      "talentDescription": "Rookie kombinerar AI-driven matchning med ett tydligt fokus på nyexaminerade och unga talanger — så att företag rekryterar snabbare och unga talanger hittar rätt första roll.",
+      "talent1Title": "AI-matchad mot rollen",
+      "talent1Description": "Vår AI rankar unga talanger mot era krav automatiskt, så den starkaste matchningen dyker upp först.",
+      "talent2Title": "Målmedvetna och ambitiösa",
+      "talent2Description": "Unga talanger har tydliga karriärmål och stark drivkraft. Rookie hjälper er hitta de som levererar från dag ett.",
+      "talent3Title": "Digitalt infödda",
+      "talent3Description": "Nyexaminerade och unga talanger är uppvuxna med moderna verktyg — deras profiler visar dagens teknikkompetens, inte gårdagens.",
+      "talent4Title": "Nya perspektiv, snabbt",
+      "talent4Description": "Hoppa över veckor av screening. Få en kortlista med unga talanger som har nya idéer och energin att agera på dem.",
+      "talent5Title": "Byggt för tidig karriär",
+      "talent5Description": "En plattform designad kring nyexaminerade och unga talanger — inte ombyggd för dem.",
+      "talent6Title": "Redo att komma igång",
+      "talent6Description": "Varje rookie vill bevisa sig själv. Vi kortar vägen från profil till första roll, för både kandidater och företag.",
+      "talentCta": "För företag",
+      "candidatesCta": "För kandidater",
       "ceoQuote": "Vår mission är att göra rekryteringsprocessen enklare och att få fler företag att se den otroliga potential som finns hos unga. Om fler vågar investera i den yngre arbetskraften så skapar vi en arbetsmarknad som är rustad för att möta framtidens utmaningar.",
       "ceoName": "Håkan Olsson",
       "ceoTitle": "VD och grundare av Rookie AB"
@@ -257,8 +258,8 @@
       "benefit2Description": "Från publicerat uppdrag till presenterade kandidater på timmar istället för veckor.",
       "benefit3Title": "Kvalitetsgranskade kandidater",
       "benefit3Description": "Varje kandidat får en AI-baserad matchpoäng så du direkt ser hur väl de passar uppdraget.",
-      "largeImageTitle": "Rekrytera snabbare och smidigare",
-      "largeImageDescription": "Rookie är det självklara valet för företag som vill växa och utvecklas med de bästa och mest lovande kandidaterna på arbetsmarknaden. Vi förstår kraften och potentialen hos unga vuxna. Upptäck möjligheterna ni också och hitta er nästa kandidat enklare och snabbare med hjälp av vår plattform.",
+      "largeImageTitle": "En plattform byggd för snabbare rekrytering",
+      "largeImageDescription": "Rookie automatiserar det tunga arbetet i rekryteringen. AI:n analyserar ert uppdrag, rankar kandidaterna och presenterar de mest relevanta unga talangerna på timmar istället för veckor. Ni fokuserar på samtalen och besluten — plattformen sköter resten.",
       "talentBenefitsTitle": "Öppna dörren för unga talanger",
       "talentBenefitsDescription": "Genom att fokusera på rekrytering av nyexaminerade och young professionals, öppnar vi dörrar till nya möjligheter och främjar tillväxt och innovation på arbetsmarknaden. Upptäck fördelarna med att anställa early talent och hur det kan vara nyckeln till framgång för ert företag.",
       "talentBenefit1Title": "Målmedvetna och ambitiösa",

@@ -24,7 +24,7 @@ export default async function BlogSection() {
             <Link href="/inspiration">{t('viewMore')}</Link>
           </Button>
         </div>
-        <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {latestPosts.map((post, index) => (
             <InspirationCard
               key={post.slug}

@@ -14,7 +14,7 @@ export default async function InspirationGridSection({ posts }: InspirationGridS
     <section className={sectionWrapper('bg-background')}>
       <div className={sectionContainer()}>
         {posts.length > 0 ? (
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {posts.map((post, index) => (
               <InspirationCard
                 key={post.slug}

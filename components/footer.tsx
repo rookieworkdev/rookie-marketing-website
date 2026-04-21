@@ -53,7 +53,7 @@ export default function FooterSection({ hideCta }: FooterSectionProps = {}) {
                 {tCta('readySubtitle')}
               </p>
             </motion.div>
-            <div className="mt-10 grid gap-6 md:grid-cols-2">
+            <div className="mt-10 grid gap-4 md:grid-cols-2">
               <motion.div
                 initial={{ opacity: 0, filter: 'blur(12px)' }}
                 whileInView={{ opacity: 1, filter: 'blur(0px)' }}

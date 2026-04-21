@@ -192,21 +192,6 @@
   "testimonial": {
     "title": "What others say"
   },
-  "jobseeker": {
-    "title": "What Rookie offers young job seekers",
-    "description": "Are you at the beginning of your career? Then you've come to the right place. Discover open positions and easily upload your CV to become visible to exciting companies.",
-    "findJobs": "Find jobs"
-  },
-  "careerCategories": {
-    "sales": "Sales",
-    "customerService": "Customer Service",
-    "marketing": "Marketing",
-    "itTech": "IT & Tech",
-    "admin": "Admin",
-    "finance": "Finance",
-    "hr": "HR",
-    "logistics": "Logistics"
-  },
   "jobCard": {
     "apply": "Apply"
   },
@@ -238,6 +223,22 @@
       "metaTitle": "Rookie — AI-matched hiring for young talent",
       "metaDescription": "Rookie uses AI to match young talent with forward-looking companies. Create your profile or post a position and find the right match in minutes.",
       "ogDescription": "AI-matched hiring that connects young talent with forward-looking companies.",
+      "talentTitle": "Built for young professionals",
+      "talentDescription": "Rookie combines AI-powered matching with a sharp focus on new graduates and young professionals — so companies hire faster and early-career talent lands the right first role.",
+      "talent1Title": "AI-matched to the role",
+      "talent1Description": "Our AI ranks young professionals against your requirements automatically, so the strongest match surfaces first.",
+      "talent2Title": "Driven and ambitious",
+      "talent2Description": "Young talents bring clear career goals and real drive. Rookie helps you spot the ones ready to deliver from day one.",
+      "talent3Title": "Digital-native by default",
+      "talent3Description": "New graduates and young professionals grew up with modern tools — their profiles showcase today's tech skills, not yesterday's.",
+      "talent4Title": "Fresh perspectives, fast",
+      "talent4Description": "Skip weeks of screening. Get a shortlist of young talents with new ideas and the energy to act on them.",
+      "talent5Title": "Built for early careers",
+      "talent5Description": "A platform designed around new graduates and young professionals — not retrofitted for them.",
+      "talent6Title": "Ready to get started",
+      "talent6Description": "Every rookie wants to prove themselves. We shorten the path from profile to first role, for candidates and companies alike.",
+      "talentCta": "For companies",
+      "candidatesCta": "For candidates",
       "ceoQuote": "Our mission is to make the recruitment process easier and to get more companies to see the incredible potential in young people. If more companies dare to invest in the younger workforce, we create a labor market that is equipped to meet the challenges of the future.",
       "ceoName": "Håkan Olsson",
       "ceoTitle": "CEO and founder of Rookie AB"
@@ -257,8 +258,8 @@
       "benefit2Description": "From published position to presented candidates in hours, not weeks.",
       "benefit3Title": "Quality-scored candidates",
       "benefit3Description": "Every candidate gets an AI-based match score so you instantly see how well they fit the role.",
-      "largeImageTitle": "Hire faster and smoother",
-      "largeImageDescription": "Rookie is the obvious choice for companies that want to grow with the best and most promising candidates on the market. We understand the strength and potential of young professionals. Discover the opportunities and find your next hire more easily and faster with our platform.",
+      "largeImageTitle": "A platform built for faster hiring",
+      "largeImageDescription": "Rookie automates the heavy lifting in recruitment. Our AI analyzes your role, ranks the candidates and presents the most relevant young talents in hours, not weeks. You focus on the conversations and decisions — the platform handles the rest.",
       "talentBenefitsTitle": "Open the door to young talent",
       "talentBenefitsDescription": "By focusing on recruiting new graduates and young professionals, we open doors to new opportunities and drive growth and innovation in the labor market. Discover the advantages of hiring early talent and how it can be the key to success for your company.",
       "talentBenefit1Title": "Driven and ambitious",

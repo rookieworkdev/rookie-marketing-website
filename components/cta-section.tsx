@@ -79,7 +79,7 @@ export default async function CTASection({ variant = 'single', content }: CTASec
                   </p>
                 </div>
                 <div className="self-start">
-                  <Button asChild size="lg" variant={doubleContent[0].buttonVariant || 'default'}>
+                  <Button asChild variant={doubleContent[0].buttonVariant || 'default'}>
                     <Link href={doubleContent[0].buttonHref || 'https://app.rookiework.com/request-access'} target={doubleContent[0].buttonOpenInNewTab ? '_blank' : undefined}>
                       <span className="text-nowrap">{doubleContent[0].buttonText}</span>
                     </Link>
@@ -105,7 +105,7 @@ export default async function CTASection({ variant = 'single', content }: CTASec
                   </p>
                 </div>
                 <div className="self-start">
-                  <Button asChild size="lg" variant={doubleContent[1].buttonVariant || 'default'}>
+                  <Button asChild variant={doubleContent[1].buttonVariant || 'default'}>
                     <Link href={doubleContent[1].buttonHref || 'https://app.rookiework.com/request-access'} target={doubleContent[1].buttonOpenInNewTab ? '_blank' : undefined}>
                       <span className="text-nowrap">{doubleContent[1].buttonText}</span>
                     </Link>
@@ -151,7 +151,7 @@ export default async function CTASection({ variant = 'single', content }: CTASec
               </p>
             </div>
             <div className="self-start">
-              <Button asChild size="lg" variant={singleContent.buttonVariant || 'default'}>
+              <Button asChild variant={singleContent.buttonVariant || 'default'}>
                 <Link href={singleContent.buttonHref || 'https://app.rookiework.com/request-access'} target={singleContent.buttonOpenInNewTab ? '_blank' : undefined}>
                   <span className="text-nowrap">{singleContent.buttonText}</span>
                 </Link>

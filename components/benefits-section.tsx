@@ -25,6 +25,8 @@ interface BenefitsSectionProps {
   benefits: Benefit[]
   ctaText?: string
   ctaHref?: string
+  secondaryCtaText?: string
+  secondaryCtaHref?: string
 }
 
 export default function BenefitsSection({
@@ -33,6 +35,8 @@ export default function BenefitsSection({
   benefits,
   ctaText,
   ctaHref,
+  secondaryCtaText,
+  secondaryCtaHref,
 }: BenefitsSectionProps) {
   const descriptionArray = Array.isArray(description) ? description : [description]
 
@@ -52,7 +56,7 @@ export default function BenefitsSection({
         </AnimateOnScroll>
 
         {/* Benefits grid */}
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {benefits.map((benefit, index) => {
             const Icon = iconMap[benefit.icon.toLowerCase()]
             if (!Icon) return null
@@ -77,12 +81,19 @@ export default function BenefitsSection({
 
         {/* Optional CTA */}
         {ctaText && ctaHref && (
-          <AnimateOnScroll delay={0.2} className="mt-12">
-            <Button asChild size="lg">
+          <AnimateOnScroll delay={0.2} className="mt-12 flex flex-wrap items-center gap-3">
+            <Button asChild>
               <Link href={ctaHref}>
                 <span className="text-nowrap">{ctaText}</span>
               </Link>
             </Button>
+            {secondaryCtaText && secondaryCtaHref && (
+              <Button asChild variant="outline">
+                <Link href={secondaryCtaHref}>
+                  <span className="text-nowrap">{secondaryCtaText}</span>
+                </Link>
+              </Button>
+            )}
           </AnimateOnScroll>
         )}
       </div>
