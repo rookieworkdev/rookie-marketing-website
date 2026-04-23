@@ -68,7 +68,7 @@ export default async function RookieOfMonthSection({ rookie }: RookieOfMonthSect
           <AnimateOnScroll delay={0.1} margin="-100px" className="flex flex-col">
             <h2 className="text-3xl font-medium tracking-tight md:text-4xl">
               {t('titlePrefix')}{' '}
-              <em className="bg-linear-to-br from-green-700 via-green-600 to-yellow-400 bg-clip-text text-transparent not-italic">
+              <em className="bg-linear-[128deg] from-[#599200] from-20% to-[#D4D702] to-80% bg-clip-text text-transparent not-italic">
                 {currentMonth}
               </em>
             </h2>
