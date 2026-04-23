@@ -20,7 +20,7 @@ export default function TwitterImage() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        background: 'linear-gradient(to right, #16a34a, #fde047)',
+        background: 'linear-gradient(128deg, #599200 20%, #D4D702 80%)',
       }}
     >
       <div
