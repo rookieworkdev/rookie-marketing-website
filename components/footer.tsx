@@ -148,7 +148,7 @@ export default function FooterSection({ hideCta }: FooterSectionProps = {}) {
                     111 51 Stockholm
                   </a>
                   <a
-                    href="mailto:support@rookiework.com"
+                    href="mailto:info@rookiework.se"
                     className="hover:text-foreground transition-colors duration-150"
                   >
                     support@rookiework.com
