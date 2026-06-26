@@ -5,7 +5,6 @@ import BenefitsSection from '@/components/benefits-section'
 import BlogSection from '@/components/blog-section'
 import TestimonialSection from '@/components/testimonial-section'
 import { getLatestJobs } from '@/lib/jobs'
-import { fetchRookieOfMonth } from '@/lib/rookie-of-month'
 import {
   buildLanguageAlternates,
   localePrefixedPath,
@@ -14,8 +13,6 @@ import {
   TWITTER_IMAGE_PATH,
 } from '@/lib/seo'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
-
-import RookieOfMonthSection from '@/components/rookie-of-month-section'
 
 export const revalidate = 86400
 
@@ -61,7 +58,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
 
   const tHome = await getTranslations('pages.home')
   const tCompanies = await getTranslations('pages.forCompanies')
-  const [jobs, rookie] = await Promise.all([getLatestJobs(8), fetchRookieOfMonth()])
+  const jobs = await getLatestJobs(8)
 
   return (
     <>
@@ -113,7 +110,6 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         role={tCompanies('testimonialRole')}
         company={tCompanies('testimonialCompany')}
       />
-      <RookieOfMonthSection rookie={rookie} />
       <FooterSection />
     </>
   )

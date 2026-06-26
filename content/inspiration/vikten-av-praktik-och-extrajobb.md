@@ -75,4 +75,4 @@ Många företag söker studenter för kortare projekt, vilket kan passa bra med 
 
 ---
 
-**Letar du efter praktik eller extrajobb?** På Rookie hjälper vi unga talanger att hitta de bästa möjligheterna. Kontakta oss idag!
+**Letar du efter praktik eller extrajobb?** På Prefeo hjälper vi unga talanger att hitta de bästa möjligheterna. Kontakta oss idag!

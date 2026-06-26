@@ -18,8 +18,8 @@ import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 
 // Runs synchronously in <head> before next-themes' own inline script. Copies
-// the cross-domain `theme` cookie (set by both rookiework.com and
-// app.rookiework.com via Domain=.rookiework.com) into localStorage so
+// the cross-domain `theme` cookie (set by both prefeo.se and
+// app.prefeo.se via Domain=.prefeo.se) into localStorage so
 // next-themes picks up the latest value and there is no flash of the wrong
 // theme when navigating between the marketing site and the platform app.
 const cookieToLocalStorageScript = `(function(){try{var m=document.cookie.match(/(?:^|; )theme=([^;]*)/);if(m){localStorage.setItem('theme',decodeURIComponent(m[1]));}}catch(e){}})();`

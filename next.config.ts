@@ -41,112 +41,125 @@ const nextConfig: NextConfig = {
       {
         source: '/',
         has: [host],
-        destination: 'https://rookiework.com/sv',
+        destination: 'https://prefeo.se/sv',
         permanent: true,
       },
       {
         source: '/for-foretag',
         has: [host],
-        destination: 'https://rookiework.com/sv/companies',
+        destination: 'https://prefeo.se/sv/companies',
         permanent: true,
       },
       {
         source: '/sok-personal',
         has: [host],
-        destination: 'https://rookiework.com/sv/companies',
+        destination: 'https://prefeo.se/sv/companies',
         permanent: true,
       },
       {
         source: '/for-jobbsokande',
         has: [host],
-        destination: 'https://rookiework.com/sv/candidates',
+        destination: 'https://prefeo.se/sv/candidates',
         permanent: true,
       },
       {
         source: '/sok-jobb',
         has: [host],
-        destination: 'https://rookiework.com/sv/candidates',
+        destination: 'https://prefeo.se/sv/candidates',
         permanent: true,
       },
       {
         source: '/lediga-jobb',
         has: [host],
-        destination: 'https://rookiework.com/sv/candidates',
+        destination: 'https://prefeo.se/sv/candidates',
         permanent: true,
       },
       {
         source: '/kontakt',
         has: [host],
-        destination: 'https://rookiework.com/sv',
+        destination: 'https://prefeo.se/sv',
         permanent: true,
       },
       {
         source: '/om-oss',
         has: [host],
-        destination: 'https://rookiework.com/sv',
+        destination: 'https://prefeo.se/sv',
         permanent: true,
       },
       {
         source: '/manadens-rookie',
         has: [host],
-        destination: 'https://rookiework.com/sv',
+        destination: 'https://prefeo.se/sv',
         permanent: true,
       },
       {
         source: '/guide-rekrytering',
         has: [host],
-        destination: 'https://rookiework.com/sv/inspiration',
+        destination: 'https://prefeo.se/sv/inspiration',
         permanent: true,
       },
       {
         source: '/integritetspolicy',
         has: [host],
-        destination: 'https://rookiework.com/sv/policy',
+        destination: 'https://prefeo.se/sv/policy',
         permanent: true,
       },
       {
         source: '/visselblasning',
         has: [host],
-        destination: 'https://rookiework.com/sv/policy',
+        destination: 'https://prefeo.se/sv/policy',
         permanent: true,
       },
       // Inspiration category pages
       {
         source: '/inspiration/category/:path*',
         has: [host],
-        destination: 'https://rookiework.com/sv/inspiration',
+        destination: 'https://prefeo.se/sv/inspiration',
         permanent: true,
       },
       // Inspiration listing page
       {
         source: '/inspiration',
         has: [host],
-        destination: 'https://rookiework.com/sv/inspiration',
+        destination: 'https://prefeo.se/sv/inspiration',
         permanent: true,
       },
       // Individual articles — same slugs, redirect to Swedish route
       {
         source: '/inspiration/:slug',
         has: [host],
-        destination: 'https://rookiework.com/sv/inspiration/:slug',
+        destination: 'https://prefeo.se/sv/inspiration/:slug',
         permanent: true,
       },
       // Catch-all fallback for any other old .se pages
       {
         source: '/:path*',
         has: [host],
-        destination: 'https://rookiework.com/sv',
+        destination: 'https://prefeo.se/sv',
         permanent: true,
       },
     ])
 
     return [
       ...sePageRedirects,
-      // www.rookiework.com → rookiework.com (preserve path as-is)
+      // Legacy rookiework.com (apex + www) → new prefeo.se domain
+      {
+        source: '/:path*',
+        has: [{ type: 'host' as const, value: 'rookiework.com' }],
+        destination: 'https://prefeo.se/:path*',
+        permanent: true,
+      },
       {
         source: '/:path*',
         has: [{ type: 'host' as const, value: 'www.rookiework.com' }],
-        destination: 'https://rookiework.com/:path*',
+        destination: 'https://prefeo.se/:path*',
+        permanent: true,
+      },
+      // Canonical host: www.prefeo.se → prefeo.se (preserve path as-is)
+      {
+        source: '/:path*',
+        has: [{ type: 'host' as const, value: 'www.prefeo.se' }],
+        destination: 'https://prefeo.se/:path*',
         permanent: true,
       },
     ]

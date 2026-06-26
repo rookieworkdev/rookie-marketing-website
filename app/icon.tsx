@@ -29,7 +29,7 @@ export default async function Icon() {
           width: 32,
           height: 32,
           borderRadius: '50%',
-          background: 'linear-gradient(128deg, #599200 20%, #D4D702 80%)',
+          background: 'linear-gradient(128deg, #093CDF 20%, #8D0FF9 80%)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -40,11 +40,11 @@ export default async function Icon() {
             fontFamily: 'Inter',
             fontSize: 22,
             fontWeight: 700,
-            color: '#000000',
+            color: '#ffffff',
             marginLeft: 1.5,
           }}
         >
-          R
+          P
         </span>
       </div>
     </div>,

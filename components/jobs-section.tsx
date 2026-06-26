@@ -25,7 +25,7 @@ export default async function JobsSection({ jobs }: JobsSectionProps) {
             </p>
           </div>
           <Button asChild>
-            <Link href="https://app.rookiework.com/login">{t('viewAll')}</Link>
+            <Link href="https://app.prefeo.se/login">{t('viewAll')}</Link>
           </Button>
         </AnimateOnScroll>
 
