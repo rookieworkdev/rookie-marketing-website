@@ -84,7 +84,7 @@ export default function FooterSection({ hideCta }: FooterSectionProps = {}) {
                 transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
               >
                 <Link
-                  href="/candidates"
+                  href="https://app.prefeo.se/login"
                   className="group bg-background block rounded-2xl border p-6 shadow-xs transition-shadow hover:shadow-sm md:p-8"
                 >
                   <div className="bg-primary/10 w-fit rounded-lg p-2">
