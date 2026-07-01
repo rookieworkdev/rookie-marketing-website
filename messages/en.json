@@ -22,6 +22,31 @@
     "tempRecruitment": "Contract-to-hire",
     "staffing": "Staffing"
   },
+  "manifest": {
+    "title": "Every hire begins with a preference.",
+    "body1": "The candidate has theirs. The client has theirs. And they move toward each other, searching for their exact counterpart.",
+    "body2": "It isn't chance. It's the oldest matching principle in mathematics, applied to the most human thing of all: the right person, the right place, the right time.",
+    "layers": {
+      "prefer": {
+        "description": "To prefer. The brand's core verb, visible and legible without instruction."
+      },
+      "preference": {
+        "description": "The candidate's and the client's preferences: what gets matched with precision."
+      },
+      "eo": {
+        "description": "Latin's verb for motion. Prefeo is the preference that never stops."
+      },
+      "io": {
+        "description": "Preferences in. The right match out. The founding principle of the digital flow."
+      },
+      "symbol": {
+        "description": "The preference-relation symbol. Mathematics' oldest matching principle."
+      },
+      "sum": {
+        "description": "Five promises in one brand. Mathematical precision meets human motion."
+      }
+    }
+  },
   "howItWorks": {
     "title": "How Prefeo works",
     "subtitle": "From profile to placement — three steps with AI in the driver's seat.",
@@ -55,8 +80,7 @@
     "getStartedDescription": "Hiring for a role, or ready for your next one? We help both sides find the right match — based on what they actually prefer.",
     "registerCompany": "Register company",
     "loginAsCandidate": "Log in",
-    "tagline": "Matching candidates and companies",
-    "taglineLine2": "on what they prefer",
+    "tagline": "Preferences in motion",
     "discoverRookie": "Discover Prefeo",
     "forJobSeekers": "For job seekers",
     "forCompanies": "For companies",
@@ -78,8 +102,8 @@
     "guide": "Guide",
     "guideDescription": "Key steps for a sharper, preference-based recruitment process",
     "getAccess": "Get access",
-    "readyTitle": "Ready to get started?",
-    "readySubtitle": "Whether you're looking for your dream job or your next star recruit — Prefeo is your partner.",
+    "readyTitle": "Start with a preference.<br></br>Move toward the right match.",
+    "readySubtitle": "Create an assignment or a candidate profile, and let Prefeo show which matches are most relevant.",
     "forCompanies": "For companies",
     "forCompaniesDescription": "Find quality-assured candidates for recruitment, contract-to-hire or consulting assignments.",
     "forCompaniesLink": "Get started",

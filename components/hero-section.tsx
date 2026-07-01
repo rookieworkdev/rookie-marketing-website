@@ -2,11 +2,11 @@
 
 import { Button } from '@/components/ui/button'
 import { FlickeringGrid } from '@/components/ui/flickering-grid'
+import { Link } from '@/i18n/navigation'
 import type { JobDisplay } from '@/lib/jobs'
 import { cn, containerBorders, horizontalPadding } from '@/lib/utils'
 import { motion } from 'motion/react'
 import { useTranslations } from 'next-intl'
-import { Link } from '@/i18n/navigation'
 import { HeroHeader } from './header'
 import { JobPostingCard } from './job-posting-card'
 
@@ -136,8 +136,8 @@ export default function HeroSection({ jobs }: HeroSectionProps) {
                     {tJobs('viewAll')}
                   </Link>
                 </motion.div>
-                <div className="-mr-6 mt-6 md:-mr-8 lg:mr-0">
-                  <div className="no-scrollbar grid grid-rows-2 grid-flow-col auto-cols-[75vw] snap-x snap-mandatory gap-4 overflow-x-auto pr-6 sm:auto-cols-[45%] md:auto-cols-[32%] md:pr-8 lg:grid-flow-row lg:grid-rows-none lg:grid-cols-4 lg:auto-cols-auto lg:overflow-visible lg:pr-0">
+                <div className="mt-6 -mr-6 md:-mr-8 lg:mr-0">
+                  <div className="no-scrollbar grid snap-x snap-mandatory auto-cols-[75vw] grid-flow-col grid-rows-2 gap-4 overflow-x-auto pr-6 sm:auto-cols-[45%] md:auto-cols-[32%] md:pr-8 lg:auto-cols-auto lg:grid-flow-row lg:grid-cols-4 lg:grid-rows-none lg:overflow-visible lg:pr-0">
                     {jobs.map((job, index) => (
                       <motion.div
                         key={job.id}

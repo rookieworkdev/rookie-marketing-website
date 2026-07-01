@@ -1,6 +1,7 @@
 import FooterSection from '@/components/footer'
 import HeroSection from '@/components/hero-section'
 import HowItWorksSection from '@/components/how-it-works-section'
+import ManifestSection from '@/components/manifest-section'
 import BenefitsSection from '@/components/benefits-section'
 import BlogSection from '@/components/blog-section'
 import TestimonialSection from '@/components/testimonial-section'
@@ -63,6 +64,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
   return (
     <>
       <HeroSection jobs={jobs} />
+      <ManifestSection />
       <HowItWorksSection />
       <BenefitsSection
         title={tHome('talentTitle')}

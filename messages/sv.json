@@ -22,6 +22,31 @@
     "tempRecruitment": "Hyrrekrytering",
     "staffing": "Bemanning"
   },
+  "manifest": {
+    "title": "Varje rekrytering börjar med en preferens.",
+    "body1": "Kandidaten har sin. Uppdragsgivaren har sin. Och de rör sig mot varandra, sökande efter sin exakta motsvarighet.",
+    "body2": "Det är inte slumpen. Det är matematikens äldsta matchningsprincip, applicerad på det som är mest mänskligt: rätt person, rätt plats, rätt tid.",
+    "layers": {
+      "prefer": {
+        "description": "Att föredra. Varumärkets kärnverb, synligt och läsbart utan instruktion."
+      },
+      "preference": {
+        "description": "Kandidatens och uppdragsgivarens preferenser: det som matchas med precision."
+      },
+      "eo": {
+        "description": "Latins verb för rörelse. Prefeo är preferensen som aldrig stannar."
+      },
+      "io": {
+        "description": "Preferenser in. Rätt match ut. Det digitala flödets grundprincip."
+      },
+      "symbol": {
+        "description": "Preferensrelationssymbolen. Matematikens äldsta matchningsprincip."
+      },
+      "sum": {
+        "description": "Fem löften i ett varumärke. Matematisk precision möter mänsklig rörelse."
+      }
+    }
+  },
   "howItWorks": {
     "title": "Så fungerar Prefeo",
     "subtitle": "Från profil till tillsättning — tre steg med AI i förarsätet.",
@@ -55,8 +80,7 @@
     "getStartedDescription": "Söker du till en roll, eller är du redo för nästa? Vi hjälper båda sidor att hitta rätt match — utifrån vad de faktiskt föredrar.",
     "registerCompany": "Registrera företag",
     "loginAsCandidate": "Logga in",
-    "tagline": "Matchar kandidater och företag",
-    "taglineLine2": "på det de föredrar",
+    "tagline": "Preferences in motion",
     "discoverRookie": "Upptäck Prefeo",
     "forJobSeekers": "För jobbsökande",
     "forCompanies": "För företag",
@@ -72,8 +96,8 @@
     "followUs": "Följ oss på"
   },
   "cta": {
-    "readyTitle": "Redo att komma igång?",
-    "readySubtitle": "Oavsett om du söker din drömtjänst eller din nästa stjärnrekrytering — Prefeo är din partner.",
+    "readyTitle": "Börja med en preferens.<br></br>Rör dig mot rätt matchning.",
+    "readySubtitle": "Skapa ett uppdrag eller en kandidatprofil och låt Prefeo visa vilka matchningar som är mest relevanta.",
     "forCompanies": "För företag",
     "forCompaniesDescription": "Hitta kvalitetssäkrade kandidater för rekrytering, hyrrekrytering eller konsultuppdrag.",
     "forCompaniesLink": "Kom igång",
