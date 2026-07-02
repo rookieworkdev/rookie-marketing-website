@@ -1,6 +1,6 @@
 import { routing } from '@/i18n/routing'
 
-export const SITE_NAME = 'Rookie'
+export const SITE_NAME = 'Prefeo'
 
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://prefeo.se').replace(
   /\/$/,
@@ -9,12 +9,12 @@ export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://prefeo.se'
 
 // Default is noindex so previews and the initial Phase 1 launch stay out of search.
 // Set NEXT_PUBLIC_ALLOW_INDEXING=true in Vercel production once we're ready to flip
-// rookiework.se DNS over to the new site. See documentation/go-live-action-plan.md.
+// prefeo.se DNS over to the new site. See documentation/go-live-action-plan.md.
 export const INDEXING_ENABLED = process.env.NEXT_PUBLIC_ALLOW_INDEXING === 'true'
 
 export const DEFAULT_DESCRIPTIONS = {
-  en: 'Rookie is dedicated to facilitating the recruitment process for both companies and young job seekers by matching the right skills with the right opportunities.',
-  sv: 'Rookie är dedikerade till att underlätta rekryteringsprocessen för både företag och unga jobbsökande genom att matcha rätt kompetens med rätt möjligheter.',
+  en: 'Prefeo is dedicated to facilitating the recruitment process for both companies and young job seekers by matching the right skills with the right opportunities.',
+  sv: 'Prefeo är dedikerade till att underlätta rekryteringsprocessen för både företag och unga jobbsökande genom att matcha rätt kompetens med rätt möjligheter.',
 } as const
 
 export function getDefaultDescription(locale: string): string {
@@ -60,8 +60,8 @@ export const structuredData = JSON.stringify([
     '@id': `${SITE_URL}#organization`,
     name: SITE_NAME,
     url: SITE_URL,
-    email: 'info@rookiework.se',
-    telephone: '010 129 60 00',
+    email: 'support@prefeo.se',
+    telephone: '072-55 55 712',
     address: {
       '@type': 'PostalAddress',
       streetAddress: 'Drottninggatan 32, 8tr',

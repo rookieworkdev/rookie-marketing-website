@@ -109,9 +109,9 @@ export function MatchScore({ score = 85, className }: MatchScoreProps) {
           <defs>
             <linearGradient id="scoreGradient" x1="0%" y1="50%" x2="100%" y2="50%">
               <stop offset="0%" stopColor="oklch(0.58 0.22 27)" />
-              <stop offset="30%" stopColor="oklch(0.75 0.18 75)" />
-              <stop offset="60%" stopColor="oklch(0.80 0.16 95)" />
-              <stop offset="100%" stopColor="oklch(0.648 0.2 131.684)" />
+              <stop offset="35%" stopColor="oklch(0.75 0.18 75)" />
+              <stop offset="70%" stopColor="oklch(0.4616 0.2474 264.19)" />
+              <stop offset="100%" stopColor="oklch(0.5432 0.2857 298.99)" />
             </linearGradient>
 
             <filter id="arcGlow" x="-20%" y="-20%" width="140%" height="140%">

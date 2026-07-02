@@ -79,4 +79,4 @@ Skicka ett tackmail inom 24 timmar efter intervjun. Tacka för tiden, upprepa di
 
 ---
 
-**Behöver du mer hjälp med att förbereda dig inför intervjun?** Kontakta Rookie så guidar vi dig genom processen!
+**Behöver du mer hjälp med att förbereda dig inför intervjun?** Kontakta Prefeo så guidar vi dig genom processen!

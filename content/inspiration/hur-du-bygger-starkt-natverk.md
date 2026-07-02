@@ -137,4 +137,4 @@ Att bygga ett professionellt nätverk tar tid och ansträngning, men investering
 
 ---
 
-**Vill du få hjälp att ta nästa steg i din karriär?** På Rookie hjälper vi unga talanger att hitta rätt möjligheter och bygga sin professionella framtid. [Kontakta oss](/kontakt) idag!
+**Vill du få hjälp att ta nästa steg i din karriär?** På Prefeo hjälper vi unga talanger att hitta rätt möjligheter och bygga sin professionella framtid. [Kontakta oss](/kontakt) idag!

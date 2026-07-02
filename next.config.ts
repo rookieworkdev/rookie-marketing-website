@@ -142,7 +142,20 @@ const nextConfig: NextConfig = {
 
     return [
       ...sePageRedirects,
-      // www.prefeo.se → prefeo.se (preserve path as-is)
+      // Legacy rookiework.com (apex + www) → new prefeo.se domain
+      {
+        source: '/:path*',
+        has: [{ type: 'host' as const, value: 'rookiework.com' }],
+        destination: 'https://prefeo.se/:path*',
+        permanent: true,
+      },
+      {
+        source: '/:path*',
+        has: [{ type: 'host' as const, value: 'www.rookiework.com' }],
+        destination: 'https://prefeo.se/:path*',
+        permanent: true,
+      },
+      // Canonical host: www.prefeo.se → prefeo.se (preserve path as-is)
       {
         source: '/:path*',
         has: [{ type: 'host' as const, value: 'www.prefeo.se' }],

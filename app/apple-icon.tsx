@@ -21,7 +21,7 @@ export default async function AppleIcon() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        background: 'linear-gradient(128deg, #599200 20%, #D4D702 80%)',
+        background: 'linear-gradient(128deg, #093CDF 20%, #8D0FF9 80%)',
         borderRadius: 40,
       }}
     >
@@ -30,11 +30,11 @@ export default async function AppleIcon() {
           fontFamily: 'Inter',
           fontSize: 100,
           fontWeight: 700,
-          color: '#000000',
+          color: '#ffffff',
           marginLeft: 8,
         }}
       >
-        R
+        P
       </span>
     </div>,
     {

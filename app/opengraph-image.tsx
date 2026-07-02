@@ -20,16 +20,16 @@ export default function OpenGraphImage() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        background: 'linear-gradient(128deg, #599200 20%, #D4D702 80%)',
+        background: 'linear-gradient(128deg, #093CDF 20%, #8D0FF9 80%)',
       }}
     >
       <div
         style={{
           fontSize: 140,
           fontWeight: 900,
-          fontStyle: 'italic',
-          letterSpacing: 8,
-          color: '#000000',
+          fontStyle: 'normal',
+          letterSpacing: -2,
+          color: '#ffffff',
         }}
       >
         {SITE_NAME}

@@ -47,9 +47,9 @@ export default function FooterSection({ hideCta }: FooterSectionProps = {}) {
               className="text-center"
             >
               <h2 className="text-3xl font-medium tracking-tight md:text-4xl">
-                {tCta('readyTitle')}
+                {tCta.rich('readyTitle', { br: () => <br /> })}
               </h2>
-              <p className="text-muted-foreground mx-auto mt-3 max-w-xl text-lg">
+              <p className="text-muted-foreground mx-auto mt-3 max-w-xl text-base">
                 {tCta('readySubtitle')}
               </p>
             </motion.div>
@@ -84,7 +84,7 @@ export default function FooterSection({ hideCta }: FooterSectionProps = {}) {
                 transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
               >
                 <Link
-                  href="/candidates"
+                  href="https://app.prefeo.se/login"
                   className="group bg-background block rounded-2xl border p-6 shadow-xs transition-shadow hover:shadow-sm md:p-8"
                 >
                   <div className="bg-primary/10 w-fit rounded-lg p-2">
@@ -111,11 +111,7 @@ export default function FooterSection({ hideCta }: FooterSectionProps = {}) {
               <Link href="/" aria-label="go home" className="block size-fit">
                 <Logo />
               </Link>
-              <p className="text-xl font-medium">
-                {t('tagline')}
-                <br />
-                {t('taglineLine2')}
-              </p>
+              <p className="text-xl font-medium">{t('tagline')}</p>
             </div>
 
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
@@ -182,7 +178,7 @@ export default function FooterSection({ hideCta }: FooterSectionProps = {}) {
           <div className="mt-16 flex flex-wrap items-center justify-between gap-6 pt-6">
             <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
               <span className="text-muted-foreground text-sm">
-                © {new Date().getFullYear()} Rookie, All rights reserved
+                © {new Date().getFullYear()} Prefeo, All rights reserved
               </span>
             </div>
             <a

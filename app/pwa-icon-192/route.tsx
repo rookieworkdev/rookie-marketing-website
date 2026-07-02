@@ -13,7 +13,7 @@ export async function GET() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        background: 'linear-gradient(128deg, #599200 20%, #D4D702 80%)',
+        background: 'linear-gradient(128deg, #093CDF 20%, #8D0FF9 80%)',
         borderRadius: 40,
       }}
     >
@@ -22,11 +22,11 @@ export async function GET() {
           fontFamily: 'Inter',
           fontSize: 120,
           fontWeight: 700,
-          color: '#000000',
+          color: '#ffffff',
           marginLeft: 8,
         }}
       >
-        R
+        P
       </span>
     </div>,
     {
