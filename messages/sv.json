@@ -23,9 +23,10 @@
     "staffing": "Bemanning"
   },
   "manifest": {
-    "title": "Varje rekrytering börjar med en preferens.",
-    "body1": "Kandidaten har sin. Uppdragsgivaren har sin. Och de rör sig mot varandra, sökande efter sin exakta motsvarighet.",
-    "body2": "Det är inte slumpen. Det är matematikens äldsta matchningsprincip, applicerad på det som är mest mänskligt: rätt person, rätt plats, rätt tid.",
+    "title": "Manifesto",
+    "body1": "Varje rekrytering börjar med en preferens. Kandidaten har sin. Uppdragsgivaren har sin. Och de rör sig mot varandra — sökande efter sin exakta motsvarighet.",
+    "body2": "Det är inte slumpen. Det är matematikens äldsta matchningsprincip — applicerad på det som är mest mänskligt: rätt person, rätt plats, rätt tid.",
+    "body3": "Preferences in motion. Vi är Prefeo.",
     "layers": {
       "prefer": {
         "description": "Att föredra. Varumärkets kärnverb, synligt och läsbart utan instruktion."
@@ -80,7 +81,6 @@
     "getStartedDescription": "Söker du till en roll, eller är du redo för nästa? Vi hjälper båda sidor att hitta rätt match — utifrån vad de faktiskt föredrar.",
     "registerCompany": "Registrera företag",
     "loginAsCandidate": "Logga in",
-    "tagline": "Preferences in motion",
     "discoverRookie": "Upptäck Prefeo",
     "forJobSeekers": "För jobbsökande",
     "forCompanies": "För företag",
@@ -97,7 +97,6 @@
   },
   "cta": {
     "readyTitle": "Börja med en preferens.<br></br>Rör dig mot rätt matchning.",
-    "readySubtitle": "Skapa ett uppdrag eller en kandidatprofil och låt Prefeo visa vilka matchningar som är mest relevanta.",
     "forCompanies": "För företag",
     "forCompaniesDescription": "Hitta kvalitetssäkrade kandidater för rekrytering, hyrrekrytering eller konsultuppdrag.",
     "forCompaniesLink": "Kom igång",

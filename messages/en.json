@@ -23,9 +23,10 @@
     "staffing": "Staffing"
   },
   "manifest": {
-    "title": "Every hire begins with a preference.",
-    "body1": "The candidate has theirs. The client has theirs. And they move toward each other, searching for their exact counterpart.",
-    "body2": "It isn't chance. It's the oldest matching principle in mathematics, applied to the most human thing of all: the right person, the right place, the right time.",
+    "title": "Manifesto",
+    "body1": "Every hire begins with a preference. The candidate has theirs. The client has theirs. And they move toward each other — searching for their exact counterpart.",
+    "body2": "It isn't chance. It's the oldest matching principle in mathematics — applied to the most human thing of all: the right person, the right place, the right time.",
+    "body3": "Preferences in motion. We are Prefeo.",
     "layers": {
       "prefer": {
         "description": "To prefer. The brand's core verb, visible and legible without instruction."
@@ -80,7 +81,6 @@
     "getStartedDescription": "Hiring for a role, or ready for your next one? We help both sides find the right match — based on what they actually prefer.",
     "registerCompany": "Register company",
     "loginAsCandidate": "Log in",
-    "tagline": "Preferences in motion",
     "discoverRookie": "Discover Prefeo",
     "forJobSeekers": "For job seekers",
     "forCompanies": "For companies",
@@ -103,7 +103,6 @@
     "guideDescription": "Key steps for a sharper, preference-based recruitment process",
     "getAccess": "Get access",
     "readyTitle": "Start with a preference.<br></br>Move toward the right match.",
-    "readySubtitle": "Create an assignment or a candidate profile, and let Prefeo show which matches are most relevant.",
     "forCompanies": "For companies",
     "forCompaniesDescription": "Find quality-assured candidates for recruitment, contract-to-hire or consulting assignments.",
     "forCompaniesLink": "Get started",

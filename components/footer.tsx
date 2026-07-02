@@ -39,21 +39,7 @@ export default function FooterSection({ hideCta }: FooterSectionProps = {}) {
         {/* CTA */}
         {!hideCta && (
           <div className="pt-16">
-            <motion.div
-              initial={{ opacity: 0, filter: 'blur(12px)' }}
-              whileInView={{ opacity: 1, filter: 'blur(0px)' }}
-              viewport={{ once: true, margin: '-100px' }}
-              transition={{ duration: 0.8, ease: 'easeOut' }}
-              className="text-center"
-            >
-              <h2 className="text-3xl font-medium tracking-tight md:text-4xl">
-                {tCta.rich('readyTitle', { br: () => <br /> })}
-              </h2>
-              <p className="text-muted-foreground mx-auto mt-3 max-w-xl text-base">
-                {tCta('readySubtitle')}
-              </p>
-            </motion.div>
-            <div className="mt-10 grid gap-4 md:grid-cols-2">
+            <div className="grid gap-4 md:grid-cols-2">
               <motion.div
                 initial={{ opacity: 0, filter: 'blur(12px)' }}
                 whileInView={{ opacity: 1, filter: 'blur(0px)' }}
@@ -111,7 +97,7 @@ export default function FooterSection({ hideCta }: FooterSectionProps = {}) {
               <Link href="/" aria-label="go home" className="block size-fit">
                 <Logo />
               </Link>
-              <p className="text-xl font-medium">{t('tagline')}</p>
+              <p className="text-xl font-medium">{tCta.rich('readyTitle', { br: () => <br /> })}</p>
             </div>
 
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
