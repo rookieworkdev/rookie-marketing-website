@@ -30,11 +30,11 @@ export function ThemeToggle() {
         const next = resolvedTheme === 'dark' ? 'light' : 'dark'
         setTheme(next)
         const isProdDomain =
-          window.location.hostname === 'rookiework.com' ||
-          window.location.hostname.endsWith('.rookiework.com')
+          window.location.hostname === 'prefeo.se' ||
+          window.location.hostname.endsWith('.prefeo.se')
         const parts = [`theme=${next}`, 'path=/', `max-age=${60 * 60 * 24 * 365}`, 'SameSite=Lax']
         if (isProdDomain) {
-          parts.push('domain=.rookiework.com')
+          parts.push('domain=.prefeo.se')
           parts.push('Secure')
         }
         document.cookie = parts.join('; ')

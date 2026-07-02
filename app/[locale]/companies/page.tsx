@@ -69,7 +69,7 @@ export default async function ForForetagPage({ params }: { params: Promise<{ loc
           description={t('pageDescription')}
           showButton
           buttonText={t('ctaButton')}
-          buttonHref="https://app.rookiework.com/request-access"
+          buttonHref="https://app.prefeo.se/request-access"
         />
         <BenefitsSection
           title={t('benefitsTitle')}
@@ -120,7 +120,7 @@ export default async function ForForetagPage({ params }: { params: Promise<{ loc
             },
           ]}
           ctaText={t('talentBenefitsCta')}
-          ctaHref="https://app.rookiework.com/request-access"
+          ctaHref="https://app.prefeo.se/request-access"
         />
         <TestimonialSection
           quote={t('testimonialQuote')}

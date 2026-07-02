@@ -77,12 +77,12 @@ export default async function RookieOfMonthSection({ rookie }: RookieOfMonthSect
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button asChild size="default">
-                <Link href="https://app.rookiework.com/request-access">
+                <Link href="https://app.prefeo.se/request-access">
                   {t('registerCompany')}
                 </Link>
               </Button>
               <Button asChild size="default" variant="outline">
-                <Link href="https://app.rookiework.com/signup">
+                <Link href="https://app.prefeo.se/signup">
                   {t('registerCandidate')}
                 </Link>
               </Button>

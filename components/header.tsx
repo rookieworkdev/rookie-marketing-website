@@ -126,7 +126,7 @@ export const HeroHeader = () => {
 
               {/* Desktop sign in */}
               <Button asChild size="sm" variant="outline" className="hidden lg:inline-flex">
-                <Link href="https://app.rookiework.com/login">
+                <Link href="https://app.prefeo.se/login">
                   <span>{t('login')}</span>
                 </Link>
               </Button>
@@ -155,12 +155,12 @@ export const HeroHeader = () => {
               </ul>
               <div className="flex flex-col gap-3 pt-4">
                 <Button asChild size="sm" className="w-full">
-                  <Link href="https://app.rookiework.com/request-access">
+                  <Link href="https://app.prefeo.se/request-access">
                     <span>{t('registerCompany')}</span>
                   </Link>
                 </Button>
                 <Button asChild size="sm" variant="outline" className="w-full">
-                  <Link href="https://app.rookiework.com/login">
+                  <Link href="https://app.prefeo.se/login">
                     <span>{t('login')}</span>
                   </Link>
                 </Button>

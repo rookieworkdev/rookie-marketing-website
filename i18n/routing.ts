@@ -10,6 +10,6 @@ export const routing = defineRouting({
     name: 'locale',
     sameSite: 'lax',
     maxAge: 60 * 60 * 24 * 365,
-    ...(isProd ? { domain: '.rookiework.com', secure: true } : {}),
+    ...(isProd ? { domain: '.prefeo.se', secure: true } : {}),
   },
 })
