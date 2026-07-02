@@ -10,7 +10,7 @@ export interface RookieOfMonth {
 
 export async function fetchRookieOfMonth(): Promise<RookieOfMonth | null> {
   try {
-    const res = await fetch('https://app.rookiework.com/api/rookie-of-the-month', {
+    const res = await fetch('https://app.prefeo.se/api/rookie-of-the-month', {
       next: { revalidate: 86400 },
     })
 

@@ -2,7 +2,7 @@ import { routing } from '@/i18n/routing'
 
 export const SITE_NAME = 'Rookie'
 
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://rookiework.com').replace(
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://prefeo.se').replace(
   /\/$/,
   ''
 )

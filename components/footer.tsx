@@ -21,8 +21,8 @@ export default function FooterSection({ hideCta }: FooterSectionProps = {}) {
     { title: t('forCompanies'), href: '/companies' },
     { title: t('inspiration'), href: '/inspiration' },
     { title: t('privacyPolicy'), href: '/policy' },
-    { title: t('login'), href: 'https://app.rookiework.com/login' },
-    { title: t('requestAccess'), href: 'https://app.rookiework.com/request-access' },
+    { title: t('login'), href: 'https://app.prefeo.se/login' },
+    { title: t('requestAccess'), href: 'https://app.prefeo.se/request-access' },
   ]
 
   const locale = useLocale()
@@ -61,7 +61,7 @@ export default function FooterSection({ hideCta }: FooterSectionProps = {}) {
                 transition={{ duration: 0.8, ease: 'easeOut', delay: 0.1 }}
               >
                 <Link
-                  href="https://app.rookiework.com/request-access"
+                  href="https://app.prefeo.se/request-access"
                   className="group bg-background block rounded-2xl border p-6 shadow-xs transition-shadow hover:shadow-sm md:p-8"
                 >
                   <div className="bg-primary/10 w-fit rounded-lg p-2">
@@ -148,10 +148,10 @@ export default function FooterSection({ hideCta }: FooterSectionProps = {}) {
                     111 51 Stockholm
                   </a>
                   <a
-                    href="mailto:support@rookiework.com"
+                    href="mailto:support@prefeo.se"
                     className="hover:text-foreground transition-colors duration-150"
                   >
-                    support@rookiework.com
+                    support@prefeo.se
                   </a>
                 </div>
               </div>

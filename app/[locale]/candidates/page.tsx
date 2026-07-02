@@ -71,13 +71,13 @@ export default async function ForJobbsokandePage({ params }: { params: Promise<{
           description={t('pageDescription')}
           showButton
           buttonText={t('ctaButton')}
-          buttonHref="https://app.rookiework.com/login"
+          buttonHref="https://app.prefeo.se/login"
         />
         <AboutSection
           title={t('aboutTitle')}
           description={[t('aboutDescription1'), t('aboutDescription2')]}
           ctaText={t('aboutCta')}
-          ctaHref="https://app.rookiework.com/signup"
+          ctaHref="https://app.prefeo.se/signup"
         />
         <BenefitsSection
           title={t('benefitsTitle')}
