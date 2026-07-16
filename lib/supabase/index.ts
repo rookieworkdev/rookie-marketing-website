@@ -4,5 +4,4 @@ export type {
   Database,
   JobRow,
   WebsiteInspiration,
-  WebsiteRookie,
 } from './types'

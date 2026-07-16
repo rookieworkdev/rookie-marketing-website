@@ -1,6 +1,7 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
+import { Link } from '@/i18n/navigation'
 import { useTranslations } from 'next-intl'
 import { useEffect } from 'react'
 
@@ -31,7 +32,7 @@ export default function Error({
             {t('tryAgain')}
           </Button>
           <Button variant="outline" size="lg" asChild>
-            <a href="/">{t('goHome')}</a>
+            <Link href="/">{t('goHome')}</Link>
           </Button>
         </div>
         {error.digest && (

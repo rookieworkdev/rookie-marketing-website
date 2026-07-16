@@ -370,5 +370,4 @@ export type Database = {
 
 // Convenience types for the website tables
 export type JobRow = Database['public']['Tables']['jobs']['Row']
-export type WebsiteRookie = Database['public']['Tables']['website_rookies']['Row']
 export type WebsiteInspiration = Database['public']['Tables']['website_inspiration']['Row']

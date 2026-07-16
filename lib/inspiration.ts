@@ -29,7 +29,7 @@ function transformPost(row: WebsiteInspiration): InspirationPost {
 
 export async function getAllPosts(): Promise<InspirationPost[]> {
   const supabase = createServerClient()
-  
+
   const { data, error } = await supabase
     .from('website_inspiration')
     .select('*')
@@ -46,7 +46,7 @@ export async function getAllPosts(): Promise<InspirationPost[]> {
 
 export const getPostBySlug = cache(async (slug: string): Promise<InspirationPost | null> => {
   const supabase = createServerClient()
-  
+
   const { data, error } = await supabase
     .from('website_inspiration')
     .select('*')
@@ -64,7 +64,7 @@ export const getPostBySlug = cache(async (slug: string): Promise<InspirationPost
 
 export async function getAllSlugs(): Promise<string[]> {
   const supabase = createServerClient()
-  
+
   const { data, error } = await supabase
     .from('website_inspiration')
     .select('slug')
@@ -76,24 +76,6 @@ export async function getAllSlugs(): Promise<string[]> {
   }
 
   return (data || []).map((post) => post.slug)
-}
-
-export async function getPostsByCategory(category: string): Promise<InspirationPost[]> {
-  const supabase = createServerClient()
-  
-  const { data, error } = await supabase
-    .from('website_inspiration')
-    .select('*')
-    .eq('category', category)
-    .eq('is_published', true)
-    .order('date', { ascending: false })
-
-  if (error) {
-    console.error('Error fetching posts by category:', error)
-    return []
-  }
-
-  return (data || []).map(transformPost)
 }
 
 export async function getRelatedPosts(slug: string, category: string, limit = 3): Promise<InspirationPost[]> {
@@ -133,21 +115,4 @@ export async function getRelatedPosts(slug: string, category: string, limit = 3)
   // Fill remaining slots with posts from other categories
   const extraPosts = (allResult.data || []).map(transformPost)
   return [...categoryPosts, ...extraPosts].slice(0, limit)
-}
-
-export async function getCategories(): Promise<string[]> {
-  const supabase = createServerClient()
-  
-  const { data, error } = await supabase
-    .from('website_inspiration')
-    .select('category')
-    .eq('is_published', true)
-
-  if (error) {
-    console.error('Error fetching categories:', error)
-    return []
-  }
-
-  const categories = [...new Set((data || []).map((post) => post.category))]
-  return categories.sort()
 }

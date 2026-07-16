@@ -80,7 +80,7 @@ export default function HeroSection({ jobs }: HeroSectionProps) {
                 animate={{ opacity: 1, filter: 'blur(0px)' }}
                 transition={{ duration: 0.5, ease: 'easeOut', delay: 0.05 }}
               >
-                <h1 className="text-foreground text-3xl font-medium tracking-tighter md:text-4xl xl:text-5xl">
+                <h1 className="text-foreground text-3xl font-medium tracking-tight md:text-4xl xl:text-5xl">
                   {t('matchQuickly')}
                 </h1>
                 <p className="text-muted-foreground mx-auto mt-6 max-w-2xl text-base">

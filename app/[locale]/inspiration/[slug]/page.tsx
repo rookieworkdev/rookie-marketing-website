@@ -135,7 +135,7 @@ export default async function InspirationPostPage({ params }: PageProps) {
           imageAlt={post.title}
         >
           <div className="mt-auto max-w-4xl">
-            <h1 className="text-foreground text-3xl font-medium tracking-tighter md:text-4xl xl:text-5xl">
+            <h1 className="text-foreground text-3xl font-medium tracking-tight md:text-4xl xl:text-5xl">
               {post.title}
             </h1>
             <div className="text-muted-foreground mt-6 flex items-center gap-3">

@@ -11,11 +11,11 @@ import {
 } from '@/components/ui/breadcrumb'
 import { Button } from '@/components/ui/button'
 import { FlickeringGrid } from '@/components/ui/flickering-grid'
+import { Link } from '@/i18n/navigation'
 import { cn, containerBorders, horizontalPadding } from '@/lib/utils'
 import { Sparkles } from 'lucide-react'
 import { motion } from 'motion/react'
 import Image from 'next/image'
-import { Link } from '@/i18n/navigation'
 
 interface BreadcrumbItem {
   label: string
@@ -82,7 +82,7 @@ export function PageHeader({
         <div
           className={cn(
             horizontalPadding,
-            'relative flex min-h-[680px] flex-col pt-28 pb-16 md:pt-32'
+            'relative flex min-h-[520px] flex-col gap-12 pt-28 pb-16 md:pt-32'
           )}
         >
           {/* Breadcrumb */}
@@ -184,7 +184,7 @@ export function PageHeader({
                   </span>
                 )}
                 {title && (
-                  <HeadingTag className="text-foreground text-3xl font-medium tracking-tighter text-balance md:text-4xl xl:text-5xl">
+                  <HeadingTag className="text-foreground text-3xl font-medium tracking-tight text-balance md:text-4xl xl:text-5xl">
                     {title}
                   </HeadingTag>
                 )}
@@ -205,7 +205,10 @@ export function PageHeader({
 
               {showAvatarGraphic && (
                 <div className="hidden lg:block">
-                  <FloatingAvatarsGraphic className="h-[320px] xl:h-[380px]" variant={avatarVariant} />
+                  <FloatingAvatarsGraphic
+                    className="h-[320px] xl:h-[380px]"
+                    variant={avatarVariant}
+                  />
                 </div>
               )}
             </div>

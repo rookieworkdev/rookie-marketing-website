@@ -7,10 +7,16 @@ export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://prefeo.se'
   ''
 )
 
-// Default is noindex so previews and the initial Phase 1 launch stay out of search.
-// Set NEXT_PUBLIC_ALLOW_INDEXING=true in Vercel production once we're ready to flip
-// prefeo.se DNS over to the new site. See documentation/go-live-action-plan.md.
-export const INDEXING_ENABLED = process.env.NEXT_PUBLIC_ALLOW_INDEXING === 'true'
+// Indexing policy (see documentation/go-live-action-plan.md):
+// - Only production deployments (Vercel VERCEL_ENV=production) are indexable.
+// - Preview and local/dev deployments are never indexed, so staging never
+//   competes with production in search.
+// - NEXT_PUBLIC_ALLOW_INDEXING=false is a kill switch: set it in the Vercel
+//   Production environment (and redeploy) to force noindex and pull the live
+//   site back out of search if ever needed.
+export const INDEXING_ENABLED =
+  process.env.VERCEL_ENV === 'production' &&
+  process.env.NEXT_PUBLIC_ALLOW_INDEXING !== 'false'
 
 export const DEFAULT_DESCRIPTIONS = {
   en: 'Prefeo is dedicated to facilitating the recruitment process for both companies and young job seekers by matching the right skills with the right opportunities.',
@@ -27,6 +33,19 @@ export function getDefaultDescription(locale: string): string {
 export const DEFAULT_DESCRIPTION = DEFAULT_DESCRIPTIONS.en
 
 export const metadataBase = new URL(SITE_URL)
+
+// Serializes a value as JSON for embedding inside a `<script type="application/ld+json">`.
+// JSON.stringify does not escape `<`, `>`, `&`, or the U+2028/U+2029 line separators, so a
+// value containing `</script>` (from DB content or a stray character in a title) would break
+// out of the tag. Escaping them as \uXXXX keeps the JSON valid while making breakout impossible.
+function serializeJsonLd(data: unknown): string {
+  return JSON.stringify(data)
+    .replace(/</g, '\\u003c')
+    .replace(/>/g, '\\u003e')
+    .replace(/&/g, '\\u0026')
+    .replace(/\u2028/g, '\\u2028')
+    .replace(/\u2029/g, '\\u2029')
+}
 
 export const OG_IMAGE_PATH = '/opengraph-image'
 export const TWITTER_IMAGE_PATH = '/twitter-image'
@@ -53,7 +72,7 @@ export function buildLanguageAlternates(
   }
 }
 
-export const structuredData = JSON.stringify([
+export const structuredData = serializeJsonLd([
   {
     '@context': 'https://schema.org',
     '@type': 'Organization',
@@ -93,7 +112,7 @@ export interface ArticleSchemaProps {
 }
 
 export function generateArticleSchema(article: ArticleSchemaProps): string {
-  return JSON.stringify({
+  return serializeJsonLd({
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     headline: article.title,
@@ -127,7 +146,7 @@ export interface JobSchemaProps {
 }
 
 export function generateJobPostingSchema(job: JobSchemaProps): string {
-  return JSON.stringify({
+  return serializeJsonLd({
     '@context': 'https://schema.org',
     '@type': 'JobPosting',
     title: job.title,
@@ -156,7 +175,7 @@ export interface BreadcrumbItem {
 }
 
 export function generateBreadcrumbSchema(items: BreadcrumbItem[]): string {
-  return JSON.stringify({
+  return serializeJsonLd({
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: items.map((item, index) => ({
@@ -169,7 +188,7 @@ export function generateBreadcrumbSchema(items: BreadcrumbItem[]): string {
 }
 
 export function generateJobListingSchema(jobs: JobSchemaProps[]): string {
-  return JSON.stringify({
+  return serializeJsonLd({
     '@context': 'https://schema.org',
     '@type': 'ItemList',
     itemListElement: jobs.map((job, index) => ({
