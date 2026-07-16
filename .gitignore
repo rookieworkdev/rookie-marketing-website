@@ -58,3 +58,5 @@ next-env.d.ts
 # Claude Code (local only)
 CLAUDE.md
 .claude/
+# internal notes (local only)
+documentation/
