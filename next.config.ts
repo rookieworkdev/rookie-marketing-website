@@ -1,9 +1,13 @@
 import type { NextConfig } from 'next'
 import createNextIntlPlugin from 'next-intl/plugin'
 
-import { INDEXING_ENABLED } from '@/lib/seo'
-
 const withNextIntl = createNextIntlPlugin('./i18n/request.ts')
+
+// Mirrors INDEXING_ENABLED in lib/seo.ts — duplicated (not imported) because
+// next.config.ts's transpiler can't resolve the @/i18n/routing alias chain
+// that lib/seo.ts pulls in.
+const INDEXING_ENABLED =
+  process.env.VERCEL_ENV === 'production' && process.env.NEXT_PUBLIC_ALLOW_INDEXING !== 'false'
 
 const securityHeaders = [
   { key: 'X-Content-Type-Options', value: 'nosniff' },
