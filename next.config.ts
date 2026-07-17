@@ -1,6 +1,8 @@
 import type { NextConfig } from 'next'
 import createNextIntlPlugin from 'next-intl/plugin'
 
+import { INDEXING_ENABLED } from '@/lib/seo'
+
 const withNextIntl = createNextIntlPlugin('./i18n/request.ts')
 
 const securityHeaders = [
@@ -16,6 +18,9 @@ const securityHeaders = [
     key: 'Permissions-Policy',
     value: 'camera=(), microphone=(), geolocation=()',
   },
+  ...(INDEXING_ENABLED
+    ? []
+    : [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }]),
 ]
 
 const nextConfig: NextConfig = {
